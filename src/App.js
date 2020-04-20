@@ -12,9 +12,9 @@ function App() {
     <Navbar/>
 
        <Switch>
-        <Route path="/AllPosts" component="working"/>
+        <Route path="/AllPosts" component={Posts}/>
         <Route path="/CreatePost" component={CreatePost}/>
-        <Route path="/" component="mola"/>
+        <Route path="/" component=""/>
       </Switch>
 
       <div className="posts">
