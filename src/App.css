@@ -4,6 +4,10 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+   /*display: flex; */
+  justify-content: center;
+  align-items: center;
+
 
 }
 
@@ -19,3 +23,13 @@
   color: white;
 }
 
+
+.posts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  border: 3px solid green;
+  margin-top: 63.7vh;
+
+}
