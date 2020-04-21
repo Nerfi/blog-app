@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const posts = () => {
-  return <h2>Posts</h2>
+class Posts extends Component {
+  render(){
+    return(
+      <p>Working 123</p>
+      );
+  }
 }
 
-export default posts;
+export default Posts;
