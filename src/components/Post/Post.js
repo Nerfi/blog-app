@@ -7,9 +7,9 @@ import {Link} from 'react-router-dom'
     return (
         <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
           <Card.Body >
-            <Card.Title>  <Link to={`/post/${props.id}`}> {props.title} </Link></Card.Title>
+            <Card.Title>  <Link to={`/post/${props.post.id}`}> {props.post.title} </Link></Card.Title>
             <Card.Text>
-              {props.body}
+              {props.post.body}
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
           </Card.Body>

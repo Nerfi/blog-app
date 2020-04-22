@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import  {Route, Switch,NavLink,Link} from 'react-router-dom';
+import  {NavLink} from 'react-router-dom';
 //we use NavLink because we want to give some style to the Links, otherwise we will just use Link
 import CreatePost from '../../components/PostCreation/CreatePost';
 import Posts from '../../components/Posts/Posts';

@@ -1,53 +1,32 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
+
 import Post from '../Post/Post';
 
+function Posts() {
 
-class Posts extends Component {
+  const [posts, setPosts] = useState([]);
 
-  state = {
-    posts: []
-  }
+    useEffect(() => {
+         fetch('/posts')
+        .then(response => {
+          return response.json();
+         })
+        .then(json => setPosts(json))
 
-  componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(json => this.setState({posts: json}))
+      }, []);
 
-  };
+  return (
+    <div>
 
-  handlesubmit = (blogPost) => {
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-    method: 'POST',
-    body: JSON.stringify({
-      title: 'foo',
-      body: 'bar',
-      userId: 1
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  .then(response => response.json())
-  .then(json => this.setState(prevstate => {
-    return [...prevstate, blogPost];
-  }))
-  };
-
-
-  render(){
-    return (
-        <div>
-         {this.state.posts.map(post => {
+         {posts.map(post => {
             return(
-              <Post title={post.title} body={post.body} key={post.id} id={post.id}/>
+              <Post post={post} key={post.id} />
               );
 
           })}
-        </div>
 
-      );
-    }
-  }
-
+    </div>
+  );
+}
 
 export default Posts;
