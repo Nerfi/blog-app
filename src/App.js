@@ -6,7 +6,7 @@ import  {Route, Switch} from 'react-router-dom';
 import Posts from '../src/components/Posts/Posts';
 import CreatePost from '../src/components/PostCreation/CreatePost';
 import LandingPage from '../src/components/LandingPage/LandingPage';
-import PostDetail from '../src/components/PostDetail/PostDetail';
+import Post from '../src/components/PostDetail/PostDetail';
 
 
  class App extends Component{
@@ -17,8 +17,8 @@ import PostDetail from '../src/components/PostDetail/PostDetail';
 
           <Switch>
                 <Route path="/posts" component={Posts}/>
-                <Route path="/CreatePost" component={CreatePost}/>
-                <Route exact path="/post/:id" component={PostDetail}/>
+                <Route path="/createpost" component={CreatePost}/>
+                <Route exact path="/post/:id" component={Post}/>
                 <Route exact path="/" component={LandingPage}/>
             </Switch>
 
