@@ -4,6 +4,7 @@ import './post.css';
 import {Link} from 'react-router-dom'
 
   const post = (props) => {
+
     return (
         <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
           <Card.Body >

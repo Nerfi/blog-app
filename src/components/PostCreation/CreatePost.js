@@ -1,14 +1,12 @@
 import React,{useState, useEffect} from 'react';
 import {Form} from 'react-bootstrap';
-//create a fuctional component
-//handle the submit of a post object, with title and body
+
 function Post(props) {
 
   const [details, setDetails] = useState({title:"", author: ""});
-//props comming from React Route
-  console.log(props);
 
   const handleChange = (event) => {
+
      const {title, author} = details;
      console.log(details);
 
@@ -47,14 +45,14 @@ function Post(props) {
 
   //async post function
   //async function addPost() {
-    //const addPost = await fetch()
+    //const addPost = await fetch('/posts')
   //}
   return (
     <div>
         <Form >
         <Form.Group controlId="formGroupEmail">
         <Form.Label>Title</Form.Label>
-        <Form.Control onChange={handleChange} type="text" placeholder="Enter title"/>
+        <Form.Control onChange={handleChange} type="text" placeholder="Enter title" />
         </Form.Group>
         <Form.Group controlId="formGroupPassword">
           <Form.Label >Content</Form.Label>
