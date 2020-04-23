@@ -1,16 +1,6 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    },
-    {
-      "id": 2,
-      "title": "jso",
-      "author": "Juan"
-    },
-    {
       "title": "",
       "body": "",
       "userId": 1,
@@ -47,12 +37,6 @@
       "id": 8
     },
     {
-      "title": "JUAN",
-      "body": "JUAN",
-      "userId": 1,
-      "id": 9
-    },
-    {
       "body": "",
       "id": 10
     },
@@ -60,11 +44,6 @@
       "title": "",
       "author": "",
       "id": 11
-    },
-    {
-      "title": "[object HTMLInputElement]",
-      "author": "",
-      "id": 12
     },
     {
       "title": "ddddd",
@@ -120,25 +99,9 @@
       "title": "a",
       "author": "",
       "id": 23
-    },
-    {
-      "title": "JUAN",
-      "author": "",
-      "id": 24
-    },
-    {
-      "title": "8",
-      "author": "",
-      "id": 25
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
+  "comments": [],
   "profile": {
     "name": "typicode"
   }

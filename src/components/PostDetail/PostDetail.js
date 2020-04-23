@@ -14,6 +14,15 @@ function PostDetails(props){
 
   },[]);
 
+  //
+  const click = () => {
+    const deletePost = fetch(`/posts/${props.match.params.id}`, {
+      method: 'DELETE'
+    });
+    props.history.push('/posts');
+    window.alert(`post wit id ${props.match.params.id} was Delete`)
+  }
+
   return(
      <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
           <Card.Body >
@@ -21,7 +30,7 @@ function PostDetails(props){
             <Card.Text>
               {selectedPost.body}
             </Card.Text>
-            <Button onClick={} variant="danger">Delete</Button>
+            <Button onClick={click} variant="danger">Delete</Button>
           </Card.Body>
 
         </Card>
