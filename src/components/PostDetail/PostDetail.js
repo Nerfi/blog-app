@@ -21,7 +21,7 @@ function PostDetails(props){
             <Card.Text>
               {selectedPost.body}
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button onClick={} variant="danger">Delete</Button>
           </Card.Body>
 
         </Card>
