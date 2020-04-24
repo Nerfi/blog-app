@@ -8,8 +8,6 @@ function Post(props) {
   const handleChange = (event) => {
 
      const {title, author} = details;
-     console.log(details);
-
     setDetails(prevDetails => {
       return {
         ...prevDetails,
@@ -43,10 +41,6 @@ function Post(props) {
 
   }
 
-  //async post function
-  //async function addPost() {
-    //const addPost = await fetch('/posts')
-  //}
   return (
     <div>
         <Form >
