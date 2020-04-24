@@ -3,7 +3,7 @@
     {
       "author": "Juanako666",
       "title": "TEST",
-      "likes": 15,
+      "likes": 21,
       "id": 1
     },
     {
@@ -21,13 +21,13 @@
     {
       "author": "Nerfi666",
       "title": "Bankok",
-      "likes": 10,
+      "likes": 14,
       "id": 4
     },
     {
-      "title": "China",
       "author": "Nerfi666",
-      "likes": 0,
+      "title": "China",
+      "likes": 6,
       "id": 5
     }
   ],
