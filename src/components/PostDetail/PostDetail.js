@@ -1,8 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { Card,Button } from 'react-bootstrap';
 
-//everytime we link to somewhere we will get the some specific props
-
 function PostDetails(props){
 
   const [selectedPost, setSelected] = useState({});
@@ -22,14 +20,14 @@ function PostDetails(props){
 
   }
 
-
-    const addLikes = () => {
+  const addLikes = () => {
 
        const postDetails = {
         method: 'PUT',
         body: JSON.stringify({
           author: selectedPost.author,
           title: selectedPost.title,
+          category: selectedPost.category,
          likes: selectedPost.likes + 1
         }),
         headers:  {
@@ -52,9 +50,10 @@ function PostDetails(props){
      <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
           <Card.Body >
             <Card.Title> {selectedPost.title}</Card.Title>
-            <p>{selectedPost.likes}</p>
+            <p>{selectedPost.likes <= 0 ? 'Be the first to like this post!' : selectedPost.likes}</p>
             <Card.Text>
               {selectedPost.body}
+              {selectedPost.category}
             </Card.Text>
             <Button onClick={click} variant="danger">Delete</Button>
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>

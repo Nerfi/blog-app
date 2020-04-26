@@ -1,13 +1,10 @@
 import React,{useState,useEffect} from 'react';
-import Posts from  '../Posts/Posts';
+import { Card,Button } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 import './landingPage.css';
 
-//make API call
-//filter post by most likes
+const LandinPage = (props) => {
 
-
-const LandinPage = () => {
-   //filter result by post with most likes
   const [blogs, setBlogs] =  useState([]);
 
   async function fetchBlogPosts () {
@@ -17,21 +14,36 @@ const LandinPage = () => {
     setBlogs(response);
 
   };
-  console.log(blogs)
 
   useEffect(() => {
     fetchBlogPosts();
   },[]);
 
+  const addLikes = () => alert('hello world JUANAKO');
+  console.log(props)
+
   return(
     <div>
       <div className="app">
       </div>
-      <p>Our Most Popular Posts </p>
-      {/*check out how to filter an array and render post with likes > 5*/}
-      {blogs.map(blog => {
-        return <Posts key={blog.id}/>
-      })}
+      <p style={{position:'center'}}>Our Most Popular Posts </p>
+
+      {blogs.filter(blog => blog.likes > 10).map(likesOnBlog => (
+
+         <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
+            <Card.Body >
+              <Card.Title> <Link to={`/post/${likesOnBlog.id}`}> {likesOnBlog.title} </Link></Card.Title>
+              <p>{likesOnBlog.likes} times this post was liked</p>
+              <Card.Text>
+                {likesOnBlog.author}
+                {likesOnBlog.category}
+              </Card.Text>
+
+               <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
+            </Card.Body>
+
+          </Card>
+      ))}
 
     </div>
 

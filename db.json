@@ -1,34 +1,48 @@
 {
   "posts": [
     {
-      "author": "Juanako666",
-      "title": "TEST",
-      "likes": 21,
+      "author": "Nerfi666",
+      "title": "China",
+      "likes": 11,
       "id": 1
     },
     {
-      "author": "Juanako666",
-      "title": "TEST2",
-      "likes": 10,
+      "title": "Bankok",
+      "author": "Nerfi666",
+      "likes": 0,
       "id": 2
     },
     {
-      "author": "Juanako666",
-      "title": "PUT",
-      "likes": 5,
+      "author": "Nerfi666",
+      "title": "Quito",
+      "likes": 12,
       "id": 3
     },
     {
+      "title": "Paris",
       "author": "Nerfi666",
-      "title": "Bankok",
-      "likes": 14,
+      "likes": 0,
       "id": 4
     },
     {
       "author": "Nerfi666",
-      "title": "China",
-      "likes": 6,
+      "title": "Krakow",
+      "likes": 4,
       "id": 5
+    },
+    {
+      "author": "Nerfi666",
+      "title": "Barcelona",
+      "category": "travel",
+      "likes": 15,
+      "id": 6
+    },
+    {
+      "author": "Nerfi666",
+      "title": "Madrid",
+      "category": "travel",
+      "likes": 17,
+      "id": 7
     }
   ],
   "comments": [],
