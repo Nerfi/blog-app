@@ -17,7 +17,6 @@ class Main extends Component {
             <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
           <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
 
-
           </Nav>
         </Navbar.Collapse>
 

@@ -7,6 +7,7 @@ import Posts from '../src/components/Posts/Posts';
 import CreatePost from '../src/components/PostCreation/CreatePost';
 import LandingPage from '../src/components/LandingPage/LandingPage';
 import Post from '../src/components/PostDetail/PostDetail';
+import PostUpdate from '../src/components/UpdatePost/UpdatePost';
 
 
  class App extends Component{
@@ -19,6 +20,7 @@ import Post from '../src/components/PostDetail/PostDetail';
                 <Route path="/posts" component={Posts}/>
                 <Route path="/createpost" component={CreatePost}/>
                 <Route exact path="/post/:id" component={Post}/>
+                <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/" component={LandingPage}/>
             </Switch>
 

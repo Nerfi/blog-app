@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { Card,Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 import './landingPage.css';
 
 const LandinPage = (props) => {
@@ -20,7 +20,7 @@ const LandinPage = (props) => {
   },[]);
 
   const addLikes = () => alert('hello world JUANAKO');
-  console.log(props)
+  console.log(props, 'props here')
 
   return(
     <div>
@@ -30,12 +30,12 @@ const LandinPage = (props) => {
 
       {blogs.filter(blog => blog.likes > 10).map(likesOnBlog => (
 
-         <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
+         <Card key={likesOnBlog.id} style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
             <Card.Body >
               <Card.Title> <Link to={`/post/${likesOnBlog.id}`}> {likesOnBlog.title} </Link></Card.Title>
               <p>{likesOnBlog.likes} times this post was liked</p>
               <Card.Text>
-                {likesOnBlog.author}
+                Created by: {likesOnBlog.author}
                 {likesOnBlog.category}
               </Card.Text>
 

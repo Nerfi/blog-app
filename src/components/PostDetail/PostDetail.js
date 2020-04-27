@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { Card,Button } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 
 function PostDetails(props){
 
@@ -19,7 +20,7 @@ function PostDetails(props){
     props.history.push('/posts');
 
   }
-
+  //adding likes
   const addLikes = () => {
 
        const postDetails = {
@@ -57,6 +58,7 @@ function PostDetails(props){
             </Card.Text>
             <Button onClick={click} variant="danger">Delete</Button>
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
+              <Link to={`/update/post/${props.match.params.id}`}> Update Post </Link>
           </Card.Body>
 
         </Card>
