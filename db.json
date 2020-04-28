@@ -1,13 +1,14 @@
 {
   "posts": [
     {
-      "author": "Nerfi666",
-      "title": "China",
+      "author": "bad bunny ",
+      "title": "New china version 2",
+      "likes": 25,
       "id": 1
     },
     {
-      "title": "Bankok",
-      "author": "Nerfi666",
+      "author": "Pampara",
+      "title": "New Bankok",
       "likes": 0,
       "id": 2
     },
@@ -26,12 +27,12 @@
       "author": "Nerfi666",
       "title": "Barcelona",
       "category": "travel",
-      "likes": 15,
+      "likes": 24,
       "id": 6
     },
     {
-      "author": "Nerfi666",
-      "title": "Madrid",
+      "author": "Updating the author of this post",
+      "title": "Updating Madrid",
       "category": "travel",
       "likes": 17,
       "id": 7
@@ -172,6 +173,62 @@
       "category": "",
       "likes": 0,
       "id": 32
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": 0,
+      "id": 33
+    },
+    {
+      "id": 34
+    },
+    {
+      "id": 35
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": 0,
+      "id": 36
+    },
+    {
+      "author": "fff",
+      "id": 37
+    },
+    {
+      "title": "dddd",
+      "id": 38
+    },
+    {
+      "title": "gsdfsdfsd",
+      "author": "workign ?",
+      "category": "",
+      "likes": 25,
+      "id": 39
+    },
+    {
+      "title": "ddddd",
+      "author": "ffffff",
+      "category": "",
+      "likes": null,
+      "id": 40
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": null,
+      "id": 41
+    },
+    {
+      "title": "name",
+      "author": "is back again ",
+      "category": "",
+      "likes": null,
+      "id": 42
     }
   ],
   "comments": [],

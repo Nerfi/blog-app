@@ -24,7 +24,7 @@ function PostDetails(props){
   const addLikes = () => {
 
        const postDetails = {
-        method: 'PUT',
+        method: 'PATCH',
         body: JSON.stringify({
           author: selectedPost.author,
           title: selectedPost.title,
@@ -53,7 +53,7 @@ function PostDetails(props){
             <Card.Title> {selectedPost.title}</Card.Title>
             <p>{selectedPost.likes <= 0 ? 'Be the first to like this post!' : selectedPost.likes}</p>
             <Card.Text>
-              {selectedPost.body}
+              {selectedPost.author}
               {selectedPost.category}
             </Card.Text>
             <Button onClick={click} variant="danger">Delete</Button>
