@@ -7,7 +7,7 @@ const LandinPage = (props) => {
 
   const [blogs, setBlogs] =  useState([]);
 
-  async function fetchBlogPosts () {
+   const fetchBlogPosts = async () => {
 
     const fetchPost = await fetch('/posts');
     const response = await fetchPost.json();
@@ -20,7 +20,7 @@ const LandinPage = (props) => {
   },[]);
 
   const addLikes = () => alert('hello world JUANAKO');
-  console.log(props, 'props here')
+
 
   return(
     <div>

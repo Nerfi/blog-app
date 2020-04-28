@@ -1,12 +1,6 @@
 {
   "posts": [
     {
-      "author": "bad bunny ",
-      "title": "New china version 2",
-      "likes": 25,
-      "id": 1
-    },
-    {
       "author": "Pampara",
       "title": "New Bankok",
       "likes": 0,
@@ -27,7 +21,7 @@
       "author": "Nerfi666",
       "title": "Barcelona",
       "category": "travel",
-      "likes": 24,
+      "likes": 25,
       "id": 6
     },
     {
@@ -36,167 +30,6 @@
       "category": "travel",
       "likes": 17,
       "id": 7
-    },
-    {
-      "title": "",
-      "author": "",
-      "id": 11
-    },
-    {
-      "title": "",
-      "author": "",
-      "id": 13
-    },
-    {
-      "title": "",
-      "author": "",
-      "id": 14
-    },
-    {
-      "title": "",
-      "author": "",
-      "id": 15
-    },
-    {
-      "title": "",
-      "author": "",
-      "id": 16
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 17
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 18
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 19
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 20
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 21
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 22
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 23
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 24
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 25
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 26
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 27
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 28
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 29
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 30
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 31
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 32
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 33
-    },
-    {
-      "id": 34
-    },
-    {
-      "id": 35
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": 0,
-      "id": 36
-    },
-    {
-      "author": "fff",
-      "id": 37
     },
     {
       "title": "dddd",
@@ -217,18 +50,18 @@
       "id": 40
     },
     {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": null,
-      "id": 41
-    },
-    {
       "title": "name",
       "author": "is back again ",
       "category": "",
       "likes": null,
       "id": 42
+    },
+    {
+      "title": "Async",
+      "author": "function",
+      "category": "",
+      "likes": null,
+      "id": 43
     }
   ],
   "comments": [],

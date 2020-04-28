@@ -25,9 +25,9 @@ function Post(props) {
 
   }
 
-   const addPost = (event) =>  {
 
-    const {title,author,likes,category} = details;
+  const addPost = async event => {
+      const {title,author,likes,category} = details;
 
     const postDetails = {
       method: 'POST',
@@ -35,11 +35,9 @@ function Post(props) {
       body: JSON.stringify({  title,  author,  category,  likes })
     };
 
-    const postRequest = fetch('/posts', postDetails)
-    .then(response => response.json())
-    .then(data => setDetails(data))
-    .catch(error => console.log(error))
-
+    const postRequest =  await fetch('/posts', postDetails)
+    const response = await postRequest.json();
+    setDetails(response);
 
     event.preventDefault();
     props.history.push('/posts')

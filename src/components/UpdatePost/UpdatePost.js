@@ -19,7 +19,7 @@ async function fetchSinglePost () {
     fetchSinglePost();
   },[]);
 
- const handleChange = (event) => {
+ const handleChange = event => {
 
     const value = event.target.value;
     const name = event.target.name;
@@ -31,9 +31,9 @@ async function fetchSinglePost () {
 
   }
 
+const updatedPost = async () => {
 
-async function updatedPost () {
-   const {author, title, category, likes} = updatePost;
+  const {author, title, category, likes} = updatePost;
 
     const postDetails = {
     method: 'PUT',

@@ -6,10 +6,15 @@ function PostDetails(props){
 
   const [selectedPost, setSelected] = useState({});
 
+  const selectPost = async () => {
+    const fetchSinglePost = await fetch(`/posts/${props.match.params.id}`);
+    const response = await fetchSinglePost.json();
+    setSelected(response);
+
+  }
+
   useEffect(() => {
-    fetch(`/posts/${props.match.params.id}`)
-    .then(response => response.json())
-    .then(data => setSelected(data))
+    selectPost();
 
   },[]);
 
@@ -21,7 +26,7 @@ function PostDetails(props){
 
   }
   //adding likes
-  const addLikes = () => {
+  const addLikes = async () => {
 
        const postDetails = {
         method: 'PATCH',
@@ -37,10 +42,10 @@ function PostDetails(props){
       };
 
 
-    const postRequest = fetch(`/posts/${props.match.params.id}`, postDetails)
-    .then(response => response.json())
-    .then(data => setSelected(data))
-    .catch(error => console.log(error))
+    const postRequest = await fetch(`/posts/${props.match.params.id}`, postDetails);
+    const response = await postRequest.json();
+    setSelected(response);
+
 
 
     };
