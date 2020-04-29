@@ -21,7 +21,7 @@
       "author": "Nerfi666",
       "title": "Barcelona",
       "category": "travel",
-      "likes": 25,
+      "likes": 26,
       "id": 6
     },
     {
@@ -62,6 +62,13 @@
       "category": "",
       "likes": null,
       "id": 43
+    },
+    {
+      "title": "Create",
+      "author": "workign",
+      "category": "",
+      "likes": null,
+      "id": 44
     }
   ],
   "comments": [],

@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { Card,Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './landingPage.css';
+import SearchBar from '../../UI/SearchBar';
 
 const LandinPage = (props) => {
 
@@ -25,6 +26,7 @@ const LandinPage = (props) => {
   return(
     <div>
       <div className="app">
+        <SearchBar />
       </div>
       <p style={{position:'center'}}>Our Most Popular Posts </p>
 

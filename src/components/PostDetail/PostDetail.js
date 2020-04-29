@@ -25,7 +25,6 @@ function PostDetails(props){
     props.history.push('/posts');
 
   }
-  //adding likes
   const addLikes = async () => {
 
        const postDetails = {
