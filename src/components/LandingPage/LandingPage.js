@@ -19,14 +19,23 @@ const LandinPage = (props) => {
   useEffect(() => {
     fetchBlogPosts();
   },[]);
-
+  //fake fucntion not pay attention to it
   const addLikes = () => alert('hello world JUANAKO');
+
+  //adding function for the searchBar component
+
+  const search = async (query) => {
+    const searchTerms = await fetch(`/posts?q=${query}`);
+    const response = await searchTerms.json();
+    setBlogs(response);
+
+  }
 
 
   return(
     <div>
       <div className="app">
-        <SearchBar />
+        <SearchBar search={search} />
       </div>
       <p style={{position:'center'}}>Our Most Popular Posts </p>
 

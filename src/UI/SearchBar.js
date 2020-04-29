@@ -1,21 +1,21 @@
 import React, {useState, useEffect} from 'react';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
 
   const [query, setQuery] = useState('');
-  const [posts , setPosts] = useState([]);
 
   const handleChange = event => {
       setQuery(event.target.value)
   };
 
-  const searchQuery = async (query) => {
-    const desiredPost = await fetch(`/posts?q=${query}`);
-    const response = desiredPost.json();
-    setPosts(response);
-  }
 
-  console.log(posts ||query)
+
+  const callSearchFucntion = e => {
+    e.preventDefault();
+    props.search(query);
+  };
+
+
   return(
     <div>
        <form>
@@ -24,7 +24,7 @@ const SearchBar = () => {
             value={query}
             onChange={handleChange}
           />
-        <input onClick={searchQuery} type="submit" value="SEARCH" />
+        <input onClick={callSearchFucntion} type="submit" value="SEARCH" />
 
         </form>
 
