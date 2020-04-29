@@ -19,6 +19,7 @@ const LandinPage = (props) => {
   useEffect(() => {
     fetchBlogPosts();
   },[]);
+
   //fake fucntion not pay attention to it
   const addLikes = () => alert('hello world JUANAKO');
 

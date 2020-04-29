@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 const SearchBar = (props) => {
 
@@ -7,7 +7,6 @@ const SearchBar = (props) => {
   const handleChange = event => {
       setQuery(event.target.value)
   };
-
 
 
   const callSearchFucntion = e => {
@@ -27,8 +26,6 @@ const SearchBar = (props) => {
         <input onClick={callSearchFucntion} type="submit" value="SEARCH" />
 
         </form>
-
-        <p style={{color: 'red'}}>your query is {query}</p>
 
     </div>
   );
