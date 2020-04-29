@@ -9,13 +9,14 @@ const UpdatePost = (props) => {
     category: ""
   });
 
-async function fetchSinglePost () {
-  const fetchPost = await fetch(`/posts/${props.match.params.id}`);
-  const response = await fetchPost.json();
-  setUpdatePost(response);
-};
 
   useEffect(() => {
+    async function fetchSinglePost () {
+      const fetchPost = await fetch(`/posts/${props.match.params.id}`);
+      const response = await fetchPost.json();
+      setUpdatePost(response);
+    };
+
     fetchSinglePost();
   },[]);
 

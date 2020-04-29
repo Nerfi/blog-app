@@ -9,7 +9,8 @@
     {
       "author": "Nerfi666",
       "title": "Quito",
-      "id": 3
+      "id": 3,
+      "likes": 18
     },
     {
       "author": "Nerfi666",
@@ -21,7 +22,7 @@
       "author": "Nerfi666",
       "title": "Barcelona",
       "category": "travel",
-      "likes": 26,
+      "likes": 46,
       "id": 6
     },
     {
@@ -69,6 +70,62 @@
       "category": "",
       "likes": null,
       "id": 44
+    },
+    {
+      "author": "bar baz fizz buzz",
+      "title": "foo",
+      "category": "",
+      "likes": 5,
+      "id": 46
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": null,
+      "id": 48
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": null,
+      "id": 49
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": null,
+      "id": 50
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": null,
+      "id": 51
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": null,
+      "id": 52
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": null,
+      "id": 53
+    },
+    {
+      "title": "",
+      "author": "",
+      "category": "",
+      "likes": null,
+      "id": 54
     }
   ],
   "comments": [],

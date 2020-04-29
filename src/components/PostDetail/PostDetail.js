@@ -6,19 +6,21 @@ function PostDetails(props){
 
   const [selectedPost, setSelected] = useState({});
 
-  const selectPost = async () => {
+
+
+  useEffect(() => {
+
+    const selectPost = async () => {
     const fetchSinglePost = await fetch(`/posts/${props.match.params.id}`);
     const response = await fetchSinglePost.json();
     setSelected(response);
 
-  }
-
-  useEffect(() => {
+   }
     selectPost();
 
   },[]);
 
-  const click = () => {
+  const deleteSelectedPost = () => {
     const deletePost = fetch(`/posts/${props.match.params.id}`, {
       method: 'DELETE'
     });
@@ -30,9 +32,6 @@ function PostDetails(props){
        const postDetails = {
         method: 'PATCH',
         body: JSON.stringify({
-          author: selectedPost.author,
-          title: selectedPost.title,
-          category: selectedPost.category,
          likes: selectedPost.likes + 1
         }),
         headers:  {
@@ -60,7 +59,7 @@ function PostDetails(props){
               {selectedPost.author}
               {selectedPost.category}
             </Card.Text>
-            <Button onClick={click} variant="danger">Delete</Button>
+            <Button onClick={deleteSelectedPost} variant="danger">Delete</Button>
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
               <Link to={`/update/post/${props.match.params.id}`}> Update Post </Link>
           </Card.Body>

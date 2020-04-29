@@ -16,12 +16,15 @@ function Post(props) {
 
     let name = event.target.name;
     let value = event.target.value;
-    setDetails(prevPosts => {
-      return {
-      ...prevPosts,
-      [name]: value
-      }
-    });
+    console.log(value.length)
+
+       setDetails(prevPosts => {
+        return {
+        ...prevPosts,
+        [name]: value
+        }
+      })
+
 
   }
 

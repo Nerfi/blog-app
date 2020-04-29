@@ -16,6 +16,7 @@ const LandinPage = (props) => {
 
   };
 
+
   useEffect(() => {
     fetchBlogPosts();
   },[]);
@@ -31,7 +32,6 @@ const LandinPage = (props) => {
     setBlogs(response);
 
   }
-
 
   return(
     <div>
