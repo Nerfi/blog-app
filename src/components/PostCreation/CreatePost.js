@@ -3,13 +3,13 @@ import {Form} from 'react-bootstrap';
 
 function Post(props) {
 
+  const [category, setCategory] = useState({value: ''});
+
   const [details, setDetails] = useState({
     title:"",
    author: "",
    likes: null
  });
-  //category state
-  const [category, setCategory] = useState({value: ''});
 
   const handleCategorChange = event => {
     setCategory({value: event.target.value});
@@ -30,10 +30,11 @@ function Post(props) {
 
   }
 
+
   const addPost = async event => {
+
       const {title,author,likes} = details;
       const{value} = category;
-
 
 
     const postDetails = {
@@ -42,12 +43,19 @@ function Post(props) {
       body: JSON.stringify({  title,  author,  value, likes })
     };
 
-    const postRequest =  await fetch('/posts', postDetails)
-    const response = await postRequest.json();
-    setDetails(response);
+    if(title.length && author.length > 5) {
 
-    event.preventDefault();
-    props.history.push('/posts')
+      const postRequest =  await fetch('/posts', postDetails)
+      const response = await postRequest.json();
+      setDetails(response);
+
+        props.history.push('/posts');
+
+    } else {
+      alert('You need to typed int something =)')
+    }
+       event.preventDefault();
+
   }
 
 
@@ -56,19 +64,22 @@ function Post(props) {
       <Form onSubmit={addPost}>
         <Form.Group controlId="formGroupEmail">
         <Form.Label>Title</Form.Label>
-        <Form.Control onChange={handleChange} name="title"  type="text" placeholder="Enter title"  />
+        <Form.Control onChange={handleChange} name="title" type="text" placeholder="Enter title"  />
         </Form.Group>
-        <Form.Group controlId="formGroupPassword">
-          <Form.Label >Content</Form.Label>
-          <Form.Control onChange={handleChange} name="author" type="text"  placeholder="Enter Content"/>
-         </Form.Group>
 
-      <select  onChange={handleCategorChange}>
+          <div className="form-group">
+          <label for="exampleFormControlTextarea1">Write your history</label>
+          <textarea className="form-control"  onChange={handleChange} name="author" required id="exampleFormControlTextarea1" rows="3" placeholder="Write your history"></textarea>
+        </div>
+
+      <select onChange={handleCategorChange}>
         <option value="Food">Food</option>
         <option value="Travel">Travel</option>
         <option  value="News">News</option>
         <option value="Tech">Tech</option>
       </select>
+
+
 
       </Form>
       <button onClick={addPost}>Add Post</button>

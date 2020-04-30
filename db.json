@@ -114,20 +114,6 @@
       "id": 52
     },
     {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": null,
-      "id": 53
-    },
-    {
-      "title": "",
-      "author": "",
-      "category": "",
-      "likes": null,
-      "id": 54
-    },
-    {
       "title": "food ",
       "author": "testing ",
       "category": "",
@@ -147,6 +133,48 @@
       "value": "Tech",
       "likes": null,
       "id": 57
+    },
+    {
+      "title": "",
+      "author": "",
+      "value": "",
+      "likes": null,
+      "id": 58
+    },
+    {
+      "title": "Waiter ",
+      "author": "dasdasd",
+      "value": "News",
+      "likes": null,
+      "id": 59
+    },
+    {
+      "title": "asdasdad",
+      "author": "AUTHOR WORKING? ",
+      "value": "Tech",
+      "likes": null,
+      "id": 60
+    },
+    {
+      "title": "",
+      "author": "",
+      "value": "",
+      "likes": null,
+      "id": 61
+    },
+    {
+      "title": "vamos a ver ",
+      "author": "ahora como funciona esta vaina ",
+      "value": "Tech",
+      "likes": null,
+      "id": 62
+    },
+    {
+      "title": "Poland Krakow",
+      "author": "Krakow it's cool",
+      "value": "Travel",
+      "likes": null,
+      "id": 63
     }
   ],
   "comments": [],

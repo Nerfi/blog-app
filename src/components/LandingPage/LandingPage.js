@@ -7,17 +7,18 @@ import SearchBar from '../../UI/SearchBar';
 const LandinPage = (props) => {
 
   const [blogs, setBlogs] =  useState([]);
-
-   const fetchBlogPosts = async () => {
-
-    const fetchPost = await fetch('/posts');
-    const response = await fetchPost.json();
-    setBlogs(response);
-
-  };
-  console.log(blogs)
+  const [searchQuery, setQuery] = useState([]);
 
   useEffect(() => {
+
+     const fetchBlogPosts = async () => {
+
+      const fetchPost = await fetch('/posts');
+      const response = await fetchPost.json();
+      setBlogs(response);
+
+    };
+
     fetchBlogPosts();
   },[]);
 
@@ -29,18 +30,15 @@ const LandinPage = (props) => {
   const search = async (query) => {
     const searchTerms = await fetch(`/posts?q=${query}`);
     const response = await searchTerms.json();
-    setBlogs(response);
+    setQuery(response);
 
-  }
 
-  return(
-    <div>
-      <div className="app">
-        <SearchBar search={search} />
-      </div>
-      <p style={{position:'center'}}>Our Most Popular Posts </p>
+  };
 
-      {blogs.filter(blog => blog.likes > 10).map(likesOnBlog => (
+  //not working
+let  newResults = (
+
+     blogs.filter(blog => blog.likes > 10).map(likesOnBlog => (
 
          <Card key={likesOnBlog.id} style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
             <Card.Body >
@@ -55,7 +53,42 @@ const LandinPage = (props) => {
             </Card.Body>
 
           </Card>
-      ))}
+      ))
+);
+
+  if(searchQuery) {
+
+   newResults =  searchQuery.map(blogQuery => (
+
+         <Card key={blogQuery.id} style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
+            <Card.Body >
+              <Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
+              <p>{blogQuery.likes} times this post was liked</p>
+              <Card.Text>
+                Created by: {blogQuery.author}
+                {blogQuery.category}
+              </Card.Text>
+
+               <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
+            </Card.Body>
+
+          </Card>
+    ))
+  }
+
+
+
+
+
+
+  return(
+    <div>
+      <div className="app">
+        <SearchBar search={search} />
+      </div>
+      <p style={{position:'center'}}>Our Most Popular Posts </p>
+      {newResults}
+
 
     </div>
 
