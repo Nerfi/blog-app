@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { Card,Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {Link, Route, Routes} from 'react-router-dom'
+import UpdatePost from '../UpdatePost/UpdatePost';
 
 function PostDetails(props){
 
@@ -56,12 +57,18 @@ function PostDetails(props){
             <Card.Title> {selectedPost.title}</Card.Title>
             <p>{selectedPost.likes <= 0 ? 'Be the first to like this post!' : selectedPost.likes}</p>
             <Card.Text>
-              {selectedPost.author}
-              {selectedPost.category}
+              the author of this post is: {selectedPost.author}
             </Card.Text>
+              Category: {selectedPost.value}
+             <Card.Text>
+             </Card.Text>
             <Button onClick={deleteSelectedPost} variant="danger">Delete</Button>
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
-              <Link to={`/update/post/${props.match.params.id}`}> Update Post </Link>
+              <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
+            {/* <Route path={this.props.match.url + '/:courseId'} component={Course} /> */}
+            <Route path={props.match.url +  `/update/post/${props.match.params.id}`}  render={() => <Route component={UpdatePost}/>}/>
+
+
           </Card.Body>
 
         </Card>

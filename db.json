@@ -37,8 +37,8 @@
       "id": 38
     },
     {
-      "title": "gsdfsdfsd",
       "author": "workign ?",
+      "title": "Lil",
       "category": "",
       "likes": 25,
       "id": 39
@@ -126,6 +126,27 @@
       "category": "",
       "likes": null,
       "id": 54
+    },
+    {
+      "title": "food ",
+      "author": "testing ",
+      "category": "",
+      "likes": null,
+      "id": 55
+    },
+    {
+      "title": "Testing ",
+      "author": "Value",
+      "value": "Travel",
+      "likes": null,
+      "id": 56
+    },
+    {
+      "title": "Test",
+      "author": "Vamos a ver ",
+      "value": "Tech",
+      "likes": null,
+      "id": 57
     }
   ],
   "comments": [],

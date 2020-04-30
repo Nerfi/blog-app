@@ -15,7 +15,7 @@ const LandinPage = (props) => {
     setBlogs(response);
 
   };
-
+  console.log(blogs)
 
   useEffect(() => {
     fetchBlogPosts();
