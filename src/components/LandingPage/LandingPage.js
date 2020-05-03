@@ -32,7 +32,9 @@ const LandinPage = (props) => {
 
   };
 
-  //not working
+
+
+  //when the component mounts again the whole array is loaded, that's not what I wanted
 
     let newResults  = (
 
@@ -54,7 +56,7 @@ const LandinPage = (props) => {
         ))
   );
 
-  if(searchQuery) {
+  if(searchQuery && searchQuery.length >= 1) {
 
       newResults =  searchQuery.map(blogQuery => (
 

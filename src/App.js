@@ -23,7 +23,7 @@ import NoMatch from '../src/components/NoMatch/NoMatch';
                 <Route exact path="/post/:id" component={Post}/>
                 <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/" component={LandingPage}/>
-               <Route component={NoMatch}/>
+              <Route exact path="/404" component={NoMatch}/>
             </Switch>
 
       </div>

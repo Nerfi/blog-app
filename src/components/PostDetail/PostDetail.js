@@ -7,23 +7,28 @@ import NoMatch from '../NoMatch/NoMatch';
 function PostDetails(props){
 
   const [selectedPost, setSelected] = useState({});
-  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
 
-    const selectPost = async () => {
 
-    const fetchSinglePost = await fetch(`/posts/${props.match.params.id}`);
-    const response = await fetchSinglePost.json();
-    setSelected(response);
+      const selectPost = async () => {
+        try {
+          const fetchSinglePost = await fetch(`/posts/${props.match.params.id}`);
+          const response = await fetchSinglePost.json();
+          setSelected(response);
+
+        } catch(e) {
+          console.log(e)
+        }
+
     }
-
     selectPost();
 
-
-
 },[]);
+
+
 
   const deleteSelectedPost = () => {
     const deletePost = fetch(`/posts/${props.match.params.id}`, {
@@ -45,13 +50,19 @@ function PostDetails(props){
       };
 
 
-    const postRequest = await fetch(`/posts/${props.match.params.id}`, postDetails);
-    const response = await postRequest.json();
-    setSelected(response);
+      const postRequest = await fetch(`/posts/${props.match.params.id}`, postDetails);
+      const response = await postRequest.json();
+      setSelected(response);
 
 
 
     };
+
+
+
+    if (selectedPost.status === 404 ) {
+      return <Redirect to="/404" />
+    }
 
   return(
      <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
@@ -68,9 +79,9 @@ function PostDetails(props){
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
               <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
            {/* <Route path={props.match.url +  `/update/post/${props.match.params.id}`}  render={() => <Route component={UpdatePost}/>}/>*/}
-
           </Card.Body>
 
+            {loading === undefined  ? <Redirect to="/404"/> : null}
         </Card>
   );
 
