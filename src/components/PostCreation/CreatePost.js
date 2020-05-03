@@ -37,24 +37,24 @@ function Post(props) {
       const{value} = category;
 
 
-    const postDetails = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({  title,  author,  value, likes })
-    };
+      const postDetails = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({  title,  author,  value, likes })
+      };
 
-    if(title.length && author.length > 5) {
+      if(title.length && author.length > 5) {
 
-      const postRequest =  await fetch('/posts', postDetails)
-      const response = await postRequest.json();
-      setDetails(response);
+        const postRequest =  await fetch('/posts', postDetails)
+        const response = await postRequest.json();
+        setDetails(response);
 
-        props.history.push('/posts');
+          props.history.push('/posts');
 
-    } else {
-      alert('You need to typed int something =)')
-    }
-       event.preventDefault();
+      } else {
+        alert('You need to typed int something =)')
+      }
+         event.preventDefault();
 
   }
 

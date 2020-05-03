@@ -1,25 +1,29 @@
 import React,{useState,useEffect} from 'react';
 import { Card,Button } from 'react-bootstrap';
-import {Link, Route, Routes} from 'react-router-dom'
+import {Link, Route, Routes, Redirect} from 'react-router-dom'
 import UpdatePost from '../UpdatePost/UpdatePost';
+import NoMatch from '../NoMatch/NoMatch';
 
 function PostDetails(props){
 
   const [selectedPost, setSelected] = useState({});
-
+  const [error, setError] = useState(null)
 
 
   useEffect(() => {
 
     const selectPost = async () => {
+
     const fetchSinglePost = await fetch(`/posts/${props.match.params.id}`);
     const response = await fetchSinglePost.json();
     setSelected(response);
+    }
 
-   }
     selectPost();
 
-  },[]);
+
+
+},[]);
 
   const deleteSelectedPost = () => {
     const deletePost = fetch(`/posts/${props.match.params.id}`, {
@@ -49,8 +53,6 @@ function PostDetails(props){
 
     };
 
-
-
   return(
      <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
           <Card.Body >
@@ -65,9 +67,7 @@ function PostDetails(props){
             <Button onClick={deleteSelectedPost} variant="danger">Delete</Button>
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
               <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
-            {/* <Route path={this.props.match.url + '/:courseId'} component={Course} /> */}
-            <Route path={props.match.url +  `/update/post/${props.match.params.id}`}  render={() => <Route component={UpdatePost}/>}/>
-
+           {/* <Route path={props.match.url +  `/update/post/${props.match.params.id}`}  render={() => <Route component={UpdatePost}/>}/>*/}
 
           </Card.Body>
 
