@@ -7,29 +7,25 @@ import NoMatch from '../NoMatch/NoMatch';
 function PostDetails(props){
 
   const [selectedPost, setSelected] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
 
   useEffect(() => {
 
 
       const selectPost = async () => {
-        try {
+
           const fetchSinglePost = await fetch(`/posts/${props.match.params.id}`);
+          if(fetchSinglePost.status === 404) {setError(true)}
           const response = await fetchSinglePost.json();
           setSelected(response);
 
-        } catch(e) {
-          console.log(e)
-        }
-
     }
+
     selectPost();
 
 },[]);
-
-
-
+console.log(error)
   const deleteSelectedPost = () => {
     const deletePost = fetch(`/posts/${props.match.params.id}`, {
       method: 'DELETE'
@@ -54,13 +50,11 @@ function PostDetails(props){
       const response = await postRequest.json();
       setSelected(response);
 
-
-
     };
 
 
 
-    if (selectedPost.status === 404 ) {
+    if (error) {
       return <Redirect to="/404" />
     }
 
@@ -80,8 +74,6 @@ function PostDetails(props){
               <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
            {/* <Route path={props.match.url +  `/update/post/${props.match.params.id}`}  render={() => <Route component={UpdatePost}/>}/>*/}
           </Card.Body>
-
-            {loading === undefined  ? <Redirect to="/404"/> : null}
         </Card>
   );
 

@@ -77,6 +77,7 @@ const LandinPage = (props) => {
 
 
   return(
+
     <div>
       <div className="app">
         <SearchBar search={search} />
