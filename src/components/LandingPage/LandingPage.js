@@ -40,7 +40,7 @@ const LandinPage = (props) => {
 
        blogs.filter(blog => blog.likes > 10).map(likesOnBlog => (
 
-           <Card key={likesOnBlog.id} style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
+           <Card key={likesOnBlog.id} >
               <Card.Body >
                 <Card.Title> <Link to={`/post/${likesOnBlog.id}`}> {likesOnBlog.title} </Link></Card.Title>
                 <p>{likesOnBlog.likes} times this post was liked</p>
@@ -56,11 +56,11 @@ const LandinPage = (props) => {
         ))
   );
 
-  if(searchQuery && searchQuery.length >= 1) {
+  if(searchQuery.length >= 1) {
 
       newResults =  searchQuery.map(blogQuery => (
 
-      <Card key={blogQuery.id} style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
+      <Card className="card" key={blogQuery.id} >
         <Card.Body >
         <Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
         <p>{blogQuery.likes} times this post was liked</p>
@@ -82,9 +82,14 @@ const LandinPage = (props) => {
       <div className="app">
         <SearchBar search={search} />
       </div>
+
+
       <p style={{color:'red' }}>Our Most Popular Posts </p>
 
-      {newResults }
+      <div className="containerBlogs">
+        {newResults }
+      </div>
+
 
 
     </div>

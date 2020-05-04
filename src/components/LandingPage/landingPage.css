@@ -9,3 +9,19 @@
   align-items: center;
 
 }
+
+.containerBlogs {
+  display: flex;
+  flex-wrap: wrap;
+  margin:40px;
+
+}
+
+.containerBlogs > .card {
+  text-align: center;
+  padding: 10px;
+  margin: 10px 10px;
+  width: 38rem;
+}
+
+

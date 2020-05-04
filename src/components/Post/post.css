@@ -1,0 +1,24 @@
+.postContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin:40px;
+
+}
+
+.postContainer > .cardContainer {
+
+  text-align: center;
+  padding: 10px;
+  margin: 10px 10px;
+  width: 38rem;
+
+
+}
+
+
+@media(min-width: 1024px) {
+  .postContainer > .cardContainer {
+    align-content: center;
+    margin-left: 50vh;
+  }
+}

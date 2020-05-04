@@ -7,11 +7,14 @@ function Posts() {
   const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-         fetch('/posts')
-        .then(response => {
-          return response.json();
-         })
-        .then(json => setPosts(json))
+
+      const fetchPostsFunction = async () => {
+       const fetchPosts = await fetch('/posts');
+        const response = await fetchPosts.json();
+        setPosts(response);
+      };
+
+    fetchPostsFunction();
 
       }, []);
 

@@ -3,6 +3,7 @@ import { Card,Button } from 'react-bootstrap';
 import {Link, Route, Routes, Redirect} from 'react-router-dom'
 import UpdatePost from '../UpdatePost/UpdatePost';
 import NoMatch from '../NoMatch/NoMatch';
+import './PostDetail.css';
 
 function PostDetails(props){
 
@@ -25,7 +26,7 @@ function PostDetails(props){
     selectPost();
 
 },[]);
-console.log(error)
+
   const deleteSelectedPost = () => {
     const deletePost = fetch(`/posts/${props.match.params.id}`, {
       method: 'DELETE'
@@ -59,7 +60,7 @@ console.log(error)
     }
 
   return(
-     <Card style={{width: '38rem', display: 'flex', flexWrap: 'wrap',alingContent: 'center'}}>
+     <Card className="singlePost">
           <Card.Body >
             <Card.Title> {selectedPost.title}</Card.Title>
             <p>{selectedPost.likes <= 0 ? 'Be the first to like this post!' : selectedPost.likes}</p>
