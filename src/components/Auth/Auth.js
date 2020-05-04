@@ -35,32 +35,39 @@ const Auth = () =>  {
 
   }
 
+  const handleSwitch = () => {
+    return alert('working')
+  }
+
   return (
      <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-         <Form.Label>Email</Form.Label>
-          <FormControl
-            autoFocus
-            type="email"
-            name="email"
-            value={credentials.email}
-            onChange={handleChange}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-        <Form.Label>Password</Form.Label>
-          <FormControl
-            value={credentials.password}
-            name="password"
-            onChange={handleChange}
-            type="password"
-          />
-        </FormGroup>
-        <Button block bssize="large" disabled={!validateForm()} type="submit">
-          Login
-        </Button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <FormGroup controlId="email" bsSize="large">
+           <Form.Label>Email</Form.Label>
+            <FormControl
+              autoFocus
+              type="email"
+              name="email"
+              value={credentials.email}
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+          <Form.Label>Password</Form.Label>
+            <FormControl
+              value={credentials.password}
+              name="password"
+              onChange={handleChange}
+              type="password"
+            />
+          </FormGroup>
+          <Button block bssize="large" disabled={!validateForm()} type="submit">
+            Login
+          </Button>
+            <Button block bssize="large" onClick={handleSwitch} type="submit">
+            Sign Up
+          </Button>
+        </form>
     </div>
 
   );

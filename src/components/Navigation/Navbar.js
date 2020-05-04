@@ -15,7 +15,8 @@ class Main extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
-          <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
+            <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
+            <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/Login">Login</NavLink>
 
           </Nav>
         </Navbar.Collapse>
