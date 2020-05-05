@@ -13,9 +13,23 @@ const LandinPage = (props) => {
 
      const fetchBlogPosts = async () => {
 
-      const fetchPost = await fetch('/posts');
+      const fetchPost = await fetch('https://blog-fa351.firebaseio.com/posts.json');
       const response = await fetchPost.json();
-      setBlogs(response);
+
+      const fetchedPosts = [];
+
+      for(let post in response) {
+
+         fetchedPosts.push({
+
+            id: post,
+            ...response[post]
+
+         });
+
+      }
+
+      setBlogs(fetchedPosts);
 
     };
 
@@ -23,10 +37,10 @@ const LandinPage = (props) => {
 
   },[]);
 
-
+// need to check firebase docs for search
 
   const search = async (query) => {
-    const searchTerms = await fetch(`/posts?q=${query}`);
+    const searchTerms = await fetch(`https://blog-fa351.firebaseio.com/posts?q${query}.json`);
     const response = await searchTerms.json();
     setQuery(response);
 

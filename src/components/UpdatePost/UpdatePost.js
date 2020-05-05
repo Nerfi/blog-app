@@ -12,7 +12,7 @@ const UpdatePost = (props) => {
 
   useEffect(() => {
     async function fetchSinglePost () {
-      const fetchPost = await fetch(`/posts/${props.match.params.id}`);
+      const fetchPost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
       const response = await fetchPost.json();
       setUpdatePost(response);
     };
@@ -47,7 +47,8 @@ const updatedPost = async () => {
       headers: { 'Content-Type': 'application/json' }
 
   };
-  const updatedPostValues =  await fetch(`/posts/${props.match.params.id}`, postDetails);
+
+  const updatedPostValues =  await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`, postDetails);
   const response = await updatedPostValues.json();
   setUpdatePost(response);
   props.history.push('/posts');

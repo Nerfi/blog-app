@@ -17,7 +17,7 @@ function PostDetails(props){
       const selectPost = async () => {
 
           const fetchSinglePost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
-          if(fetchSinglePost.status === 404) {setError(true)}
+          if(!fetchSinglePost) {setError(true)}
           const response = await fetchSinglePost.json();
           setSelected(response);
 
@@ -35,6 +35,7 @@ function PostDetails(props){
     props.history.push('/posts');
 
   }
+
   const addLikes = async () => {
 
        const postDetails = {
@@ -48,7 +49,7 @@ function PostDetails(props){
       };
 
 
-      const postRequest = await fetch(`/posts/${props.match.params.id}`, postDetails);
+      const postRequest = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`, postDetails);
       const response = await postRequest.json();
       setSelected(response);
 
@@ -64,7 +65,8 @@ function PostDetails(props){
      <Card className="singlePost">
           <Card.Body >
             <Card.Title> {selectedPost.title}</Card.Title>
-            <p>{selectedPost.likes <= 0 ? 'Be the first to like this post!' : selectedPost.likes}</p>
+            <p>{selectedPost.likes === 0 ? 'Be the first to like this post!' : selectedPost.likes} {selectedPost.likes ? "Times this post was liked" : null}</p>
+
             <Card.Text>
               the author of this post is: {selectedPost.author}
             </Card.Text>
