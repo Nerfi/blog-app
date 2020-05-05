@@ -16,7 +16,7 @@ function PostDetails(props){
 
       const selectPost = async () => {
 
-          const fetchSinglePost = await fetch(`/posts/${props.match.params.id}`);
+          const fetchSinglePost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
           if(fetchSinglePost.status === 404) {setError(true)}
           const response = await fetchSinglePost.json();
           setSelected(response);
@@ -28,7 +28,8 @@ function PostDetails(props){
 },[]);
 
   const deleteSelectedPost = () => {
-    const deletePost = fetch(`/posts/${props.match.params.id}`, {
+
+    const deletePost = fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`, {
       method: 'DELETE'
     });
     props.history.push('/posts');
