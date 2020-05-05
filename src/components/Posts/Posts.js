@@ -9,15 +9,27 @@ function Posts() {
     useEffect(() => {
 
       const fetchPostsFunction = async () => {
-       const fetchPosts = await fetch('/posts');
+
+       const fetchPosts = await fetch('https://blog-fa351.firebaseio.com/posts.json');
         const response = await fetchPosts.json();
-        setPosts(response);
+
+       const results = [];
+
+        for(let post in response) {
+
+          results.push({
+            id: post,
+            ...response[post]
+          });
+        }
+
+
+        setPosts(results);
       };
 
     fetchPostsFunction();
 
       }, []);
-
   return (
     <div>
 

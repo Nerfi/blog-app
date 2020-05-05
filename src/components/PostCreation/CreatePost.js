@@ -45,7 +45,7 @@ function Post(props) {
 
       if(title.length && author.length > 5) {
 
-        const postRequest =  await fetch('/posts', postDetails)
+        const postRequest =  await fetch('https://blog-fa351.firebaseio.com/posts.json', postDetails)
         const response = await postRequest.json();
         setDetails(response);
 
