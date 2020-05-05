@@ -1,8 +1,9 @@
 import React , {useState} from 'react';
 import './auth.css';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
+import { Redirect} from 'react-router-dom';
 
-const Auth = () =>  {
+const Auth = (props) =>  {
 
   const [credentials, setCredentials] = useState({
     email: '',
@@ -35,14 +36,13 @@ const Auth = () =>  {
 
   }
 
-  const handleSwitch = () => {
-    return alert('working')
-  }
+  const history =  props.history;
+
 
   return (
      <div className="Login">
         <form onSubmit={handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="email" bssize="large">
            <Form.Label>Email</Form.Label>
             <FormControl
               autoFocus
@@ -64,7 +64,7 @@ const Auth = () =>  {
           <Button block bssize="large" disabled={!validateForm()} type="submit">
             Login
           </Button>
-            <Button block bssize="large" onClick={handleSwitch} type="submit">
+            <Button block bssize="large" onClick={() => history.push('/SignUp')} type="submit">
             Sign Up
           </Button>
         </form>

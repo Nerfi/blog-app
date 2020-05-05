@@ -8,7 +8,9 @@ import LandingPage from '../src/components/LandingPage/LandingPage';
 import Post from '../src/components/PostDetail/PostDetail';
 import PostUpdate from '../src/components/UpdatePost/UpdatePost';
 import NoMatch from '../src/components/NoMatch/NoMatch';
+//autho here is the login page
 import Auth from '../src/components/Auth/Auth';
+import SignUp from '../src/components/Auth/SignUp';
 
 
  class App extends Component{
@@ -24,6 +26,7 @@ import Auth from '../src/components/Auth/Auth';
                 <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/404" component={NoMatch}/>
                 <Route exact path="/Login" component={Auth}/>
+                <Route exact path="/SignUp" component={SignUp}/>
                 <Route exact path="/" component={LandingPage}/>
             </Switch>
 
