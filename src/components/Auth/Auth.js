@@ -5,10 +5,13 @@ import { Redirect} from 'react-router-dom';
 
 const Auth = (props) =>  {
 
+
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
   });
+  //adding error state
+  const [error, setError] = useState("");
 
   const  validateForm  = () => {
 
@@ -17,9 +20,26 @@ const Auth = (props) =>  {
     return email.length > 0 && password.length > 0;
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+   const {email , password} = credentials;
+
+    const authData = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({  email, password,  returnSecureToken: true })
+
   }
+    const envVaribales = process.env.REACT_APP_SIGNUP_API_KEY;
+
+    const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${envVaribales}`, authData)
+    const response = await postRequest.json();
+    //setting up state in case there is an error
+    if(response.error.code >= 400 && response.error.code <= 500) {setError(response.error.message)}
+      console.log(response, 'response esta aqui')
+
+}
+
 
   const handleChange = (event) => {
 
@@ -42,6 +62,7 @@ const Auth = (props) =>  {
   return (
      <div className="Login">
         <form onSubmit={handleSubmit}>
+        <h1> {error ?  error : "SignUp"}</h1>
           <FormGroup controlId="email" bssize="large">
            <Form.Label>Email</Form.Label>
             <FormControl
@@ -52,7 +73,7 @@ const Auth = (props) =>  {
               onChange={handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password" bssize="large">
           <Form.Label>Password</Form.Label>
             <FormControl
               value={credentials.password}
@@ -62,10 +83,10 @@ const Auth = (props) =>  {
             />
           </FormGroup>
           <Button block bssize="large" disabled={!validateForm()} type="submit">
-            Login
-          </Button>
-            <Button block bssize="large" onClick={() => history.push('/SignUp')} type="submit">
             Sign Up
+          </Button>
+            <Button block bssize="large" onClick={() => history.push('/Login')} type="submit">
+            Login
           </Button>
         </form>
     </div>

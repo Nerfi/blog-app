@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import  {NavLink} from 'react-router-dom';
-//we use NavLink because we want to give some style to the Links, otherwise we will just use Link
 
 
 class Main extends Component {
@@ -16,7 +15,7 @@ class Main extends Component {
           <Nav className="mr-auto">
             <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
             <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
-            <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/Login">Login</NavLink>
+            <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/SignUp">SignUp</NavLink>
 
           </Nav>
         </Navbar.Collapse>

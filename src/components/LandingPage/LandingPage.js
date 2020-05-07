@@ -9,6 +9,8 @@ const LandinPage = (props) => {
   const [blogs, setBlogs] =  useState([]);
   const [searchQuery, setQuery] = useState([]);
 
+
+
   useEffect(() => {
 
      const fetchBlogPosts = async () => {
