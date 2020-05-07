@@ -35,9 +35,7 @@ const Auth = (props) =>  {
     const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${envVaribales}`, authData)
     const response = await postRequest.json();
     //setting up state in case there is an error
-    if(response.error.code >= 400 && response.error.code <= 500) {setError(response.error.message)}
-      console.log(response, 'response esta aqui')
-
+      return response.error ? setError(response.error.message) : null;
 }
 
 
