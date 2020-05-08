@@ -2,9 +2,9 @@ import React , {useState} from 'react';
 import './auth.css';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import { Redirect} from 'react-router-dom';
+import Spinner from '../../UI/Spinner/Spinner';
 
 const Auth = (props) =>  {
-
 
   const [credentials, setCredentials] = useState({
     email: '',
@@ -29,7 +29,7 @@ const Auth = (props) =>  {
 
     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
-    return pattern.test(email) && password.length > 0;
+    return pattern.test(email) && password.length > 6;
   }
 
 
@@ -38,6 +38,10 @@ const Auth = (props) =>  {
 
     event.preventDefault();
    const {email , password} = credentials;
+
+    //cahnginf thr default value from the state from loadinf: false to true, not suer if this is the best way
+    setUserData(prevLoading => {return {loading: !prevLoading.loading}});
+
     //this is in max video the onAuth action dipatch from the redux store weere we send email adn password to firebase
     const authData = {
       method: 'POST',
@@ -45,16 +49,17 @@ const Auth = (props) =>  {
       body: JSON.stringify({  email, password,  returnSecureToken: true })
 
   }
+
     const envVaribales = process.env.REACT_APP_SIGNUP_API_KEY;
 
     const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${envVaribales}`, authData)
     const response = await postRequest.json();
-    console.log(response, 'reponse from firebase here')
+    console.log(response, 'response is ehre');
     //setting up state in case there is an error
-      return response.error ? setError(response.error.message) : setUserData({token: response.idToken});
+      return response.error ? setError(response.error.message) : setUserData({token: response.idToken, userId: response.localId, loading: false});
 }
 
-console.log(userData.token,  'tokejn is here')
+
 
   const handleChange = (event) => {
 
@@ -72,6 +77,10 @@ console.log(userData.token,  'tokejn is here')
   }
 
   const history =  props.history;
+
+  if(userData.loading) {
+    return <Spinner/>
+  }
 
 
   return (

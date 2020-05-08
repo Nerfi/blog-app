@@ -3,20 +3,24 @@ import { Card,Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './landingPage.css';
 import SearchBar from '../../UI/SearchBar';
+import Spinner from '../../UI/Spinner/Spinner'
 
 const LandinPage = (props) => {
 
   const [blogs, setBlogs] =  useState([]);
   const [searchQuery, setQuery] = useState([]);
-
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
 
   useEffect(() => {
 
      const fetchBlogPosts = async () => {
-
+      //not sure if this is the best way to implement the SPinner componennt
+      setLoading(prevLoading => {return !prevLoading});
       const fetchPost = await fetch('https://blog-fa351.firebaseio.com/posts.json');
       const response = await fetchPost.json();
+      response.error ? setError(response.error.message) : setLoading(loading)
 
       const fetchedPosts = [];
 
@@ -39,7 +43,7 @@ const LandinPage = (props) => {
 
   },[]);
 
-// need to check firebase docs for search
+// need to check firebase docs for search fucnitonalitty
 
   const search = async (query) => {
     const searchTerms = await fetch(`https://blog-fa351.firebaseio.com/posts?q${query}.json`);
@@ -71,7 +75,7 @@ const LandinPage = (props) => {
             </Card>
         ))
   );
-
+//not working since I have not check the firebase docs for thsi
   if(searchQuery.length >= 1) {
 
       newResults =  searchQuery.map(blogQuery => (
@@ -91,6 +95,9 @@ const LandinPage = (props) => {
   ));
 };
 
+if(loading) return newResults = <Spinner/>;
+
+
 
   return(
 
@@ -103,7 +110,9 @@ const LandinPage = (props) => {
       <p style={{color:'red' }}>Our Most Popular Posts </p>
 
       <div className="containerBlogs">
+
         {newResults }
+
       </div>
 
 
