@@ -14,6 +14,15 @@ const Auth = (props) =>  {
   //adding error state
   const [error, setError] = useState("");
 
+  //storing user data comming from firebase
+
+  const userData = {
+    token: null,
+    userId: null,
+    error: null,
+    loading: false
+  };
+
   const  validateForm  = () => {
 
     const {email, password} = credentials;
@@ -24,9 +33,10 @@ const Auth = (props) =>  {
   }
 
   const handleSubmit = async (event) => {
+
     event.preventDefault();
    const {email , password} = credentials;
-
+    //this is in max video the onAuth action dipatch from the redux store weere we send email adn password to firebase
     const authData = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -37,6 +47,7 @@ const Auth = (props) =>  {
 
     const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${envVaribales}`, authData)
     const response = await postRequest.json();
+    console.log(response, 'reponse from firebase here')
     //setting up state in case there is an error
       return response.error ? setError(response.error.message) : null;
 }
