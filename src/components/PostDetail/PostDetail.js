@@ -14,7 +14,7 @@ function PostDetails(props){
   //mañana lo 1 de lo primer
 
   console.log(props, 'porps hereererer')
-console.log(error)
+  console.log(error)
   useEffect(() => {
 
 

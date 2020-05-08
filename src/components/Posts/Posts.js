@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import Post from '../Post/Post';
 
+
 function Posts(props) {
-  console.log(props,  'props hersdfef')
 
   const [posts, setPosts] = useState([]);
 
@@ -37,7 +37,10 @@ function Posts(props) {
 
          {posts.map(post => {
             return(
-              <Post post={post} key={post.id} />
+              <div>
+                <Post post={post} key={post.id}  match={props.match}/>
+
+              </div>
               );
 
           })}

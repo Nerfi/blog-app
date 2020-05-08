@@ -10,6 +10,7 @@ const Auth = (props) =>  {
     email: '',
     password: ''
   });
+
   //adding error state
   const [error, setError] = useState("");
 
@@ -17,7 +18,9 @@ const Auth = (props) =>  {
 
     const {email, password} = credentials;
 
-    return email.length > 0 && password.length > 0;
+    const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
+    return pattern.test(email) && password.length > 0;
   }
 
   const handleSubmit = async (event) => {

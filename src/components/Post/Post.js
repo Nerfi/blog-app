@@ -4,14 +4,16 @@ import './post.css';
 import {Link} from 'react-router-dom'
 
   const post = (props) => {
-    console.log(props, 'props here')
+    console.log(props, 'props here fo a post component here')
 
     return (
       <div className="postContainer">
 
           <Card className="cardContainer">
             <Card.Body >
-              <Card.Title>  <Link to={`/post/${props.post.id}`}> {props.post.title} </Link></Card.Title>
+              <Card.Title>  <Link to={`/post/${props.post.id}`}> {props.post.title} </Link>
+
+              </Card.Title>
               <Card.Text>
                 {props.post.body}
               </Card.Text>
