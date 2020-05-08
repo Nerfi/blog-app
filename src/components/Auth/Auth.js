@@ -11,10 +11,7 @@ const Auth = (props) =>  {
     password: ''
   });
 
-  //adding error state
   const [error, setError] = useState("");
-
-  //storing user data comming from firebase
 
   const [userData, setUserData] = useState({
     token: null,
@@ -22,6 +19,9 @@ const Auth = (props) =>  {
     error: null,
     loading: false
   });
+
+  // lesson 330 crea una function para hacer log out, en la cual
+  //limpia el estado que he definido antes with userData
 
   const  validateForm  = () => {
 
@@ -32,8 +32,6 @@ const Auth = (props) =>  {
     return pattern.test(email) && password.length > 6;
   }
 
-
-
   const handleSubmit = async (event) => {
 
     event.preventDefault();
@@ -41,8 +39,6 @@ const Auth = (props) =>  {
 
     //cahnginf thr default value from the state from loadinf: false to true, not suer if this is the best way
     setUserData(prevLoading => {return {loading: !prevLoading.loading}});
-
-    //this is in max video the onAuth action dipatch from the redux store weere we send email adn password to firebase
     const authData = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,12 +50,8 @@ const Auth = (props) =>  {
 
     const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${envVaribales}`, authData)
     const response = await postRequest.json();
-    console.log(response, 'response is ehre');
-    //setting up state in case there is an error
-      return response.error ? setError(response.error.message) : setUserData({token: response.idToken, userId: response.localId, loading: false});
+    return response.error ? setError(response.error.message) : setUserData({token: response.idToken, userId: response.localId, loading: false});
 }
-
-
 
   const handleChange = (event) => {
 

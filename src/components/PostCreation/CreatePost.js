@@ -5,6 +5,8 @@ function Post(props) {
 
   const [category, setCategory] = useState({value: ''});
 
+  console.log(props, 'props for Create post are here')
+
   const [details, setDetails] = useState({
     title:"",
    author: "",
@@ -45,7 +47,7 @@ function Post(props) {
 
       if(title.length && author.length > 5) {
 
-        const postRequest =  await fetch('https://blog-fa351.firebaseio.com/posts.json', postDetails)
+        const postRequest =  await fetch('https://blog-fa351.firebaseio.com/posts.json?auth=', postDetails)
         const response = await postRequest.json();
         setDetails(response);
 
