@@ -4,6 +4,7 @@ import './post.css';
 import {Link} from 'react-router-dom'
 
   const post = (props) => {
+    console.log(props, 'props here')
 
     return (
       <div className="postContainer">

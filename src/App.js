@@ -22,12 +22,17 @@ import SignUp from '../src/components/Auth/SignUp';
           <Switch>
                 <Route path="/posts" component={Posts}/>
                 <Route path="/createpost" component={CreatePost}/>
-                <Route exact path="/post/:id" component={Post}/>
+                <Route  path="/post/:id" component={Post}/>
                 <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/404" component={NoMatch}/>
                 <Route exact path="/Login" component={SignUp}/>
                 <Route exact path="/SignUp" component={Auth}/>
                 <Route exact path="/" component={LandingPage}/>
+                <Route component={NoMatch}/>
+
+
+
+
             </Switch>
 
       </div>

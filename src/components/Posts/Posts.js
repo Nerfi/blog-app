@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import Post from '../Post/Post';
 
-function Posts() {
+function Posts(props) {
+  console.log(props,  'props hersdfef')
 
   const [posts, setPosts] = useState([]);
 
@@ -30,6 +31,7 @@ function Posts() {
     fetchPostsFunction();
 
       }, []);
+
   return (
     <div>
 
