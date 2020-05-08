@@ -16,12 +16,12 @@ const Auth = (props) =>  {
 
   //storing user data comming from firebase
 
-  const userData = {
+  const [userData, setUserData] = useState({
     token: null,
     userId: null,
     error: null,
     loading: false
-  };
+  });
 
   const  validateForm  = () => {
 
@@ -31,6 +31,8 @@ const Auth = (props) =>  {
 
     return pattern.test(email) && password.length > 0;
   }
+
+
 
   const handleSubmit = async (event) => {
 
@@ -49,9 +51,10 @@ const Auth = (props) =>  {
     const response = await postRequest.json();
     console.log(response, 'reponse from firebase here')
     //setting up state in case there is an error
-      return response.error ? setError(response.error.message) : null;
+      return response.error ? setError(response.error.message) : setUserData({token: response.idToken});
 }
 
+console.log(userData.token,  'tokejn is here')
 
   const handleChange = (event) => {
 
