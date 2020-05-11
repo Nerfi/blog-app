@@ -1,11 +1,20 @@
 import React from 'react';
 
-const authContext = React.createContext();
+//passing the initial values of the context
+const authContext = React.createContext({
+   token: null,
+    userId: null,
+    error: null,
+    loading: false
+  });
 
-const auth =  props => {
+//wrapper component
+const Auth =  props => {
   return (
-    <authContext.Provider value={}>
+    <authContext.Provider value={authContext}>
     {props.children}
     </authContext.Provider>
   );
 }
+
+export {authContext, Auth};

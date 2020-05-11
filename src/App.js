@@ -11,6 +11,8 @@ import NoMatch from '../src/components/NoMatch/NoMatch';
 //autho here is the login page
 import Auth from '../src/components/Auth/Auth';
 import SignUp from '../src/components/Auth/SignUp';
+//importing the Context hook
+import AuthContext from '../src/components/Context/AuthContext';
 
 
  class App extends Component{
@@ -18,6 +20,7 @@ import SignUp from '../src/components/Auth/SignUp';
     return (
       <div>
         <Navbar/>
+
 
           <Switch>
                 <Route path="/posts" component={Posts}/>
