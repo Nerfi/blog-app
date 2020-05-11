@@ -22,6 +22,7 @@ const Auth = (props) =>  {
 
   // lesson 330 crea una function para hacer log out, en la cual
   //limpia el estado que he definido antes with userData
+  console.log(userData, 'userdata is ehre') //this is wokring and Im storing the userData here
 
   const  validateForm  = () => {
 
@@ -29,7 +30,7 @@ const Auth = (props) =>  {
 
     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
-    return pattern.test(email) && password.length > 6;
+    return pattern.test(email) && password.length >= 6;
   }
 
   const handleSubmit = async (event) => {
