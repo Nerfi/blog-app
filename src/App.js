@@ -16,14 +16,6 @@ import {UserContext} from '../src/components/Context/AuthContext';
 
 
 const App = () => {
-   //we can use useState here to write the value we pass to the provider
-    //const [userData, setUserData] = useState({
-    //token: null,
-    //userId: null,
-    //error: null,
-    //loading: false
-  //});
-
     //test data, this is the one I'm using right now
 
   const [newData, setNewData] = useState({
@@ -35,11 +27,10 @@ const App = () => {
 
   return (
     <div>
-        <Navbar/>
-
 
           <Switch>
           <UserContext.Provider value={{newData,setNewData}}>
+              <Navbar/>
                 <Route path="/posts" component={Posts}/>
                  <Route path="/createpost" component={CreatePost}/>
                 <Route  path="/post/:id" component={Post}/>

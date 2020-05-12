@@ -42,7 +42,6 @@ const Auth = (props) =>  {
     event.preventDefault();
    const {email , password} = credentials;
 
-    //cahnginf thr default value from the state from loadinf: false to true, not suer if this is the best way
     setNewData(prevLoading => {return {loading: !prevLoading.loading}});
 
     const authData = {

@@ -8,3 +8,4 @@ import {createContext} from 'react';
   //};
 
 export const UserContext = createContext(null);
+//check out again docs about useContext

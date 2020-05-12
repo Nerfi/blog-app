@@ -5,7 +5,8 @@ import {UserContext} from '../Context/AuthContext';
 
 const Main = () => {
 
-   console.log(UserContext)
+    const {newData, setNewData} = useContext(UserContext);
+
   return(
        <div>
 
@@ -29,3 +30,5 @@ const Main = () => {
   );
 };
 export default Main;
+
+
