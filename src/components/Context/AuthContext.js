@@ -1,20 +1,37 @@
-import React from 'react';
+//import React,{createContext} from 'react';
+
+//const initialState = {
+ // token: null,
+  //  userId: null,
+  //  error: null,
+    //loading: false
+//};
 
 //passing the initial values of the context
-const authContext = React.createContext({
-   token: null,
+//const AuthContext = React.createContext(initialState);
+
+
+//wrapper component
+//const AuthProvider =  props => {
+ // return (
+   // <AuthContext.Provider value={initialState}>
+     // {props.children}
+   // </AuthContext.Provider>
+  //);
+//
+//
+
+
+//nuevo context
+//1creamos el contexto en la  folder , co su valor inicial, el que queramos
+//en este caso initial value
+import {createContext} from 'react';
+
+const initialValue = {
+    token: null,
     userId: null,
     error: null,
     loading: false
-  });
+  };
 
-//wrapper component
-const Auth =  props => {
-  return (
-    <authContext.Provider value={authContext}>
-    {props.children}
-    </authContext.Provider>
-  );
-}
-
-export {authContext, Auth};
+export const UserContext = createContext(initialValue);

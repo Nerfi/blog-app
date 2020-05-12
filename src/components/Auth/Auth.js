@@ -40,6 +40,7 @@ const Auth = (props) =>  {
 
     //cahnginf thr default value from the state from loadinf: false to true, not suer if this is the best way
     setUserData(prevLoading => {return {loading: !prevLoading.loading}});
+
     const authData = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

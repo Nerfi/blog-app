@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{Component, useState} from 'react';
 import './App.css';
 import Navbar from './components/Navigation/Navbar';
 import  {Route, Switch, Redirect} from 'react-router-dom';
@@ -12,37 +12,42 @@ import NoMatch from '../src/components/NoMatch/NoMatch';
 import Auth from '../src/components/Auth/Auth';
 import SignUp from '../src/components/Auth/SignUp';
 //importing the Context hook
-import AuthContext from '../src/components/Context/AuthContext';
+import {UserContext} from '../src/components/Context/AuthContext';
 
 
- class App extends Component{
-  render() {
-    return (
-      <div>
+const App = () => {
+   //we can use useState here to write the value we pass to the provider
+    const [userData, setUserData] = useState({
+    token: null,
+    userId: null,
+    error: null,
+    loading: false
+  });
+
+
+  return (
+    <div>
         <Navbar/>
 
 
           <Switch>
+          <UserContext.Provider value='jello from the PROVIDER'>
                 <Route path="/posts" component={Posts}/>
-                <Route path="/createpost" component={CreatePost}/>
+                 <Route path="/createpost" component={CreatePost}/>
                 <Route  path="/post/:id" component={Post}/>
                 <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/404" component={NoMatch}/>
                 <Route exact path="/Login" component={SignUp}/>
                 <Route exact path="/SignUp" component={Auth}/>
                 <Route exact path="/" component={LandingPage}/>
+            </UserContext.Provider>
                 <Route component={NoMatch}/>
-
-
-
 
             </Switch>
 
       </div>
 
-    );
-
-  }
+  );
 }
 
 export default App;
