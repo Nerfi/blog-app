@@ -1,10 +1,13 @@
-import React , {useState} from 'react';
+import React , {useState, useContext} from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
+import {UserContext} from '../Context/AuthContext';
 //THIS IS THE SIGN  IN COMPONENT
 
 const SingUp = (props) => {
 
   const [singUp, setSignup] =  useState({email: '', password: ''});
+  //useContext is here
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -17,13 +17,21 @@ import {UserContext} from '../src/components/Context/AuthContext';
 
 const App = () => {
    //we can use useState here to write the value we pass to the provider
-    const [userData, setUserData] = useState({
+    //const [userData, setUserData] = useState({
+    //token: null,
+    //userId: null,
+    //error: null,
+    //loading: false
+  //});
+
+    //test data, this is the one I'm using right now
+
+  const [newData, setNewData] = useState({
     token: null,
     userId: null,
     error: null,
     loading: false
   });
-
 
   return (
     <div>
@@ -31,13 +39,14 @@ const App = () => {
 
 
           <Switch>
-          <UserContext.Provider value='jello from the PROVIDER'>
+          <UserContext.Provider value={{newData,setNewData}}>
                 <Route path="/posts" component={Posts}/>
                  <Route path="/createpost" component={CreatePost}/>
                 <Route  path="/post/:id" component={Post}/>
                 <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/404" component={NoMatch}/>
-                <Route exact path="/Login" component={SignUp}/>
+                { newData.token != null ? "Log out": <Route exact path="/Login" component={SignUp}/>}
+               {/* <Route exact path="/Login" component={SignUp}/> */}
                 <Route exact path="/SignUp" component={Auth}/>
                 <Route exact path="/" component={LandingPage}/>
             </UserContext.Provider>

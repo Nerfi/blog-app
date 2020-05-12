@@ -1,8 +1,9 @@
-import React , {useState} from 'react';
+import React , {useState, useContext} from 'react';
 import './auth.css';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import { Redirect} from 'react-router-dom';
 import Spinner from '../../UI/Spinner/Spinner';
+import {UserContext} from '../Context/AuthContext';
 
 const Auth = (props) =>  {
 
@@ -13,16 +14,19 @@ const Auth = (props) =>  {
 
   const [error, setError] = useState("");
 
-  const [userData, setUserData] = useState({
-    token: null,
-    userId: null,
-    error: null,
-    loading: false
-  });
+  //tesTdata from youtube tutorial
+    const {newData, setNewData} = useContext(UserContext);
+
+//  const [userData, setUserData] = useState({
+  //  token: null,
+    //userId: null,
+    //error: null,
+    //loading: false
+  //});
 
   // lesson 330 crea una function para hacer log out, en la cual
   //limpia el estado que he definido antes with userData
-  console.log(userData, 'userdata is ehre') //this is wokring and Im storing the userData here
+  console.log(newData, 'userdata is ehreeee') //this is wokring and Im storing the userData here
 
   const  validateForm  = () => {
 
@@ -39,7 +43,7 @@ const Auth = (props) =>  {
    const {email , password} = credentials;
 
     //cahnginf thr default value from the state from loadinf: false to true, not suer if this is the best way
-    setUserData(prevLoading => {return {loading: !prevLoading.loading}});
+    setNewData(prevLoading => {return {loading: !prevLoading.loading}});
 
     const authData = {
       method: 'POST',
@@ -52,7 +56,7 @@ const Auth = (props) =>  {
 
     const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${envVaribales}`, authData)
     const response = await postRequest.json();
-    return response.error ? setError(response.error.message) : setUserData({token: response.idToken, userId: response.localId, loading: false});
+    return response.error ? setError(response.error.message) : setNewData({token: response.idToken, userId: response.localId, loading: false});
 }
 
   const handleChange = (event) => {
@@ -72,7 +76,7 @@ const Auth = (props) =>  {
 
   const history =  props.history;
 
-  if(userData.loading) {
+  if(newData.loading) {
     return <Spinner/>
   }
 

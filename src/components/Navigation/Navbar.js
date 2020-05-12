@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
+import React, {Component,useContext} from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import  {NavLink} from 'react-router-dom';
+import {UserContext} from '../Context/AuthContext';
 
+const Main = () => {
 
-class Main extends Component {
-  render() {
-    return (
-    <div>
+   console.log(UserContext)
+  return(
+       <div>
 
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <NavLink style={{color: 'white'}} to="/">Blog</NavLink>
@@ -24,8 +25,7 @@ class Main extends Component {
 
 
         </div>
-    );
-  }
-}
 
+  );
+};
 export default Main;

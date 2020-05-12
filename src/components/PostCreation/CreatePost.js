@@ -1,11 +1,21 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import {Form} from 'react-bootstrap';
+//importiung the context
+import {UserContext} from '../Context/AuthContext';
+
+//1 importamos el hook useContext, el cual nos va a permitir usar el contexto creado anteriormente
+//2 importamos la folder donde tenemos el context con su initial value, y la llamamos
+// en cada componente que queremos usar dichos valores.
+
 
 function Post(props) {
 
   const [category, setCategory] = useState({value: ''});
+  //adding context
+  const {newData, setNewData} = useContext(UserContext);
 
-  console.log(props, 'props for Create post are here')
+  console.log(newData, 'newData here')
+
 
   const [details, setDetails] = useState({
     title:"",
@@ -46,8 +56,8 @@ function Post(props) {
       };
 
       if(title.length && author.length > 5) {
-
-        const postRequest =  await fetch('https://blog-fa351.firebaseio.com/posts.json?auth=', postDetails)
+          const {token} = newData;
+        const postRequest =  await fetch(`https://blog-fa351.firebaseio.com/posts.json?auth=${token}`, postDetails)
         const response = await postRequest.json();
         setDetails(response);
 

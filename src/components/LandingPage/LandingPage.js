@@ -5,9 +5,6 @@ import './landingPage.css';
 import SearchBar from '../../UI/SearchBar';
 import Spinner from '../../UI/Spinner/Spinner'
 import {UserContext} from '../Context/AuthContext';
-//1 importamos el hook useContext, el cual nos va a permitir usar el contexto creado anteriormente
-//2 importamos la folder donde tenemos el context con su initial value, y la llamamos
-// en cada componente que queremos usar dichos valores.
 
 const LandinPage = (props) => {
 
@@ -16,14 +13,10 @@ const LandinPage = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  //storing the context we want to use in a variable
-  const message = useContext(UserContext);
-
 
   useEffect(() => {
 
      const fetchBlogPosts = async () => {
-      //not sure if this is the best way to implement the SPinner componennt
       setLoading(prevLoading => {return !prevLoading});
       const fetchPost = await fetch('https://blog-fa351.firebaseio.com/posts.json');
       const response = await fetchPost.json();
@@ -119,13 +112,9 @@ if(loading) return newResults = <Spinner/>;
       <div className="containerBlogs">
 
         {newResults }
-        <p>Abajo esta el context</p>
+
 
       </div>
-
-        {message}
-
-
 
     </div>
 
