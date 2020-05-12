@@ -4,7 +4,6 @@ import './post.css';
 import {Link} from 'react-router-dom'
 
   const post = (props) => {
-    console.log(props, 'props here fo a post component here')
 
     return (
       <div className="postContainer">
@@ -17,6 +16,7 @@ import {Link} from 'react-router-dom'
               <Card.Text>
                 {props.post.body}
               </Card.Text>
+
               <Button variant="primary">Goo somewhere</Button>
             </Card.Body>
 

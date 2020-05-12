@@ -36,8 +36,8 @@ const App = () => {
                 <Route  path="/post/:id" component={Post}/>
                 <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/404" component={NoMatch}/>
-                { newData.token != null ? "Log out": <Route exact path="/Login" component={SignUp}/>}
-               {/* <Route exact path="/Login" component={SignUp}/> */}
+
+                <Route exact path="/Login" component={SignUp}/>
                 <Route exact path="/SignUp" component={Auth}/>
                 <Route exact path="/" component={LandingPage}/>
             </UserContext.Provider>

@@ -66,13 +66,13 @@ function PostDetails(props){
     }
 
   return(
-     <Card className="singlePost">
+     <Card key={selectedPost.id} className="singlePost">
           <Card.Body >
             <Card.Title> {selectedPost.title}</Card.Title>
             <p>{selectedPost.likes === 0 ? 'Be the first to like this post!' : selectedPost.likes} {selectedPost.likes ? "Times this post was liked" : null}</p>
 
             <Card.Text>
-              the author of this post is: {selectedPost.author}
+              the author of this post is: <strong>{selectedPost.author}</strong>
             </Card.Text>
               Category: {selectedPost.value}
              <Card.Text>
