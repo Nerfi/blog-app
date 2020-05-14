@@ -1,22 +1,21 @@
 import React,{useState} from 'react';
 import './App.css';
 import Navbar from './components/Navigation/Navbar';
-import  {Route, Switch, Redirect} from 'react-router-dom';
+import  {Route, Switch} from 'react-router-dom';
 import Posts from '../src/components/Posts/Posts';
 import CreatePost from '../src/components/PostCreation/CreatePost';
 import LandingPage from '../src/components/LandingPage/LandingPage';
 import Post from '../src/components/PostDetail/PostDetail';
 import PostUpdate from '../src/components/UpdatePost/UpdatePost';
 import NoMatch from '../src/components/NoMatch/NoMatch';
-//autho here is the login page
 import Auth from '../src/components/Auth/Auth';
 import SignUp from '../src/components/Auth/SignUp';
+import LogOut from '../src/components/Auth/LogOut';
 //importing the Context hook
 import {UserContext} from '../src/components/Context/AuthContext';
 
 
 const App = () => {
-    //test data, this is the one I'm using right now
 
   const [newData, setNewData] = useState({
     token: null,
@@ -36,8 +35,8 @@ const App = () => {
                 <Route  path="/post/:id" component={Post}/>
                 <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/404" component={NoMatch}/>
-
                 <Route exact path="/Login" component={SignUp}/>
+                <Route exact path="/Logout" component={LogOut}/>
                 <Route exact path="/SignUp" component={Auth}/>
                 <Route exact path="/" component={LandingPage}/>
             </UserContext.Provider>

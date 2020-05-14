@@ -14,11 +14,7 @@ const Auth = (props) =>  {
 
   const [error, setError] = useState("");
 
-  //tesTdata from youtube tutorial
     const {newData, setNewData} = useContext(UserContext);
-
-  // lesson 330 crea una function para hacer log out, en la cual
-  //limpia el estado que he definido antes with userData
 
   const  validateForm  = () => {
 

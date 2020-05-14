@@ -14,8 +14,6 @@ function Post(props) {
   //adding context
   const {newData, setNewData} = useContext(UserContext);
 
-  console.log(newData, 'newData here')
-
 
   const [details, setDetails] = useState({
     title:"",
@@ -64,7 +62,7 @@ function Post(props) {
           props.history.push('/posts');
 
       } else {
-        alert('You need to typed int something =)')
+        alert('You need to typed int something')
       }
          event.preventDefault();
 
