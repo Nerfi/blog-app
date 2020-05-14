@@ -10,13 +10,7 @@ function PostDetails(props){
   const [selectedPost, setSelected] = useState({});
   const [error, setError] = useState(false);
 
-  //crear state para saber cuando e s null the ID renderizar 404
-  //mañana lo 1 de lo primer
-
-  console.log(props, 'porps hereererer')
-  console.log(error)
   useEffect(() => {
-
 
       const selectPost = async () => {
 

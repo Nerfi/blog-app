@@ -1,4 +1,4 @@
-import React, {Component,useContext} from 'react';
+import React, {useContext} from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import  {NavLink} from 'react-router-dom';
 import {UserContext} from '../Context/AuthContext';
@@ -17,7 +17,11 @@ const Main = () => {
           <Nav className="mr-auto">
             <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
             <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
-            <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/SignUp">SignUp</NavLink>
+            {
+              newData.token ? <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
+            :  <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/SignUp">SignUp</NavLink>
+           }
+
 
           </Nav>
         </Navbar.Collapse>

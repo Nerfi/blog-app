@@ -17,16 +17,8 @@ const Auth = (props) =>  {
   //tesTdata from youtube tutorial
     const {newData, setNewData} = useContext(UserContext);
 
-//  const [userData, setUserData] = useState({
-  //  token: null,
-    //userId: null,
-    //error: null,
-    //loading: false
-  //});
-
   // lesson 330 crea una function para hacer log out, en la cual
   //limpia el estado que he definido antes with userData
-  console.log(newData, 'userdata is ehreeee') //this is wokring and Im storing the userData here
 
   const  validateForm  = () => {
 
@@ -40,6 +32,7 @@ const Auth = (props) =>  {
   const handleSubmit = async (event) => {
 
     event.preventDefault();
+
    const {email , password} = credentials;
 
     setNewData(prevLoading => {return {loading: !prevLoading.loading}});

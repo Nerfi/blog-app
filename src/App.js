@@ -1,4 +1,4 @@
-import React,{Component, useState} from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import Navbar from './components/Navigation/Navbar';
 import  {Route, Switch, Redirect} from 'react-router-dom';
