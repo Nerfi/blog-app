@@ -4,11 +4,6 @@ import  {NavLink, Redirect} from 'react-router-dom';
 import {UserContext} from '../Context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
-function logOut () {
-  const history = useHistory();
-  setNewData({token: null,useId: null })
-  history.push("/")
-};
 
 
 const Main = () => {
@@ -28,7 +23,13 @@ const Main = () => {
       //return history.push("/");
     //}
 
-    const  history = useHistory();
+      const history = useHistory();
+      const logOut = () => {
+      setNewData({token: null,useId: null })
+      history.push("/")
+    };
+
+   // const  history = useHistory();
 
   return(
        <div>

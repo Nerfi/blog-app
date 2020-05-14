@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 
 const LogOut = props => {
 
-  const {newData, setNewData} = useContext("");
+ // const {newData, setNewData} = useContext("");
 
   return (
       <div>
