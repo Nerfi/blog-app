@@ -52,7 +52,7 @@ function Post(props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({  title,  author,  value, likes })
       };
-
+    //esot se puede hacer en firebase tbn
       if(title.length && author.length > 5) {
           const {token} = newData;
         const postRequest =  await fetch(`https://blog-fa351.firebaseio.com/posts.json?auth=${token}`, postDetails)

@@ -10,7 +10,6 @@ import PostUpdate from '../src/components/UpdatePost/UpdatePost';
 import NoMatch from '../src/components/NoMatch/NoMatch';
 import Auth from '../src/components/Auth/Auth';
 import SignUp from '../src/components/Auth/SignUp';
-import LogOut from '../src/components/Auth/LogOut';
 //importing the Context hook
 import {UserContext} from '../src/components/Context/AuthContext';
 
@@ -36,7 +35,6 @@ const App = () => {
                 <Route exact path="/update/post/:id" component={PostUpdate}/>
                 <Route exact path="/404" component={NoMatch}/>
                 <Route exact path="/Login" component={SignUp}/>
-                <Route exact path="/Logout" component={LogOut}/>
                 <Route exact path="/SignUp" component={Auth}/>
                 <Route exact path="/" component={LandingPage}/>
             </UserContext.Provider>
