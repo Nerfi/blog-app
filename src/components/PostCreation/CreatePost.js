@@ -2,12 +2,19 @@ import React,{useState, useContext} from 'react';
 import {Form} from 'react-bootstrap';
 //importiung the context
 import {UserContext} from '../Context/AuthContext';
+//adding firebase methods
+import firebase from '../../firebase/firebase';
+
+
 
 //1 importamos el hook useContext, el cual nos va a permitir usar el contexto creado anteriormente
 //2 importamos la folder donde tenemos el context con su initial value, y la llamamos
 // en cada componente que queremos usar dichos valores.
-
-
+firebase.firestore().collection('posts').add({
+  title: 'juan',
+  author: 'paredes',
+  likes: null
+});
 function Post(props) {
 
   const [category, setCategory] = useState({value: ''});
@@ -47,24 +54,28 @@ function Post(props) {
       const{value} = category;
 
 
-      const postDetails = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({  title,  author,  value, likes })
-      };
+     // const postDetails = {
+       // method: 'POST',
+        //headers: { 'Content-Type': 'application/json' },
+        //body: JSON.stringify({  title,  author,  value, likes })
+      //};
     //esot se puede hacer en firebase tbn
-      if(title.length && author.length > 5) {
-          const {token} = newData;
-        const postRequest =  await fetch(`https://blog-fa351.firebaseio.com/posts.json?auth=${token}`, postDetails)
-        const response = await postRequest.json();
-        setDetails(response);
+      //if(title.length && author.length > 5) {
+        //  const {token} = newData;
+        //const postRequest =  await fetch(`https://blog-fa351.firebaseio.com/posts.json?auth=${token}`, postDetails)
+        //const response = await postRequest.json();
+        //setDetails(response);
 
-          props.history.push('/posts');
+          //props.history.push('/posts');
 
-      } else {
-        alert('You need to typed int something')
-      }
-         event.preventDefault();
+      //} else {
+        //alert('You need to typed int something')
+      //}
+         //event.preventDefault();
+
+         //adding firebase methods
+         //not working
+
 
   }
 
