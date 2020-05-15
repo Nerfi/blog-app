@@ -43,22 +43,21 @@ function PostDetails(props){
              const postDetails = {
               method: 'PATCH',
               body: JSON.stringify({
-               likes: selectedPost.likes + 1
+              likes: selectedPost.likes + 1
               }),
-              headers:  {
-                "Content-type": "application/json; charset=UTF-8"
-              }
-            };
+               headers:  {
+                 "Content-type": "application/json; charset=UTF-8"
+                }
+              };
 
-          const {token} = newData;
-            const postRequest = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json?author=${token}`, postDetails);
-            const response = await postRequest.json();
-            setSelected(response);
-            console.log(response, 'aqui tengo que buscar el error')
+            //extracting the token from the newData object using context API
+            const {token} = newData;
+              const postRequest = await fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, postDetails);
+              const response = await postRequest.json();
+              setSelected(response);
+              console.log(response, 'aqui tengo que buscar el error')
 
-            return response.error ? setError(error) :  null;
-
-
+              return response.error ? setError(error) :  null;
 
 
 
