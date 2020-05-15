@@ -30,8 +30,8 @@ function PostDetails(props){
 },[]);
 
   const deleteSelectedPost = () => {
-
-    const deletePost = fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`, {
+      const {token} = newData;
+    const deletePost = fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, {
       method: 'DELETE'
     });
     props.history.push('/posts');
@@ -46,7 +46,7 @@ function PostDetails(props){
               likes: selectedPost.likes + 1
               }),
                headers:  {
-                 "Content-type": "application/json; charset=UTF-8"
+                 "Content-type": "application/json charset=UTF-8"
                 }
               };
 
