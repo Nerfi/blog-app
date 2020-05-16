@@ -11,18 +11,10 @@ import firebase from '../../firebase/firebase';
 //2 importamos la folder donde tenemos el context con su initial value, y la llamamos
 // en cada componente que queremos usar dichos valores.
 
-//este codigo funciona,para mañana, borrar lineas 15-19 y seguir inplementando auth con ifirebase, posiblemente habra que b orrar context hokk
-firebase.firestore().collection('posts').add({
-  title: 'juan',
-  author: 'paredes',
-  likes: null
-});
-
-
 function Post(props) {
 
   const [category, setCategory] = useState({value: ''});
-  //adding context
+  //adding context, probably change with firebase firestroe
   const {newData, setNewData} = useContext(UserContext);
 
 
