@@ -5,6 +5,8 @@ import UpdatePost from '../UpdatePost/UpdatePost';
 import NoMatch from '../NoMatch/NoMatch';
 import './PostDetail.css';
 import {UserContext} from '../Context/AuthContext';
+//importing firebase in order to make the PATCH request
+import firebase from '../../firebase/firebase';
 
 
 function PostDetails(props){
@@ -40,24 +42,28 @@ function PostDetails(props){
 
   const addLikes = async () => {
 
-             const postDetails = {
-              method: 'PATCH',
-              body: JSON.stringify({
-              likes: selectedPost.likes + 1
-              }),
-               headers:  {
-                 "Content-type": "application/json charset=UTF-8"
-                }
-              };
+             //const postDetails = {
+             // method: 'PATCH',
+              //body: JSON.stringify({
+              //likes: selectedPost.likes + 1
+              //}),
+               //headers:  {
+                 //"Content-type": "application/json charset=UTF-8"
+                //}
+              //};
 
             //extracting the token from the newData object using context API
-            const {token} = newData;
-              const postRequest = await fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, postDetails);
-              const response = await postRequest.json();
-              setSelected(response);
-              console.log(response, 'aqui tengo que buscar el error')
+            //const {token} = newData;
+              //const postRequest = await fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, postDetails);
+              //const response = await postRequest.json();
+              //setSelected(response);
+              //console.log(response, 'aqui tengo que buscar el error')
 
-              return response.error ? setError(error) :  null;
+              //return response.error ? setError(error) :  null;
+
+              //adding firebase code to PATCH request
+              const db = firebase.firestore()
+              db.collection('posts').doc(props.match.params.id).set({likes: selectedPost.likes + 1})
 
 
 

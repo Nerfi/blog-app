@@ -24,7 +24,7 @@ const LandinPage = (props) => {
   const fetchData = async () => {
     setLoading(prevLoading => {return !prevLoading});
 
-    firebase
+    const unsubscribe = firebase
     .firestore()
     .collection('posts')
     .onSnapshot((snap) => {
@@ -37,6 +37,9 @@ const LandinPage = (props) => {
       setLoading(prev => !prev);
 
     })
+      //when we cahnge out tab we want to drop the susbcrition we have with
+      //firebase firestore., that's why we do this,see the video bakc again for more details
+    return () => unsubscribe();
 
 
   };
