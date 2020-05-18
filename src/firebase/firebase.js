@@ -1,5 +1,7 @@
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 //import 'firebase/firestore';
+import firebase from 'firebase';
+
 
 const firebaseConfig = {
 

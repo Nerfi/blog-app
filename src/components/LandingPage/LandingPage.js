@@ -5,7 +5,7 @@ import './landingPage.css';
 import SearchBar from '../../UI/SearchBar';
 import Spinner from '../../UI/Spinner/Spinner'
 import {UserContext} from '../Context/AuthContext';
-//importing firebase
+//importing firebase firestore
 import firebase from '../../firebase/firebase';
 
 const LandinPage = (props) => {
@@ -15,33 +15,46 @@ const LandinPage = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  //newsetter for testing firebase firestroe
+  const [newPosts , setNewPosts] = useState([]);
+
 
   useEffect(() => {
 
-     const fetchBlogPosts = async () => {
-      setLoading(prevLoading => {return !prevLoading});
-      const fetchPost = await fetch('https://blog-fa351.firebaseio.com/posts.json');
-      const response = await fetchPost.json();
-      response.error ? setError(response.error.message) : setLoading(loading)
+     //const fetchBlogPosts = async () => {
+      //setLoading(prevLoading => {return !prevLoading});
+      //const fetchPost = await fetch('https://blog-fa351.firebaseio.com/posts.json');
+      //const response = await fetchPost.json();
+      //response.error ? setError(response.error.message) : setLoading(loading)
 
-      const fetchedPosts = [];
+    //NEW CALL FROM FIREBASE
 
-      for(let post in response) {
+  const fetchData = async () => {
+    firebase
+    .firestore()
+    .collection('posts')
+    .onSnapshot((snap) => {
+      const newData = snap.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+      }))
 
-         fetchedPosts.push({
+      setNewPosts(newData);
+    })
 
-            id: post,
-            ...response[post]
 
-         });
+    //setNewPosts(data)
 
-      }
 
-      setBlogs(fetchedPosts);
+  };
 
-    };
 
-    fetchBlogPosts();
+  fetchData();
+
+
+
+
+
 
   },[]);
 
@@ -54,6 +67,22 @@ const LandinPage = (props) => {
 
   };
 
+  //firebase test
+  let newPostss =  newPosts.map(blogQuery => (
+
+      <Card className="card" key={blogQuery.id} >
+        <Card.Body >
+        <Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
+        <p>{blogQuery.likes} times this post was liked</p>
+        <Card.Text>
+        Created by: {blogQuery.author}
+        {blogQuery.category}
+        </Card.Text>
+
+        </Card.Body>
+
+      </Card>
+  ));
 
 
   //when the component mounts again the whole array is loaded, that's not what I wanted
@@ -115,6 +144,9 @@ if(loading) return newResults = <Spinner/>;
 
         {newResults }
 
+        {newPostss}
+
+
 
       </div>
 
@@ -124,3 +156,6 @@ if(loading) return newResults = <Spinner/>;
 }
 
 export default LandinPage;
+
+
+
