@@ -9,7 +9,7 @@ import {UserContext} from '../Context/AuthContext';
 import firebase from '../../firebase/firebase';
 
 const LandinPage = (props) => {
-
+//need to be delete blogs state
   const [blogs, setBlogs] =  useState([]);
   const [searchQuery, setQuery] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,15 +21,9 @@ const LandinPage = (props) => {
 
   useEffect(() => {
 
-     //const fetchBlogPosts = async () => {
-      //setLoading(prevLoading => {return !prevLoading});
-      //const fetchPost = await fetch('https://blog-fa351.firebaseio.com/posts.json');
-      //const response = await fetchPost.json();
-      //response.error ? setError(response.error.message) : setLoading(loading)
-
-    //NEW CALL FROM FIREBASE
-
   const fetchData = async () => {
+    setLoading(prevLoading => {return !prevLoading});
+
     firebase
     .firestore()
     .collection('posts')
@@ -40,14 +34,12 @@ const LandinPage = (props) => {
       }))
 
       setNewPosts(newData);
+      setLoading(prev => !prev);
+
     })
 
 
-    //setNewPosts(data)
-
-
   };
-
 
   fetchData();
 
