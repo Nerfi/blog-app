@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
 import Post from '../Post/Post';
+import firebase from '../../firebase/firebase';
 
 
 function Posts(props) {
@@ -9,28 +9,24 @@ function Posts(props) {
 
     useEffect(() => {
 
-      const fetchPostsFunction = async () => {
-
-       const fetchPosts = await fetch('https://blog-fa351.firebaseio.com/posts.json');
-        const response = await fetchPosts.json();
-
-       const results = [];
-
-        for(let post in response) {
-
-          results.push({
-            id: post,
-            ...response[post]
-          });
-        }
+      //new async function in order to call firebase and render posts from firebase
+      const fetchPosts = async () => {
+        const fetch = await firebase.firestore()
+        .collection('posts')
+        .onSnapshot((snap) => {
+          const response  = snap.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+          }))
+         setPosts(response)
+        })
 
 
-        setPosts(results);
-      };
+      }
 
-    fetchPostsFunction();
+      fetchPosts();
 
-      }, []);
+    }, []);
 
   return (
     <div>

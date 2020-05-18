@@ -16,6 +16,8 @@ function PostDetails(props){
   //importing the context object
   const {newData} = useContext(UserContext);
 
+  console.log(selectedPost,  'selectedPost datos estan aqui')
+
   useEffect(() => {
 
       const selectPost = async () => {
@@ -41,7 +43,7 @@ function PostDetails(props){
   }
 
   const addLikes = async () => {
-
+      // Like: no se aumenta automaticamente, arreglar este problema
              //const postDetails = {
              // method: 'PATCH',
               //body: JSON.stringify({
@@ -63,7 +65,7 @@ function PostDetails(props){
 
               //adding firebase code to PATCH request
               const db = firebase.firestore()
-              db.collection('posts').doc(props.match.params.id).set({likes: selectedPost.likes + 1})
+              db.collection('posts').doc(props.match.params.id).set({...selectedPost,likes: selectedPost.likes + 1})
 
 
 
