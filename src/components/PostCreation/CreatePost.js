@@ -13,10 +13,9 @@ import firebase from '../../firebase/firebase';
 
 function Post(props) {
 
-  const [category, setCategory] = useState({value: ''});
   //adding context, probably change with firebase firestroe
-  const {newData, setNewData} = useContext(UserContext);
-
+  //const {newData, setNewData} = useContext(UserContext);
+  const [category, setCategory] = useState({value: ''});
 
   const [details, setDetails] = useState({
     title:"",
@@ -70,7 +69,19 @@ function Post(props) {
          //event.preventDefault();
 
          //adding firebase methods
-         //not working
+         firebase
+         .firestore()
+         .collection('posts')
+         .add({
+            title,
+            author,
+            likes,
+            value
+         })
+         .then(() => {
+          console.log('working this shit')
+
+         })
 
 
   }
