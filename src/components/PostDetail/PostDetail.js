@@ -12,18 +12,24 @@ import firebase from '../../firebase/firebase';
 function PostDetails(props){
 
   const [selectedPost, setSelected] = useState({});
+
+  console.log(selectedPost, 'selectedPost is here')
+
   const [error, setError] = useState(false);
   //importing the context object
   const {newData} = useContext(UserContext);
 
-  console.log(selectedPost,  'selectedPost datos estan aqui')
+
+
 
   useEffect(() => {
 
       const selectPost = async () => {
 
           const fetchSinglePost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
+
           if(!fetchSinglePost) {setError(true)}
+
           const response = await fetchSinglePost.json();
           setSelected(response);
 
@@ -35,9 +41,11 @@ function PostDetails(props){
 
   const deleteSelectedPost = () => {
       const {token} = newData;
+
     const deletePost = fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, {
       method: 'DELETE'
     });
+
     props.history.push('/posts');
 
   }
@@ -63,14 +71,15 @@ function PostDetails(props){
 
               //return response.error ? setError(error) :  null;
 
-              //adding firebase code to PATCH request
+              //adding firebase code to PATCH request, to add likes to the post
+
               const db = firebase.firestore()
-              db.collection('posts').doc(props.match.params.id).set({...selectedPost,likes: selectedPost.likes + 1})
+              db.collection('posts').doc(props.match.params.id).set({...selectedPost, likes: selectedPost.likes + 1})
 
 
 
     };
-
+  //delete this line after checking the error logged
   console.log(error)
 
 
