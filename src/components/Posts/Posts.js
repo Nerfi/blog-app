@@ -11,6 +11,7 @@ function Posts(props) {
 
       //new async function in order to call firebase and render posts from firebase
       const fetchPosts = async () => {
+
         const fetch = await firebase.firestore()
         .collection('posts')
         .onSnapshot((snap) => {
