@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import {Form} from 'react-bootstrap';
 //importiung the context
 import {UserContext} from '../Context/AuthContext';

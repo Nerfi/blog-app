@@ -9,15 +9,20 @@ import {UserContext} from '../Context/AuthContext';
 import firebase from '../../firebase/firebase';
 
 
+//esta fucnion acepta props porque los que vamos a usar son los del navbar, history and so on, check out that lesson again.
+
 function PostDetails(props){
 
-  const [selectedPost, setSelected] = useState({});
+
+  const [selectedPost, setSelected] = useState({id: ''});
 
   console.log(selectedPost, 'selectedPost is here')
 
   const [error, setError] = useState(false);
   //importing the context object
   const {newData} = useContext(UserContext);
+
+  console.log(props, 'props here')
 
 
 
@@ -26,15 +31,20 @@ function PostDetails(props){
 
       const selectPost = async () => {
 
+
           const fetchSinglePost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
+
+
+          const response = await fetchSinglePost.json();
+
+          setSelected(response);
 
           if(!fetchSinglePost) {setError(true)}
 
-          const response = await fetchSinglePost.json();
-          setSelected(response);
 
     }
 
+  //calling the selectPost function
     selectPost();
 
 },[]);
@@ -78,9 +88,12 @@ function PostDetails(props){
 
 
 
+
+
     };
+
   //delete this line after checking the error logged
-  console.log(error)
+  console.log(error, 'the error is here')
 
 
     if (error) {
@@ -89,6 +102,7 @@ function PostDetails(props){
 
   return(
      <Card key={selectedPost.id} className="singlePost">
+
           <Card.Body >
            <h1>{error}</h1>
             <Card.Title> {selectedPost.title}</Card.Title>
@@ -104,6 +118,7 @@ function PostDetails(props){
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
               <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
           </Card.Body>
+
         </Card>
   );
 
