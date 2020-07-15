@@ -14,15 +14,13 @@ import firebase from '../../firebase/firebase';
 function PostDetails(props){
 
 
-  const [selectedPost, setSelected] = useState({id: ''});
+  const [selectedPost, setSelected] = useState({});
 
   console.log(selectedPost, 'selectedPost is here')
 
   const [error, setError] = useState(false);
   //importing the context object
   const {newData} = useContext(UserContext);
-
-  console.log(props, 'props here')
 
 
 
@@ -32,14 +30,26 @@ function PostDetails(props){
       const selectPost = async () => {
 
 
+
+
+
           const fetchSinglePost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
 
+          //if(!fetchSinglePost) {setError(true)}
 
+          //const response = await fetchSinglePost.json();
+
+          //setSelected(response);
+
+
+
+          try {
           const response = await fetchSinglePost.json();
-
           setSelected(response);
-
-          if(!fetchSinglePost) {setError(true)}
+      } catch (error) {
+        console.log(error, 'error here');
+    // see what firebase tells you here
+  }
 
 
     }
@@ -49,7 +59,13 @@ function PostDetails(props){
 
 },[]);
 
+
+  ///testing from lewagon
+
+
+
   const deleteSelectedPost = () => {
+
       const {token} = newData;
 
     const deletePost = fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, {
