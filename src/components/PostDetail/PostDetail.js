@@ -25,15 +25,15 @@ function PostDetails(props){
 
 
 
-  useEffect(() => {
+  //useEffect(() => {
 
-      const selectPost = async () => {
-
-
+     // const selectPost = async () => {
 
 
 
-          const fetchSinglePost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
+
+
+         // const fetchSinglePost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
 
           //if(!fetchSinglePost) {setError(true)}
 
@@ -43,24 +43,53 @@ function PostDetails(props){
 
 
 
-          try {
-          const response = await fetchSinglePost.json();
-          setSelected(response);
-      } catch (error) {
-        console.log(error, 'error here');
+          //try {
+         // const response = await fetchSinglePost.json();
+         // setSelected(response);
+      //} catch (error) {
+        //console.log(error, 'error here');
     // see what firebase tells you here
-  }
+ // }
 
 
-    }
+    //}
 
   //calling the selectPost function
-    selectPost();
+    //selectPost();
 
-},[]);
+//},[]);
 
 
-  ///testing from lewagon
+  ///testing from firestore docs
+  useEffect(() => {
+
+    const selectPost = async () => {
+
+        const docRef = firebase.firestore()
+        .collection("posts")
+        .doc(`${props.match.params.id}`)
+
+      docRef.get().then(function(doc) {
+          if (doc.exists) {
+              setSelected(doc.data());
+          } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+              alert('No such document!')
+          }
+      }).catch(function(error) {
+          console.log("Error getting document:", error);
+      });
+
+
+      }
+    //calling the function
+      selectPost();
+
+
+
+  },[])
+
 
 
 
@@ -108,8 +137,7 @@ function PostDetails(props){
 
     };
 
-  //delete this line after checking the error logged
-  console.log(error, 'the error is here')
+
 
 
     if (error) {
