@@ -7,6 +7,8 @@ function Posts(props) {
 
   const [posts, setPosts] = useState([]);
 
+
+
     useEffect(() => {
 
       //new async function in order to call firebase and render posts from firebase
@@ -19,8 +21,11 @@ function Posts(props) {
             id: doc.id,
             ...doc.data()
           }))
+
          setPosts(response)
+
         })
+
 
 
       }
