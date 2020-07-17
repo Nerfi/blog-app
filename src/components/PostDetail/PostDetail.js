@@ -16,8 +16,6 @@ function PostDetails(props){
 
   const [selectedPost, setSelected] = useState({});
 
-  console.log(selectedPost, 'selectedPost is here')
-
   const [error, setError] = useState(false);
   //importing the context object
   const {newData} = useContext(UserContext);
@@ -61,6 +59,7 @@ function PostDetails(props){
 
 
   ///testing from firestore docs
+
   useEffect(() => {
 
     const selectPost = async () => {
@@ -83,13 +82,13 @@ function PostDetails(props){
 
 
       }
+
     //calling the function
       selectPost();
 
 
 
   },[])
-
 
 
 
