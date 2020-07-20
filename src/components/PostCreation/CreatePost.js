@@ -3,11 +3,10 @@ import {Form} from 'react-bootstrap';
 //adding firebase methods
 import firebase from '../../firebase/firebase';
 
+//creating ref to firestroe and storage
+const db = firebase.firestore();
+const storage = firebase.storage();
 
-
-//1 importamos el hook useContext, el cual nos va a permitir usar el contexto creado anteriormente
-//2 importamos la folder donde tenemos el context con su initial value, y la llamamos
-// en cada componente que queremos usar dichos valores.
 
 function Post(props) {
 
@@ -19,9 +18,10 @@ function Post(props) {
    likes: null
  });
 
-  const handleCategorChange = event => {
-    setCategory({value: event.target.value});
-  }
+//firestore uploading img
+  const [file, setFile] = useState(null);
+
+  const handleCategorChange = event => setCategory({value: event.target.value});
 
 
   const handleChange = event => {
@@ -42,6 +42,7 @@ function Post(props) {
   const addPost = async event => {
 
       const {title,author,likes} = details;
+
       const{value} = category;
          //adding firebase methods
          firebase
@@ -61,6 +62,28 @@ function Post(props) {
 
   }
 
+  //function to upload img to firestore
+  //need to create a ref to the db firestore in the example is const db = app.firestroe()
+  const uploadImg = async () => {
+
+    const storageRef = storage.ref();
+    //not sure what this does
+    const fileRef = storageRef.child(file)
+    await fileRef.put(file)
+    db.collection('posts').doc().update({
+       images: firebase.firestore.FieldValue.arrayUnion({
+        name: file.name,
+        url: await  fileRef.getDownloadURL()
+       })
+    })
+
+  }
+
+  //onfile Change
+  const onFileChange = (e) => {
+    setFile(e.target.files[0])
+  }
+
 
   return (
 
@@ -77,7 +100,7 @@ function Post(props) {
           <textarea className="form-control"  onChange={handleChange} name="author" required id="exampleFormControlTextarea1" rows="3" placeholder="Write your history"></textarea>
         </div>
 
-        <input type='file' />
+        <input type='file' onChange={onFileChange}/>
 
       <select onChange={handleCategorChange}>
         <option value="Food">Food</option>

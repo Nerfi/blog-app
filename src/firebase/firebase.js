@@ -1,5 +1,7 @@
 import firebase from 'firebase';
 
+//importign storage in order to upload photos to firestore
+import 'firebase/storage';
 
 const firebaseConfig = {
 
