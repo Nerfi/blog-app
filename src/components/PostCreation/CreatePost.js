@@ -37,7 +37,7 @@ function Post(props) {
     event.preventDefault();
 
     const {title, author, likes }  = details;
-    const {value} = category;
+    const { value } = category;
 
 
     // code from firestore

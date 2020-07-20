@@ -1,5 +1,8 @@
 import React,{useState, useEffect} from 'react';
 import {Form} from 'react-bootstrap';
+//importing firebase
+import firebase from '../../firebase/firebase';
+
 
 const UpdatePost = (props) => {
 
@@ -9,15 +12,28 @@ const UpdatePost = (props) => {
     category: ""
   });
 
-
+  //probablemente necesito reescribir este hook, completamente with firestore methods.
   useEffect(() => {
+
     async function fetchSinglePost () {
+
       const fetchPost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
       const response = await fetchPost.json();
       setUpdatePost(response);
     };
 
     fetchSinglePost();
+
+  },[]);
+
+  useEffect(() => {
+
+    const getSingleDoc = () => {
+      firebase
+      firestore()
+    }
+
+
   },[]);
 
  const handleChange = event => {
@@ -53,11 +69,14 @@ const updatedPost = async () => {
   setUpdatePost(response);
   props.history.push('/posts');
 
+  //Re-writing with firestore docs
+
+
 }
 
 
   return(
-    <div>
+    <div style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
      <Form >
         <Form.Group controlId="formGroupEmail">
         <Form.Label>Title</Form.Label>
@@ -67,8 +86,8 @@ const updatedPost = async () => {
           <Form.Label >Content</Form.Label>
           <Form.Control onChange={handleChange} name="author" type="text" placeholder="Enter Content"  value={updatePost.author}/>
          </Form.Group>
+       <button  type="button" onClick={updatedPost}>Update Post</button>
       </Form>
-      <button onClick={updatedPost}>Update Post</button>
 
     </div>
   );
