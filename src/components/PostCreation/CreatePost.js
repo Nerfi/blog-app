@@ -1,7 +1,5 @@
 import React,{useState, useContext} from 'react';
 import {Form} from 'react-bootstrap';
-//importiung the context
-import {UserContext} from '../Context/AuthContext';
 //adding firebase methods
 import firebase from '../../firebase/firebase';
 
@@ -67,7 +65,7 @@ function Post(props) {
 
 
   return (
-    <div>
+    <div className="create_div" style={{display: 'flex', justifyContent: 'center'}}>
       <Form onSubmit={addPost}>
         <Form.Group controlId="formGroupEmail">
         <Form.Label>Title</Form.Label>
@@ -88,8 +86,8 @@ function Post(props) {
 
 
 
+        <button onClick={addPost}>Add Post</button>
       </Form>
-      <button onClick={addPost}>Add Post</button>
     </div>
   );
 }
