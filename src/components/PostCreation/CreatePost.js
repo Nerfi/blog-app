@@ -89,8 +89,8 @@ function Post(props) {
 
 
 
+        <button type="button" style={{margin: '20px'}} onClick={addPost}>Add Post</button>
       </Form>
-        <button style={{margin: '20px'}} onClick={addPost}>Add Post</button>
     </div>
   );
 }
