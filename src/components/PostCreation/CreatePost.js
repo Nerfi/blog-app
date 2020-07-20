@@ -11,8 +11,6 @@ import firebase from '../../firebase/firebase';
 
 function Post(props) {
 
-  //adding context, probably change with firebase firestroe
-  //const {newData, setNewData} = useContext(UserContext);
   const [category, setCategory] = useState({value: ''});
 
   const [details, setDetails] = useState({
@@ -65,8 +63,10 @@ function Post(props) {
 
 
   return (
-    <div className="create_div" style={{display: 'flex', justifyContent: 'center'}}>
-      <Form onSubmit={addPost}>
+
+    <div className="create_div" style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
+
+      <Form onSubmit={addPost} >
         <Form.Group controlId="formGroupEmail">
         <Form.Label>Title</Form.Label>
         <Form.Control onChange={handleChange} name="title" type="text" placeholder="Enter title"  />
@@ -77,6 +77,8 @@ function Post(props) {
           <textarea className="form-control"  onChange={handleChange} name="author" required id="exampleFormControlTextarea1" rows="3" placeholder="Write your history"></textarea>
         </div>
 
+        <input type='file' />
+
       <select onChange={handleCategorChange}>
         <option value="Food">Food</option>
         <option value="Travel">Travel</option>
@@ -86,7 +88,7 @@ function Post(props) {
 
 
 
-        <button onClick={addPost}>Add Post</button>
+        <button style={{margin: '20px'}} onClick={addPost}>Add Post</button>
       </Form>
     </div>
   );
