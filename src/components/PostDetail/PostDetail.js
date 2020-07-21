@@ -48,7 +48,7 @@ function PostDetails(props){
 
   },[]);
 
-  console.log(selectedPost, 'selectedPost is here')
+
 
 
 //needst o be done again with firebase methods
@@ -64,12 +64,6 @@ function PostDetails(props){
     props.history.push('/posts');
 
   }
-
-
-
-    //new function, still not working
-
-
 
     const addLikes = () => {
 
@@ -89,10 +83,6 @@ function PostDetails(props){
             })
 
     };
-
-
-
-
 
 
   //redirecting to a 404 in case an error occur

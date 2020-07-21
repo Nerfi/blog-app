@@ -34,6 +34,8 @@ function Posts(props) {
 
     }, []);
 
+    console.log(posts, 'posts ')
+
   return (
     <div>
 
