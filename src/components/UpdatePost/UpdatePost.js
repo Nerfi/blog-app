@@ -8,13 +8,14 @@ const UpdatePost = (props) => {
 
   const [error, setError] = useState(false);
 
+  const [category, setCategory] = useState({value: ''});
+
   const [updatePost, setUpdatePost] = useState({
     title: "",
     author: "",
     value: ""
   });
 
-  const [category, setCategory] = useState({value: ''});
 
   useEffect(() => {
 

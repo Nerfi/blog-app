@@ -2,14 +2,11 @@ import React,{useState,useEffect, useContext} from 'react';
 import { Card,Button } from 'react-bootstrap';
 import {Link, Route, Routes, Redirect} from 'react-router-dom'
 import UpdatePost from '../UpdatePost/UpdatePost';
-
 import './PostDetail.css';
 import {UserContext} from '../Context/AuthContext';
 //importing firebase in order to make the PATCH request
 import firebase from '../../firebase/firebase';
 
-
-//esta fucnion acepta props porque los que vamos a usar son los del navbar, history and so on, check out that lesson again.
 
 function PostDetails(props){
 
@@ -49,10 +46,12 @@ function PostDetails(props){
 
 
 
-  },[])
+  },[]);
+
+  console.log(selectedPost, 'selectedPost is here')
 
 
-
+//needst o be done again with firebase methods
 
   const deleteSelectedPost = () => {
 
@@ -66,56 +65,34 @@ function PostDetails(props){
 
   }
 
-  //const addLikes = async () => {
-      // Like: no se aumenta automaticamente, arreglar este problema
-             //const postDetails = {
-             // method: 'PATCH',
-              //body: JSON.stringify({
-              //likes: selectedPost.likes + 1
-              //}),
-               //headers:  {
-                 //"Content-type": "application/json charset=UTF-8"
-                //}
-              //};
 
-            //extracting the token from the newData object using context API
-            //const {token} = newData;
-              //const postRequest = await fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, postDetails);
-              //const response = await postRequest.json();
-              //setSelected(response);
-              //console.log(response, 'aqui tengo que buscar el error')
 
-              //return response.error ? setError(error) :  null;
-
-              //adding firebase code to PATCH request, to add likes to the post
-
-              //const db = await firebase.firestore()
-              //db.collection('posts').doc(props.match.params.id).set({...selectedPost, likes: selectedPost.likes + 1})
+    //new function, still not working
 
 
 
-
-
-    //};
-
-
-    //new function
     const addLikes = () => {
 
+      const {likes} = selectedPost;
 
           const likePost = firebase
             .firestore()
             .collection('posts')
             .doc(`${props.match.params.id}`)
-            .update({ ...selectedPost,likes: selectedPost.likes + 1})
+            .update({ likes: likes + 1})
             .then(function() {
-              console.log('goood is working')
+              setSelected({...selectedPost,likes: likes + 1})
+
             })
             .catch(function(error) {
                console.error("Error updating document: ", error);
             })
 
-    }
+    };
+
+
+
+
 
 
   //redirecting to a 404 in case an error occur
