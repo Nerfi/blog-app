@@ -6,35 +6,52 @@ import firebase from '../../firebase/firebase';
 
 const UpdatePost = (props) => {
 
+  const [error, setError] = useState(false);
+
   const [updatePost, setUpdatePost] = useState({
     title: "",
     author: "",
     category: ""
   });
 
-  //probablemente necesito reescribir este hook, completamente with firestore methods.
-  useEffect(() => {
-
-    async function fetchSinglePost () {
-
-      const fetchPost = await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`);
-      const response = await fetchPost.json();
-      setUpdatePost(response);
-    };
-
-    fetchSinglePost();
-
-  },[]);
+  //new hook with firebase methods firestore
 
   useEffect(() => {
 
-    const getSingleDoc = () => {
-      firebase
-      firestore()
+    const fetchUpdatePost = () => {
+
+      const singleDoc = firebase
+      .firestore()
+      .collection("posts")
+      .doc(`${props.match.params.id}`)
+
+      singleDoc
+      .get()
+      .then(function(doc) {
+
+        if(doc.exists) {
+          setUpdatePost(doc.data());
+
+        } else {
+            setError(!error)
+        }
+      }).catch(function(error) {
+        console.log(error, 'the error is here')
+      })
+
     }
 
+    fetchUpdatePost()
+
+
 
   },[]);
+
+
+
+
+
+
 
  const handleChange = event => {
 
