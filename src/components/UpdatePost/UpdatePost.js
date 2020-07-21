@@ -14,7 +14,6 @@ const UpdatePost = (props) => {
     category: ""
   });
 
-  //new hook with firebase methods firestore
 
   useEffect(() => {
 
@@ -49,10 +48,6 @@ const UpdatePost = (props) => {
 
 
 
-
-
-
-
  const handleChange = event => {
 
     const value = event.target.value;
@@ -65,32 +60,53 @@ const UpdatePost = (props) => {
 
   }
 
-const updatedPost = async () => {
+//const updatedPost = async () => {
 
-  const {author, title, category, likes} = updatePost;
+  //const {author, title, category, likes} = updatePost;
 
-    const postDetails = {
-    method: 'PUT',
-      body: JSON.stringify({
-          author: author,
-          title: title,
-          category: category,
-          likes: likes
-        }),
-      headers: { 'Content-Type': 'application/json' }
+    //const postDetails = {
+   // method: 'PUT',
+      //body: JSON.stringify({
+          //author: author,
+          //title: title,
+         // category: category,
+         // likes: likes
+        //}),
+     // headers: { 'Content-Type': 'application/json' }
 
-  };
+  //};
 
-  const updatedPostValues =  await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`, postDetails);
-  const response = await updatedPostValues.json();
-  setUpdatePost(response);
-  props.history.push('/posts');
-
-  //Re-writing with firestore docs
+  //const updatedPostValues =  await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`, postDetails);
+  //const response = await updatedPostValues.json();
+  //setUpdatePost(response);
+  //props.history.push('/posts');
 
 
-}
 
+//}
+
+
+  //reescribiendo esto con firebase
+
+  const updatedPostValues = async () => {
+
+    const {author, title, category, likes} = updatePost;
+
+    firebase
+    .firestore()
+    .collection("posts")
+    .doc(`${props.match.params.id}`)
+    .update({
+       author,
+      title,
+
+      likes
+    })
+    .then(function() {
+      console.log('success')
+    })
+
+  }
 
   return(
     <div style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
@@ -103,7 +119,7 @@ const updatedPost = async () => {
           <Form.Label >Content</Form.Label>
           <Form.Control onChange={handleChange} name="author" type="text" placeholder="Enter Content"  value={updatePost.author}/>
          </Form.Group>
-       <button  type="button" onClick={updatedPost}>Update Post</button>
+       <button  type="button" onClick={updatedPostValues}>Update Post</button>
       </Form>
 
     </div>
