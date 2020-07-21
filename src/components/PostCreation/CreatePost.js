@@ -52,8 +52,8 @@ function Post(props) {
           likes,
           value
         })
-          .then(function(docRef) {
-            console.log( 'document saved', docRef.id)
+          .then(function() {
+            props.history.push("/")
         })
           .catch(error => {
             console.log(error, 'this is the error')

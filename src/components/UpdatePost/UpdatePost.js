@@ -11,9 +11,10 @@ const UpdatePost = (props) => {
   const [updatePost, setUpdatePost] = useState({
     title: "",
     author: "",
-    category: ""
+    value: ""
   });
 
+  const [category, setCategory] = useState({value: ''});
 
   useEffect(() => {
 
@@ -29,6 +30,7 @@ const UpdatePost = (props) => {
       .then(function(doc) {
 
         if(doc.exists) {
+
           setUpdatePost(doc.data());
 
         } else {
@@ -40,7 +42,7 @@ const UpdatePost = (props) => {
 
     }
 
-    fetchUpdatePost()
+    fetchUpdatePost();
 
 
 
@@ -53,44 +55,21 @@ const UpdatePost = (props) => {
     const value = event.target.value;
     const name = event.target.name;
 
-    setUpdatePost({
-      ...updatePost,
+    setUpdatePost(prevPosts => {
+      return {
+      ...prevPosts,
       [name]: value
+
+      }
     });
 
   }
 
-//const updatedPost = async () => {
-
-  //const {author, title, category, likes} = updatePost;
-
-    //const postDetails = {
-   // method: 'PUT',
-      //body: JSON.stringify({
-          //author: author,
-          //title: title,
-         // category: category,
-         // likes: likes
-        //}),
-     // headers: { 'Content-Type': 'application/json' }
-
-  //};
-
-  //const updatedPostValues =  await fetch(`https://blog-fa351.firebaseio.com/posts/${props.match.params.id}.json`, postDetails);
-  //const response = await updatedPostValues.json();
-  //setUpdatePost(response);
-  //props.history.push('/posts');
-
-
-
-//}
-
-
-  //reescribiendo esto con firebase
 
   const updatedPostValues = async () => {
 
-    const {author, title, category, likes} = updatePost;
+    const {author, title} = updatePost;
+    const { value } =  category;
 
     firebase
     .firestore()
@@ -99,14 +78,16 @@ const UpdatePost = (props) => {
     .update({
        author,
       title,
-
-      likes
+      value
     })
     .then(function() {
-      console.log('success')
+      props.history.push("/")
     })
 
   }
+
+  const handleCategorChange = event => setCategory({value: event.target.value});
+
 
   return(
     <div style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
@@ -119,6 +100,14 @@ const UpdatePost = (props) => {
           <Form.Label >Content</Form.Label>
           <Form.Control onChange={handleChange} name="author" type="text" placeholder="Enter Content"  value={updatePost.author}/>
          </Form.Group>
+
+      <select onChange={handleCategorChange}>
+        <option value="Food">Food</option>
+        <option value="Travel">Travel</option>
+        <option  value="News">News</option>
+        <option value="Tech">Tech</option>
+      </select>
+
        <button  type="button" onClick={updatedPostValues}>Update Post</button>
       </Form>
 
