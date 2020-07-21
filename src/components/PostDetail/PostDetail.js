@@ -2,7 +2,7 @@ import React,{useState,useEffect, useContext} from 'react';
 import { Card,Button } from 'react-bootstrap';
 import {Link, Route, Routes, Redirect} from 'react-router-dom'
 import UpdatePost from '../UpdatePost/UpdatePost';
-import NoMatch from '../NoMatch/NoMatch';
+
 import './PostDetail.css';
 import {UserContext} from '../Context/AuthContext';
 //importing firebase in order to make the PATCH request
@@ -19,7 +19,6 @@ function PostDetails(props){
   const [error, setError] = useState(false);
   //importing the context object
   const {newData} = useContext(UserContext);
-
 
 
   useEffect(() => {
@@ -54,6 +53,7 @@ function PostDetails(props){
 
 
 
+
   const deleteSelectedPost = () => {
 
       const {token} = newData;
@@ -66,7 +66,7 @@ function PostDetails(props){
 
   }
 
-  const addLikes = async () => {
+  //const addLikes = async () => {
       // Like: no se aumenta automaticamente, arreglar este problema
              //const postDetails = {
              // method: 'PATCH',
@@ -89,17 +89,36 @@ function PostDetails(props){
 
               //adding firebase code to PATCH request, to add likes to the post
 
-              const db = firebase.firestore()
-              db.collection('posts').doc(props.match.params.id).set({...selectedPost, likes: selectedPost.likes + 1})
+              //const db = await firebase.firestore()
+              //db.collection('posts').doc(props.match.params.id).set({...selectedPost, likes: selectedPost.likes + 1})
 
 
 
 
 
-    };
+    //};
 
 
+    //new function
+    const addLikes = () => {
 
+
+          const likePost = firebase
+            .firestore()
+            .collection('posts')
+            .doc(`${props.match.params.id}`)
+            .update({ ...selectedPost,likes: selectedPost.likes + 1})
+            .then(function() {
+              console.log('goood is working')
+            })
+            .catch(function(error) {
+               console.error("Error updating document: ", error);
+            })
+
+    }
+
+
+  //redirecting to a 404 in case an error occur
 
     if (error) {
       return <Redirect to="/404" />
