@@ -47,9 +47,9 @@ const Auth = (props) =>  {
 
       //setting the user inn local storage in order to not lose it on reload page
 
-      console.log(response,  'response from auth is here')
 
-    const expirationDate =  new Date(new Date().getTime + response.expiresIn * 1000)
+    //before the line below was:  const expirationDate =  new Date(new Date().getTime() + response.expiresIn * 1000);
+    const expirationDate =  new Date(new Date().getTime() + response.expiresIn * 100);
     localStorage.setItem('token', response.idToken);
     localStorage.setItem('expirationDate', expirationDate);
 

@@ -27,8 +27,8 @@ const Main = () => {
 
       const logOut = () => {
         //aqui vamos a borrar lo que hemos guardado en localStorage
-        localStorage.removeItem('token')
-        localStorage.removeItem('expirationTime')
+        //localStorage.removeItem('token')
+        //localStorage.removeItem('expirationTime')
 
 
 
