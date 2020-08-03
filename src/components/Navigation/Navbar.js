@@ -8,15 +8,8 @@ import { useHistory } from 'react-router-dom';
 import {user} from '../../firebase/firebase';
 import firebase from '../../firebase/firebase';
 
-
-if (user) {
-  // User is signed in.
-  alert(user, 'here is the fucking user')
-} else {
-  alert('not user')
-}
-
 const Main = () => {
+
 
       const history = useHistory();
       const userSession = user;
@@ -25,7 +18,8 @@ const Main = () => {
 
         firebase.auth().signOut().then(function() {
       // Sign-out successful.
-          alert(' Sign out done !')
+          alert('Sign out done !')
+          history.push("/")
 
         }).catch(function(error) {
           alert(error.message)
@@ -46,7 +40,7 @@ const Main = () => {
                 <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
                 <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
                 {
-                  userSession ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
+                  user ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
                 :  <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/SignUp">SignUp</NavLink>
                }
 

@@ -89,7 +89,7 @@ const UpdatePost = (props) => {
 
   }
 
-  const handleCategorChange = event => setCategory({value: event.target.value});
+  const handleCategoryChange = event => setCategory({value: event.target.value});
 
 
   return(
@@ -104,7 +104,7 @@ const UpdatePost = (props) => {
           <Form.Control onChange={handleChange} name="author" type="text" placeholder="Enter Content"  value={updatePost.author}/>
          </Form.Group>
 
-      <select onChange={handleCategorChange}>
+      <select onChange={handleCategoryChange}>
         <option value="Food">Food</option>
         <option value="Travel">Travel</option>
         <option  value="News">News</option>

@@ -22,6 +22,7 @@ const SingUp = (props) => {
      await firebase.auth().signInWithEmailAndPassword(email, password)
       .then(response => {
         if(response) {
+
           history.push("/")
           alert('the user' + email + 'was successfully signned in!')
         }

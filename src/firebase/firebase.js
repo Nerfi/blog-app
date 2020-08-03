@@ -17,7 +17,14 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const user = firebase.auth().currentUser;
+const user = firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    alert('user is sign in '+ user)
+  } else {
+    // No user is signed in.
+    alert('no user has signned in ')
+  }
+});
 
 export {user}
 
