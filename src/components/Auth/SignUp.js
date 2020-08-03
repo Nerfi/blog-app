@@ -1,6 +1,10 @@
 import React , {useState, useContext} from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import {UserContext} from '../Context/AuthContext';
+
+//setting up firebase new metjhods fro internet
+import firebase from '../../firebase/firebase';
+import { useHistory } from 'react-router-dom';
 //THIS IS THE SIGN  IN COMPONENT
 
 
@@ -8,25 +12,24 @@ const SingUp = (props) => {
 
   const [singUp, setSignup] =  useState({email: '', password: ''});
   const [error, setError] = useState(null);
-  //useContext is here
-  const {newData, setNewData} = useContext(UserContext);
 
+  const history = useHistory();
 
+  //new handle submit with firebase methods
   const handleSubmit = async (event) => {
+    //preventing default behavior
     event.preventDefault();
-   const {email , password} = singUp;
+    const {email , password} = singUp;
 
-    const authData = {
-
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({  email, password,  returnSecureToken: true })
-
-  }
-    const envVaribales =  process.env.REACT_APP_SIGNIN_API_KEY;
-    const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${envVaribales}`, authData);
-    const response = await postRequest.json();
-    response.error ? setError(response.error.message) : setNewData({token: response.idToken, userId: response.localId})
+     await firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(response => {
+        if(response) {
+          history.push("/UpdatePost")
+          alert('the user' + email + 'was successfully signned in!')
+        }
+      }).catch(e => {
+        setError(e.message);
+      })
 
   }
 

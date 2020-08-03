@@ -40,14 +40,16 @@ const handleSubmit = async (event) => {
   await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
         if(result) {
-            history.push("/")
-        }else {
+            history.push("/");
+            //delete line below after all is working
+            alert('the user with the email' + email + 'was created!')
+        } else {
         const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorCode, errorMessage);
         }
     }).catch(e => {
-      alert(e.message)
+      setError(e.message)
     })
 
 };
