@@ -24,7 +24,15 @@ const Main = () => {
     //}
 
       const history = useHistory();
+
       const logOut = () => {
+        //aqui vamos a borrar lo que hemos guardado en localStorage
+        localStorage.removeItem('token')
+        localStorage.removeItem('expirationTime')
+
+
+
+
       setNewData({token: null,useId: null })
       history.push("/")
     };

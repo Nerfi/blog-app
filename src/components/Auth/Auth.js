@@ -38,12 +38,21 @@ const Auth = (props) =>  {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({  email, password,  returnSecureToken: true })
 
-  }
+     }
 
     const envVaribales = process.env.REACT_APP_SIGNUP_API_KEY;
 
     const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${envVaribales}`, authData)
     const response = await postRequest.json();
+
+      //setting the user inn local storage in order to not lose it on reload page
+
+      console.log(response,  'response from auth is here')
+
+    const expirationDate =  new Date(new Date().getTime + response.expiresIn * 1000)
+    localStorage.setItem('token', response.idToken);
+    localStorage.setItem('expirationDate', expirationDate);
+
     return response.error ? setError(response.error.message) : setNewData({token: response.idToken, userId: response.localId, loading: false});
 }
 

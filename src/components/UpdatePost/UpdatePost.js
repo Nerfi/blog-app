@@ -24,7 +24,7 @@ const UpdatePost = (props) => {
       const singleDoc = firebase
       .firestore()
       .collection("posts")
-      .doc(`${props.match.params.id}`)
+      .doc(props.match.params.id)
 
       singleDoc
       .get()
@@ -35,7 +35,7 @@ const UpdatePost = (props) => {
           setUpdatePost(doc.data());
 
         } else {
-            setError(!error)
+            setError(true);
         }
       }).catch(function(error) {
         console.log(error, 'the error is here')
@@ -47,7 +47,7 @@ const UpdatePost = (props) => {
 
 
 
-  },[]);
+  },[updatePost]);
 
 
 
@@ -83,6 +83,8 @@ const UpdatePost = (props) => {
     })
     .then(function() {
       props.history.push("/")
+    }).catch(e => {
+      console.log(e.message)
     })
 
   }
