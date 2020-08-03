@@ -4,6 +4,9 @@ import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import { Redirect} from 'react-router-dom';
 import Spinner from '../../UI/Spinner/Spinner';
 import {UserContext} from '../Context/AuthContext';
+//importing firebase in order to add a user with email and password
+import firebase from '../../firebase/firebase';
+import { useHistory } from 'react-router-dom';
 
 const Auth = (props) =>  {
 
@@ -16,6 +19,7 @@ const Auth = (props) =>  {
 
     const {newData, setNewData} = useContext(UserContext);
 
+    //validating the email and the password to be grather than 6.
   const  validateForm  = () => {
 
     const {email, password} = credentials;
@@ -25,36 +29,28 @@ const Auth = (props) =>  {
     return pattern.test(email) && password.length >= 6;
   }
 
-  const handleSubmit = async (event) => {
 
-    event.preventDefault();
+//new tresting handle submit
+const handleSubmit = async (event) => {
 
-   const {email , password} = credentials;
+  event.preventDefault();
+  const {email , password} = credentials;
 
-    setNewData(prevLoading => {return {loading: !prevLoading.loading}});
+  //firebase method to sign up
+  await firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(result => {
+        if(result) {
+            history.push("/")
+        }else {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorCode, errorMessage);
+        }
+    }).catch(e => {
+      alert(e.message)
+    })
 
-    const authData = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({  email, password,  returnSecureToken: true })
-
-     }
-
-    const envVaribales = process.env.REACT_APP_SIGNUP_API_KEY;
-
-    const postRequest =  await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${envVaribales}`, authData)
-    const response = await postRequest.json();
-
-      //setting the user inn local storage in order to not lose it on reload page
-
-
-    //before the line below was:  const expirationDate =  new Date(new Date().getTime() + response.expiresIn * 1000);
-    const expirationDate =  new Date(new Date().getTime() + response.expiresIn * 100);
-    localStorage.setItem('token', response.idToken);
-    localStorage.setItem('expirationDate', expirationDate);
-
-    return response.error ? setError(response.error.message) : setNewData({token: response.idToken, userId: response.localId, loading: false});
-}
+};
 
   const handleChange = (event) => {
 
