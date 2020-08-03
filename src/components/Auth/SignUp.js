@@ -1,10 +1,8 @@
 import React , {useState, useContext} from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import {UserContext} from '../Context/AuthContext';
-
-//setting up firebase new metjhods fro internet
 import firebase from '../../firebase/firebase';
-import { useHistory } from 'react-router-dom';
+
 //THIS IS THE SIGN  IN COMPONENT
 
 
@@ -13,7 +11,7 @@ const SingUp = (props) => {
   const [singUp, setSignup] =  useState({email: '', password: ''});
   const [error, setError] = useState(null);
 
-  const history = useHistory();
+  const history = props.history;
 
   //new handle submit with firebase methods
   const handleSubmit = async (event) => {
@@ -24,14 +22,14 @@ const SingUp = (props) => {
      await firebase.auth().signInWithEmailAndPassword(email, password)
       .then(response => {
         if(response) {
-          history.push("/UpdatePost")
+          history.push("/")
           alert('the user' + email + 'was successfully signned in!')
         }
       }).catch(e => {
         setError(e.message);
       })
 
-  }
+  };
 
   const handleChange = (event) => {
 
@@ -45,13 +43,13 @@ const SingUp = (props) => {
       };
     });
 
-  }
+  };
 
   const validateForm = () => {
      const {email, password} = singUp;
 
     return email.length > 0 && password.length > 0;
-  }
+  };
 
 
   return (

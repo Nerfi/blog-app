@@ -15,6 +15,7 @@ const LandinPage = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+
   //newsetter for testing firebase firestroe
   const [newPosts , setNewPosts] = useState([]);
 

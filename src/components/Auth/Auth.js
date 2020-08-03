@@ -6,7 +6,7 @@ import Spinner from '../../UI/Spinner/Spinner';
 import {UserContext} from '../Context/AuthContext';
 //importing firebase in order to add a user with email and password
 import firebase from '../../firebase/firebase';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 
 const Auth = (props) =>  {
 

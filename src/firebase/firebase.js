@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-//importign storage in order to upload photos to firestore
+//importign storage in order to upload photos to firestore, not done yet
 import 'firebase/storage';
 
 const firebaseConfig = {
@@ -17,7 +17,9 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const user = firebase.auth().currentUser;
 
+export {user}
 
 export default firebase;
 

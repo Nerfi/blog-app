@@ -4,22 +4,33 @@ import  {NavLink, Redirect} from 'react-router-dom';
 import {UserContext} from '../Context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
+//imporing current user in case there is
+import {user} from '../../firebase/firebase';
+import firebase from '../../firebase/firebase';
 
+
+if (user) {
+  // User is signed in.
+  alert(user, 'here is the fucking user')
+} else {
+  alert('not user')
+}
 
 const Main = () => {
 
-    const {newData, setNewData} = useContext(UserContext);
-
-
       const history = useHistory();
+      const userSession = user;
 
       const logOut = () => {
-        //aqui vamos a borrar lo que hemos guardado en localStorage
-        localStorage.removeItem('token');
-        localStorage.removeItem('expirationTime');
 
-      setNewData({token: null,useId: null })
-      history.push("/")
+        firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+          alert(' Sign out done !')
+
+        }).catch(function(error) {
+          alert(error.message)
+        })
+
     };
 
 
@@ -35,7 +46,7 @@ const Main = () => {
                 <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
                 <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
                 {
-                  newData.token ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
+                  userSession ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
                 :  <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/SignUp">SignUp</NavLink>
                }
 
