@@ -47,11 +47,6 @@ const LandinPage = (props) => {
 
   fetchData();
 
-
-
-
-
-
   },[]);
 
 // need to check firebase docs for search fucnitonalitty

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './App.css';
 import Navbar from './components/Navigation/Navbar';
 import  {Route, Switch} from 'react-router-dom';
@@ -13,8 +13,46 @@ import SignUp from '../src/components/Auth/SignUp';
 //importing the Context hook
 import {UserContext} from '../src/components/Context/AuthContext';
 
+//importing firebase, not working, failling to import, chech that out later
+import firebase from './firebase/firebase';
+
+
 
 const App = () => {
+
+//puede que esto lo tenga que borrar despues  de añadir firebase methods
+useEffect(() => {
+  //even when we refresh the page the user will still logged in!
+  const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
+      if(authUser) {
+        //the is a user, is logged in
+        dispatch({
+
+          type: "SET_USER",
+          user: authUser
+
+        })
+
+      } else {
+        //the user is logged out
+        dispatch({
+         type: "SET_USER",
+          user: null
+
+        })
+      }
+
+    })
+
+  //cleaning up, make sure to re-read what is this about again
+  return () => {
+    //any clean up goes here
+    unsubscribe();
+  }
+
+},[]);
+
+
 
   const [newData, setNewData] = useState({
     token: null,

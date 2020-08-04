@@ -5,14 +5,14 @@ import {UserContext} from '../Context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
 //imporing current user in case there is
-import {user} from '../../firebase/firebase';
+
 import firebase from '../../firebase/firebase';
 
 const Main = () => {
 
 
       const history = useHistory();
-      const userSession = user;
+
 
       const logOut = () => {
 
@@ -40,7 +40,7 @@ const Main = () => {
                 <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
                 <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
                 {
-                  user ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
+                  "userSession" ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
                 :  <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/SignUp">SignUp</NavLink>
                }
 
