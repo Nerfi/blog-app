@@ -51,7 +51,7 @@ function PostDetails(props){
 
 
 
-//needst o be done again with firebase methods
+//needst o be done again with firebase methods, this feature will not work because Im working in another name context.
 
   const deleteSelectedPost = () => {
 
