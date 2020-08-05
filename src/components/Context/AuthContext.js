@@ -1,22 +1,23 @@
-import {createContext} from 'react';
-//check this out maybe later I will need to delete this
-//const initialValue = {
-  //  token: null,
-    //userId: null,
-    //error: null,
-    //loading: false
-  //};
-
-export const UserContext = createContext(null);
-//check out again docs about useContext
+import React,{useEffect, useState} from 'react';
 
 
-/*AQUI VAMOS A TENER QUE VOLVER A CREAR THE CONTEXT AND USE THE CONTEXT API
-ALSO WE WILL HAVE TO CREATE THE SWITCH CASES AND THEN WE WILLL HAVE TO DISPATCH
-THE ACTIONS: WE WILL HAVE TO USER THAT CONTEXT IN THE <APP/> COMPONENT
-AND THEN DISTRIBUTE THAT STATE , SORT TO SPEAK, AROUND THE APP WITH THE
-ONAUTHSTATECHANGE METHOD , GIVEN TO US THANKS TO FIREBASE */
+ export const UserSessionContext = React.createContext(null);
 
+const AuthProvider = (props) => {
+  return (
+       <UserSessionContext.Provider
+    value={{
+      user: null
+    }}>
+  {/*we call (props.children) because we wrap the <App >  component with the AuthPRovider*/}
+      {props.children}
+    }
+
+    </UserSessionContext.Provider>
+  );
+};
+
+export default AuthProvider;
 
 /* example code of whtat Im talking about
 
