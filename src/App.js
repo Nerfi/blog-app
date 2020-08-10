@@ -20,10 +20,7 @@ import firebase from './firebase/firebase';
 
 const App = () => {
 
-
-
 //NEW TRY WITH ARTICLE ONLINE
-
 
 /*reating the initial state of the user
 we create the state in the parent componetn of the consumer, 'cause this way we will not
@@ -38,15 +35,22 @@ const [auth, setAuth] = useState({
 // new useEffect hook in order to take the state of auth and leave here in case I need it somewhere else in the app
 
 useEffect(() => {
+
   const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
+
     if(authUser) {
+
       setAuth({loggedIn: true, user: authUser});
+
     } else {
-      setAuth(null) //no user
+     //setAuth(null) //no user
+     alert('not user and not working ')
     }
 
   })
+//calling the function
   unsubscribe();
+
 
 },[]);
 
