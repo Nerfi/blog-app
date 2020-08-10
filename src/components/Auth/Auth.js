@@ -3,7 +3,7 @@ import './auth.css';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import { Redirect} from 'react-router-dom';
 import Spinner from '../../UI/Spinner/Spinner';
-import {UserContext} from '../Context/AuthContext';
+import {UserSessionContext} from '../Context/AuthContext';
 //importing firebase in order to add a user with email and password
 import firebase from '../../firebase/firebase';
 
@@ -17,7 +17,7 @@ const Auth = (props) =>  {
 
   const [error, setError] = useState("");
 
-    const {newData, setNewData} = useContext(UserContext);
+//    const {newData, setNewData} = useContext(UserContext);
 
     //validating the email and the password to be grather than 6.
   const  validateForm  = () => {
@@ -71,9 +71,10 @@ const handleSubmit = async (event) => {
 
   const history =  props.history;
 
-  if(newData.loading) {
-    return <Spinner/>
-  }
+//aqui tendremos que cambiar esto por los nuevos datos del nuevo context
+  //if(newData.loading) {
+   // return <Spinner/>
+  //}
 
 
   return (

@@ -3,7 +3,7 @@ import { Card,Button } from 'react-bootstrap';
 import {Link, Route, Routes, Redirect} from 'react-router-dom'
 import UpdatePost from '../UpdatePost/UpdatePost';
 import './PostDetail.css';
-import {UserContext} from '../Context/AuthContext';
+import {UserSessionContext} from '../Context/AuthContext';
 //importing firebase in order to make the PATCH request
 import firebase from '../../firebase/firebase';
 
@@ -15,7 +15,7 @@ function PostDetails(props){
 
   const [error, setError] = useState(false);
   //importing the context object
-  const {newData} = useContext(UserContext);
+  //const {newData} = useContext(UserContext);
 
 
   useEffect(() => {
@@ -51,19 +51,19 @@ function PostDetails(props){
 
 
 
-//needst o be done again with firebase methods, this feature will not work because Im working in another name context.
+//needst o be done again with firebase methods, this feature will not work because Im working in another, context.
 
-  const deleteSelectedPost = () => {
+//  const deleteSelectedPost = () => {
 
-      const {token} = newData;
+   //   const {token} = newData;
 
-    const deletePost = fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, {
-      method: 'DELETE'
-    });
+    //const deletePost = fetch(`https://blog-fa351.firebaseio.com/posts?auth=${token}/${props.match.params.id}.json`, {
+      //method: 'DELETE'
+    //});
 
-    props.history.push('/posts');
+    //props.history.push('/posts');
 
-  }
+  //}
 
     const addLikes = () => {
 
@@ -105,7 +105,7 @@ function PostDetails(props){
               Category: {selectedPost.value}
              <Card.Text>
              </Card.Text>
-            <Button onClick={deleteSelectedPost} variant="danger">Delete</Button>
+            <Button onClick={"deleteSelectedPost"} variant="danger">Delete</Button>
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
               <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
           </Card.Body>

@@ -1,23 +1,27 @@
-import React,{useEffect, useState} from 'react';
+import React from 'react';
 
+//initiaiizing the contezt with a null value, user is not logged in
+ export const UserSessionContext = React.createContext({
+  loggedIn: false,
+  user: {}
+ });
 
- export const UserSessionContext = React.createContext(null);
+//const AuthProvider = (props) => {
+  //return (
 
-const AuthProvider = (props) => {
-  return (
-       <UserSessionContext.Provider
-    value={{
-      user: null
-    }}>
-  {/*we call (props.children) because we wrap the <App >  component with the AuthPRovider*/}
-      {props.children}
-    }
+      // <UserSessionContext.Provider
+   // value={{
+     // user: null
+    //}}>
+  //{/*we call (props.children) because we wrap the <App >  component with the AuthPRovider*/}
+     // {props.children}
+  //  }
 
-    </UserSessionContext.Provider>
-  );
-};
+   // </UserSessionContext.Provider>
+  //);
+//};
 
-export default AuthProvider;
+//export default AuthProvider;
 
 /* example code of whtat Im talking about
 
