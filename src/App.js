@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import Navbar from './components/Navigation/Navbar';
 import  {Route, Switch} from 'react-router-dom';
@@ -19,39 +19,6 @@ import firebase from './firebase/firebase';
 
 
 const App = () => {
-
-//useEffect(() => {
-  //even when we refresh the page the user will still logged in!
-  //const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
-    //  if(authUser) {
-        //the is a user, is logged in
-      //  dispatch({
-
-        //  type: "SET_USER",
-          //user: authUser
-
-        //})
-
-      //} else {
-        //the user is logged out
-        //dispatch({
-         //type: "SET_USER",
-          //user: null
-
-        //})
-      //}
-
-    //})
-
-  //cleaning up, make sure to re-read what is this about again
-  //return () => {
-    //any clean up goes here
-    //unsubscribe();
-  //}
-
-//},[]);
-
-
   return (
     <div>
 

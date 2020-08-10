@@ -1,13 +1,9 @@
 import React, {useContext} from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import  {NavLink, Redirect} from 'react-router-dom';
-import {UserContext} from '../Context/AuthContext';
-import { useHistory } from 'react-router-dom';
+import  {NavLink, Redirect,useHistory} from 'react-router-dom';
 //AuthContext will actually hold my context 'state'
 import {AuthContext } from '../../../src/components/Context/AuthContext';
-
 //imporing current user in case there is
-
 import firebase from '../../firebase/firebase';
 
 const Main = () => {
