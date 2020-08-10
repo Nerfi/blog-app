@@ -1,10 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import firebase from '../../firebase/firebase';
 
-//initiaiizing the contezt with a null value, user is not logged in
- export const UserSessionContext = React.createContext({
-  loggedIn: false,
-  user: {}
- });
+ //NEW TSTING WITH YOUTUBE VIDEO FROM MASKIN
+ export const AuthContext = React.createContext();
+
+ export const AuthProvider = (props) => {
+
+  const [currentUser, setCurrentUser ] = useState(null); //there's no user logged in initialy
+
+    useEffect(() => {
+
+      firebase.auth().onAuthStateChanged((user) => {
+        setCurrentUser(user)
+      })
+
+
+    },[]);
+
+    return(
+      <AuthContext.Provider
+        value={{
+          currentUser
+        }}
+      >
+        {props.children}
+    </AuthContext.Provider>
+    );
+ };
 
 //const AuthProvider = (props) => {
   //return (

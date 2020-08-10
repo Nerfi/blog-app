@@ -3,18 +3,14 @@ import { Navbar, Nav } from 'react-bootstrap';
 import  {NavLink, Redirect} from 'react-router-dom';
 import {UserContext} from '../Context/AuthContext';
 import { useHistory } from 'react-router-dom';
-import {UserSessionContext} from '../../../src/components/Context/AuthContext';
+//AuthContext will actually hold my context 'state'
+import {AuthContext } from '../../../src/components/Context/AuthContext';
 
 //imporing current user in case there is
 
 import firebase from '../../firebase/firebase';
 
 const Main = () => {
-
-  //testing if the context works
-  const authUser = useContext(UserSessionContext);
-
-  console.log('authUser loogedIn property:' , authUser.loggedIn)
 
       const history = useHistory();
 
@@ -33,6 +29,11 @@ const Main = () => {
     };
 
 
+  const { currentUser } = useContext(AuthContext);
+
+  console.log('currentUser:', currentUser)
+
+
 
   return(
        <div>
@@ -45,7 +46,7 @@ const Main = () => {
                 <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
                 <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
                 {
-                  authUser.loggedIn ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
+                  currentUser ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
                 :  <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/SignUp">SignUp</NavLink>
                }
 

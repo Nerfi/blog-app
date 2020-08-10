@@ -11,7 +11,7 @@ import NoMatch from '../src/components/NoMatch/NoMatch';
 import Auth from '../src/components/Auth/Auth';
 import SignUp from '../src/components/Auth/SignUp';
 //importing the Context hook
-import {UserSessionContext} from '../src/components/Context/AuthContext';
+import {AuthProvider} from '../src/components/Context/AuthContext';
 
 //importing firebase, not working, failling to import, chech that out later
 import firebase from './firebase/firebase';
@@ -19,44 +19,6 @@ import firebase from './firebase/firebase';
 
 
 const App = () => {
-
-//NEW TRY WITH ARTICLE ONLINE
-
-/*reating the initial state of the user
-we create the state in the parent componetn of the consumer, 'cause this way we will not
-re-render the children components in case we change/update the state
-https://dev.to/emeka/usecontext-a-good-reason-to-drop-redux-216l */
-
-const [auth, setAuth] = useState({
-  loggedIn: false,
-  user: {} //user is initialized as an empty object
-})
-
-// new useEffect hook in order to take the state of auth and leave here in case I need it somewhere else in the app
-
-useEffect(() => {
-
-  const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
-
-    if(authUser) {
-
-      setAuth({loggedIn: true, user: authUser});
-
-    } else {
-     //setAuth(null) //no user
-     alert('not user and not working ')
-    }
-
-  })
-//calling the function
-  unsubscribe();
-
-
-},[]);
-
-
-
-
 
 //useEffect(() => {
   //even when we refresh the page the user will still logged in!
@@ -90,12 +52,11 @@ useEffect(() => {
 //},[]);
 
 
-
   return (
     <div>
 
           <Switch>
-          <UserSessionContext.Provider value={auth}>
+          <AuthProvider>
               <Navbar/>
                 <Route path="/posts" component={Posts}/>
                  <Route path="/createpost" component={CreatePost}/>
@@ -105,7 +66,7 @@ useEffect(() => {
                 <Route exact path="/Login" component={SignUp}/>
                 <Route exact path="/SignUp" component={Auth}/>
                 <Route exact path="/" component={LandingPage}/>
-            </UserSessionContext.Provider>
+            </AuthProvider>
                 <Route component={NoMatch}/>
 
             </Switch>
