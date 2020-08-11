@@ -17,6 +17,7 @@ const SingUp = (props) => {
   const handleSubmit = async (event) => {
     //preventing default behavior
     event.preventDefault();
+
     const {email , password} = singUp;
 
      await firebase.auth().signInWithEmailAndPassword(email, password)

@@ -53,8 +53,8 @@ const UpdatePost = (props) => {
 
  const handleChange = event => {
 
-    const value = event.target.value;
-    const name = event.target.name;
+    let value = event.target.value;
+    let name = event.target.name;
 
     setUpdatePost(prevPosts => {
       return {
@@ -91,17 +91,19 @@ const UpdatePost = (props) => {
 
   const handleCategoryChange = event => setCategory({value: event.target.value});
 
+  const {title, author} = updatePost;
+
 
   return(
     <div style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
      <Form >
         <Form.Group controlId="formGroupEmail">
         <Form.Label>Title</Form.Label>
-        <Form.Control onChange={handleChange} name="title" type="text" placeholder="Enter title" value={updatePost.title} />
+        <Form.Control  name="title" type="text" placeholder="Enter title" onChange={handleChange} value={title} />
         </Form.Group>
         <Form.Group controlId="formGroupPassword">
           <Form.Label >Content</Form.Label>
-          <Form.Control onChange={handleChange} name="author" type="text" placeholder="Enter Content"  value={updatePost.author}/>
+          <Form.Control onChange={handleChange} name="author" type="text" placeholder="Enter Content"  value={author}/>
          </Form.Group>
 
       <select onChange={handleCategoryChange}>

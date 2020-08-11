@@ -17,8 +17,6 @@ const Auth = (props) =>  {
 
   const [error, setError] = useState("");
 
-//    const {newData, setNewData} = useContext(UserContext);
-
     //validating the email and the password to be grather than 6.
   const  validateForm  = () => {
 
@@ -30,7 +28,6 @@ const Auth = (props) =>  {
   }
 
 
-//new tresting handle submit
 const handleSubmit = async (event) => {
 
   event.preventDefault();

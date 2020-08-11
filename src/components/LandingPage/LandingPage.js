@@ -5,8 +5,6 @@ import './landingPage.css';
 import SearchBar from '../../UI/SearchBar';
 import Spinner from '../../UI/Spinner/Spinner'
 
-//import {UserContext} from '../Context/AuthContext';
-
 //importing firebase firestore
 import firebase from '../../firebase/firebase';
 
@@ -25,6 +23,7 @@ const LandinPage = (props) => {
   useEffect(() => {
 
   const fetchData = async () => {
+
     setLoading(prevLoading => {return !prevLoading});
 
     const unsubscribe = firebase

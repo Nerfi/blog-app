@@ -24,7 +24,6 @@ const Main = () => {
 
     };
 
-
   const { currentUser } = useContext(AuthContext);
 
   console.log('currentUser:', currentUser)

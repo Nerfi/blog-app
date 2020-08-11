@@ -14,8 +14,6 @@ function PostDetails(props){
   const [selectedPost, setSelected] = useState({});
 
   const [error, setError] = useState(false);
-  //importing the context object
-  //const {newData} = useContext(UserContext);
 
 
   useEffect(() => {

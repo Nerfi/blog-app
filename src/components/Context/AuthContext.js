@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import firebase from '../../firebase/firebase';
 
- //NEW TSTING WITH YOUTUBE VIDEO FROM MASKIN
+  //1 we create the context like below
+
  export const AuthContext = React.createContext();
 
+  /*2 we created the function to handle the logic and we pass 'props', because
+  this component will wrap others components, and those components will have access to
+  the state we define in here */
  export const AuthProvider = (props) => {
 
   const [currentUser, setCurrentUser ] = useState(null); //there's no user logged in initialy
@@ -17,7 +21,13 @@ import firebase from '../../firebase/firebase';
 
     },[]);
 
+
+    console.log(firebase.auth().currentUser, 'current user hereeeeeeeeee');
+
+
     return(
+      /* 3- every  context have a Provider, the mission of this prop is to
+      provide the value that the components that will be wrap around it  will have acces */
       <AuthContext.Provider
         value={{
           currentUser
@@ -28,35 +38,3 @@ import firebase from '../../firebase/firebase';
     );
  };
 
-//const AuthProvider = (props) => {
-  //return (
-
-      // <UserSessionContext.Provider
-   // value={{
-     // user: null
-    //}}>
-  //{/*we call (props.children) because we wrap the <App >  component with the AuthPRovider*/}
-     // {props.children}
-  //  }
-
-   // </UserSessionContext.Provider>
-  //);
-//};
-
-//export default AuthProvider;
-
-/* example code of whtat Im talking about
-
-cosnt reducer = (state, action) => {
-    console.log(action);
-    switch(action.type) {
-      case "SET_USER":
-      return {
-        // returning the current state, whatever it might be
-        ...state,
-        user: action.user
-      }
-    }
-}
-
-*/
