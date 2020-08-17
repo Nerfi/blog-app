@@ -12,7 +12,8 @@ const Auth = (props) =>  {
 
   const [credentials, setCredentials] = useState({
     email: '',
-    password: ''
+    password: '',
+    name: ''
   });
 
   const [error, setError] = useState("");
@@ -31,12 +32,24 @@ const Auth = (props) =>  {
 const handleSubmit = async (event) => {
 
   event.preventDefault();
-  const {email , password} = credentials;
+  const {email , password,name} = credentials;
 
   //firebase method to sign up
   await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
+
         if(result) {
+
+          //once the user is created we also create a new one in the DB
+          firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+            email,
+            name
+
+          }).catch(e => {
+             console.log('Something went wrong with added user to firestore: ', error);
+
+          })
+
             history.push("/");
             //delete line below after all is working
             alert('the user with the email' + email + 'was created!')
@@ -78,8 +91,22 @@ const handleSubmit = async (event) => {
      <div className="Login">
         <form onSubmit={handleSubmit}>
         <h1> {error ?  error : "SignUp"}</h1>
+
+          <FormGroup controlId="name" bssize="large">
+          <Form.Label>Name</Form.Label>
+            <FormControl
+              value={credentials.name}
+              name="name"
+              onChange={handleChange}
+              type="name"
+            />
+          </FormGroup>
+
+
+
           <FormGroup controlId="email" bssize="large">
            <Form.Label>Email</Form.Label>
+
             <FormControl
               autoFocus
               type="email"
