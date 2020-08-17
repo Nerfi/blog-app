@@ -35,7 +35,7 @@ function Post(props) {
         }
       })
 
-  }
+  };
 
 
 
@@ -70,11 +70,6 @@ function Post(props) {
     })
 
 
-
-
-
-
-
     const {title, author, likes}  = details;
     const { value } = category;
     const {imgUrl}  = imageAsUrl;
@@ -104,9 +99,6 @@ function Post(props) {
 
   }
 
-  console.log(imageAsUrl , 'img as ulr AQUI')
-  ///firebase fistore uploadgin a img
-  console.log(imageAsFile, 'img as file ')
 
    const handleImageAsFile = (e) => {
       const image = e.target.files[0]
