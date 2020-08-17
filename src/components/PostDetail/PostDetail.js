@@ -44,7 +44,7 @@ function PostDetails(props){
 
 
 
-  },[]);
+  },[props.match.params.id]);
 
 
 
@@ -95,9 +95,10 @@ function PostDetails(props){
      <Card key={selectedPost.id} className="singlePost">
 
           <Card.Body >
-         <img src={selectedPost.imgUrl} alt="image tag" />
+
            <h1>{error}</h1>
             <Card.Title> {selectedPost.title}</Card.Title>
+             <img className="postDetail_img" src={selectedPost.imgUrl} alt="image tag" />
             <p>{selectedPost.likes === 0 ? 'Be the first to like this post!' : selectedPost.likes} {selectedPost.likes ? "Times this post was liked" : null}</p>
 
             <Card.Text>

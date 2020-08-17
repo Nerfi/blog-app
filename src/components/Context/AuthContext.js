@@ -11,7 +11,7 @@ import firebase from '../../firebase/firebase';
  export const AuthProvider = (props) => {
 
   const [currentUser, setCurrentUser ] = useState(null); //there's no user logged in initialy
-  const [userLogged, setUser] = useState(null)
+
 
     useEffect(() => {
 
@@ -32,7 +32,7 @@ import firebase from '../../firebase/firebase';
       <AuthContext.Provider
         value={{
           currentUser,
-          userLogged
+
         }}
       >
         {props.children}
