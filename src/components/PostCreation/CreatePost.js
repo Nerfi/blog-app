@@ -1,12 +1,18 @@
 import React,{useState} from 'react';
 import {Form} from 'react-bootstrap';
 //adding firebase methods
-import firebase from '../../firebase/firebase';
+import  firebase, {storage} from '../../firebase/firebase';
+
 
 function Post(props) {
 
-  const [category, setCategory] = useState({value: ''});
+  // adding img upload to firebase
+  const allInputs = {imgUrl: ''};
+  const [imageAsFile , setImageAsFile] = useState('');
+  const [imageAsUrl, setImageAsUrl] = useState(allInputs);
 
+
+  const [category, setCategory] = useState({value: ''});
   const [details, setDetails] = useState({
     title:"",
    author: "",
@@ -32,16 +38,50 @@ function Post(props) {
   }
 
 
+
+
   const addPost = (event) => {
 
     event.preventDefault();
 
-    const {title, author, likes }  = details;
+
+    //addig firebase upload img
+    if(imageAsFile === '') {
+      console.log(` not an image, the ima is ${typeof(imageAsFile)}`)
+    }
+    //with this const we are uploading the img to firebase
+    const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
+
+    //initiates the firebase side uploading
+    uploadTask.on('state_changed',
+    (snapShot) => {
+      //takes a snap shot of the process as it is happening
+      console.log(snapShot)
+    }, (err) => {
+      //catches the errors
+      console.log(err)
+    }, () => {
+      // gets the functions from storage refences the image storage in firebase by the children
+      // gets the download url then sets the image from firebase as the value for the imgUrl key:
+      storage.ref('images').child(imageAsFile.name).getDownloadURL()
+       .then(fireBaseUrl => {
+         setImageAsUrl(prevObject => ({...prevObject, imgUrl: fireBaseUrl}))
+       })
+    })
+
+
+
+
+
+
+
+    const {title, author, likes}  = details;
     const { value } = category;
+    const {imgUrl}  = imageAsUrl;
 
 
     // code from firestore
-    if(title && author  && value) {
+    if(title && author  && value && imgUrl) {
 
        firebase
         .firestore()
@@ -50,7 +90,8 @@ function Post(props) {
           title,
           author,
           likes,
-          value
+          value,
+          imgUrl: imgUrl
         })
           .then(function() {
             props.history.push("/")
@@ -61,6 +102,15 @@ function Post(props) {
     }
 
 
+  }
+
+  console.log(imageAsUrl , 'img as ulr AQUI')
+  ///firebase fistore uploadgin a img
+  console.log(imageAsFile, 'img as file ')
+
+   const handleImageAsFile = (e) => {
+      const image = e.target.files[0]
+      setImageAsFile(imageFile => (image))
   }
 
 
@@ -79,6 +129,15 @@ function Post(props) {
           <label >Write your history</label>
           <textarea className="form-control"  onChange={handleChange} name="author" required  rows="3" placeholder="Write your history"></textarea>
         </div>
+
+
+
+        <input
+// allows you to reach into your file directory and upload image to the browser
+          type="file"
+          onChange={handleImageAsFile}
+        />
+
 
       <select onChange={handleCategorChange}>
         <option value="Food">Food</option>

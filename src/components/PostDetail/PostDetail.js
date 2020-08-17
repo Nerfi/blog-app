@@ -82,6 +82,8 @@ function PostDetails(props){
 
     };
 
+    console.log(selectedPost, 'selectedPost aqui')
+
 
   //redirecting to a 404 in case an error occur
 
@@ -93,6 +95,7 @@ function PostDetails(props){
      <Card key={selectedPost.id} className="singlePost">
 
           <Card.Body >
+         <img src={selectedPost.imgUrl} alt="image tag" />
            <h1>{error}</h1>
             <Card.Title> {selectedPost.title}</Card.Title>
             <p>{selectedPost.likes === 0 ? 'Be the first to like this post!' : selectedPost.likes} {selectedPost.likes ? "Times this post was liked" : null}</p>

@@ -17,6 +17,13 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+//adding storage in order to upload image
+const storage = firebase.storage();
 
-export default firebase;
+
+//export default firebase;
+
+export {
+  storage, firebase as default
+}
 

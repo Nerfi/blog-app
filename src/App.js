@@ -12,8 +12,6 @@ import Auth from '../src/components/Auth/Auth';
 import SignUp from '../src/components/Auth/SignUp';
 //importing the Context hook
 import {AuthProvider} from '../src/components/Context/AuthContext';
-
-//importing firebase, not working, failling to import, chech that out later
 import firebase from './firebase/firebase';
 
 
