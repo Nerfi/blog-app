@@ -43,7 +43,6 @@ function Post(props) {
 
 
 
-
   const addPost = (event) => {
 
     event.preventDefault();
@@ -136,8 +135,6 @@ function Post(props) {
         <option  value="News">News</option>
         <option value="Tech">Tech</option>
       </select>
-
-
 
         <button type="button" style={{margin: '20px'}} onClick={addPost}>Add Post</button>
       </Form>

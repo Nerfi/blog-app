@@ -42,8 +42,6 @@ function PostDetails(props){
     //calling the function
       selectPost();
 
-
-
   },[props.match.params.id]);
 
 
