@@ -40,7 +40,7 @@ const handleSubmit = async (event) => {
 
         if(result) {
 
-          //once the user is created we also create a new one in the DB
+         //once the user is created we also create a new one in the DB
           firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
             email,
             name

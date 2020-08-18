@@ -24,11 +24,10 @@ const Main = () => {
 
     };
 
-  const { currentUser,userLogged } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
-  console.log('currentUser:', currentUser);
-  console.log('cUserloge:', userLogged);
 
+  console.log('currentUser UID:', currentUser );
 
 
   return(

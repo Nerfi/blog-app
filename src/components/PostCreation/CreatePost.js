@@ -69,13 +69,13 @@ function Post(props) {
        })
     })
 
-
+    //deconstructing the objecst state
     const {title, author, likes}  = details;
     const { value } = category;
     const {imgUrl}  = imageAsUrl;
 
 
-    // code from firestore
+    // adding new post!
     if(title && author  && value && imgUrl) {
 
        firebase
@@ -122,14 +122,7 @@ function Post(props) {
           <textarea className="form-control"  onChange={handleChange} name="author" required  rows="3" placeholder="Write your history"></textarea>
         </div>
 
-
-
-        <input
-// allows you to reach into your file directory and upload image to the browser
-          type="file"
-          onChange={handleImageAsFile}
-        />
-
+        <input type='file' onChange={handleImageAsFile} />
 
       <select onChange={handleCategorChange}>
         <option value="Food">Food</option>

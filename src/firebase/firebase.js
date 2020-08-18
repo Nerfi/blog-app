@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-
 //importign storage in order to upload photos to firestore, not done yet
 import 'firebase/storage';
 

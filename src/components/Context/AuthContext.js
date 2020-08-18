@@ -23,15 +23,12 @@ import firebase from '../../firebase/firebase';
     },[]);
 
 
-    console.log(firebase.auth().currentUser, 'current user hereeeeeeeeee');
-
-
     return(
       /* 3- every  context have a Provider, the mission of this prop is to
       provide the value that the components that will be wrap around it  will have acces */
       <AuthContext.Provider
         value={{
-          currentUser,
+          currentUser
 
         }}
       >
