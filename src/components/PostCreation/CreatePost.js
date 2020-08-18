@@ -1,7 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import {Form} from 'react-bootstrap';
 //adding firebase methods
 import  firebase, {storage} from '../../firebase/firebase';
+import {AuthContext } from '../../../src/components/Context/AuthContext';
 
 
 function Post(props) {
@@ -19,7 +20,10 @@ function Post(props) {
    likes: null
  });
 
+  //importing context in order to grab the user uid
+  const { currentUser } = useContext(AuthContext);
 
+    //handling selection of category
   const handleCategorChange = event => setCategory({value: event.target.value});
 
 
@@ -86,7 +90,9 @@ function Post(props) {
           author,
           likes,
           value,
-          imgUrl: imgUrl
+          imgUrl: imgUrl,
+          currentUser: currentUser.uid
+
         })
           .then(function() {
             props.history.push("/")
