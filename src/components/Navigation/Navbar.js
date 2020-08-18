@@ -27,7 +27,7 @@ const Main = () => {
   const { currentUser } = useContext(AuthContext);
 
 
-  console.log('currentUser UID:', currentUser );
+  console.log('currentUser UID:', currentUser.uid );
 
 
   return(

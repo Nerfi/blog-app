@@ -10,7 +10,7 @@ import firebase from '../../firebase/firebase';
   the state we define in here */
  export const AuthProvider = (props) => {
 
-  const [currentUser, setCurrentUser ] = useState(null); //there's no user logged in initialy
+  const [currentUser, setCurrentUser ] = useState({}); //there's no user logged in initialy
 
 
     useEffect(() => {
