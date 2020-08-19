@@ -3,7 +3,6 @@ import './auth.css';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import { Redirect} from 'react-router-dom';
 import Spinner from '../../UI/Spinner/Spinner';
-import {UserSessionContext} from '../Context/AuthContext';
 //importing firebase in order to add a user with email and password
 import firebase from '../../firebase/firebase';
 

@@ -17,7 +17,11 @@ const UpdatePost = (props) => {
   });
 
 
+
+  console.log(category, 'category here')
+
   useEffect(() => {
+
 
     const fetchUpdatePost = () => {
 
@@ -30,12 +34,15 @@ const UpdatePost = (props) => {
       .get()
       .then(function(doc) {
 
-        if(doc.exists) {
+        if(!doc.exists) {
 
-          setUpdatePost(doc.data());
+          //setUpdatePost( doc.data() );
+          setError(true);
 
         } else {
-            setError(true);
+            //setError(true);
+            //alert('not working ')
+            setUpdatePost( doc.data() );
         }
       }).catch(function(error) {
         console.log(error, 'the error is here')
@@ -47,7 +54,7 @@ const UpdatePost = (props) => {
 
 
 
-  },[updatePost]);
+  },[]);
 
 
 
@@ -56,13 +63,11 @@ const UpdatePost = (props) => {
     let value = event.target.value;
     let name = event.target.name;
 
-    setUpdatePost(prevPosts => {
-      return {
-      ...prevPosts,
-      [name]: value
-
-      }
-    });
+    setUpdatePost(
+    {
+    ...updatePost,
+    [name]: value,
+  });
 
   }
 
@@ -75,9 +80,9 @@ const UpdatePost = (props) => {
     firebase
     .firestore()
     .collection("posts")
-    .doc(`${props.match.params.id}`)
+    .doc(props.match.params.id)
     .update({
-       author,
+      author,
       title,
       value
     })
@@ -86,6 +91,24 @@ const UpdatePost = (props) => {
     }).catch(e => {
       console.log(e.message)
     })
+
+  }
+
+  //new function in order to update the post, not WORKING yet
+
+  const newPostUpdate =  async () => {
+
+
+    const {author, title} = updatePost;
+    const { value } =  category;
+
+
+    firebase.firestore().collection("posts").doc(props.match.params.id)
+    .onSnapshot(function(doc) {
+        console.log("Current data: ", doc.data());
+        setUpdatePost(...doc.data(), doc.data())
+    });
+
 
   }
 
@@ -99,11 +122,23 @@ const UpdatePost = (props) => {
      <Form >
         <Form.Group controlId="formGroupEmail">
         <Form.Label>Title</Form.Label>
-        <Form.Control  name="title" type="text" placeholder="Enter title" onChange={handleChange} value={title} />
+        <Form.Control
+        name="title"
+        type="text"
+        placeholder="Enter title"
+        onChange={handleChange}
+        value={title}
+        />
         </Form.Group>
         <Form.Group controlId="formGroupPassword">
           <Form.Label >Content</Form.Label>
-          <Form.Control onChange={handleChange} name="author" type="text" placeholder="Enter Content"  value={author}/>
+          <Form.Control
+          onChange={handleChange}
+          name="author"
+          type="text"
+          placeholder="Enter Content"
+          value={author}
+          />
          </Form.Group>
 
       <select onChange={handleCategoryChange}>

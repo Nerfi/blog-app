@@ -1,7 +1,6 @@
 import React,{useState,useEffect, useContext} from 'react';
 import { Card,Button } from 'react-bootstrap';
 import {Link, Route, Routes, Redirect} from 'react-router-dom'
-import UpdatePost from '../UpdatePost/UpdatePost';
 import './PostDetail.css';
 import {AuthContext} from '../Context/AuthContext';
 //importing firebase in order to make the PATCH request
@@ -12,9 +11,7 @@ function PostDetails(props){
 
 
   const [selectedPost, setSelected] = useState({});
-
   const [error, setError] = useState(false);
-
   //calling the context
    const {currentUser} = useContext(AuthContext);
 
@@ -65,7 +62,7 @@ function PostDetails(props){
         props.history.push('/posts');
 
     } else {
-      alert('not working this shit ')
+      alert('not working this shit ');
     }
 
 
