@@ -17,9 +17,6 @@ const UpdatePost = (props) => {
   });
 
 
-
-  console.log(category, 'category here')
-
   useEffect(() => {
 
 
@@ -63,11 +60,13 @@ const UpdatePost = (props) => {
     let value = event.target.value;
     let name = event.target.name;
 
-    setUpdatePost(
-    {
-    ...updatePost,
-    [name]: value,
-  });
+    setUpdatePost(prev => {
+      //because we depend on the last value
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
 
   }
 
@@ -94,23 +93,7 @@ const UpdatePost = (props) => {
 
   }
 
-  //new function in order to update the post, not WORKING yet
 
-  const newPostUpdate =  async () => {
-
-
-    const {author, title} = updatePost;
-    const { value } =  category;
-
-
-    firebase.firestore().collection("posts").doc(props.match.params.id)
-    .onSnapshot(function(doc) {
-        console.log("Current data: ", doc.data());
-        setUpdatePost(...doc.data(), doc.data())
-    });
-
-
-  }
 
   const handleCategoryChange = event => setCategory({value: event.target.value});
 

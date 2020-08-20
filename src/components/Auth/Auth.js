@@ -1,7 +1,6 @@
-import React , {useState, useContext} from 'react';
+import React , {useState} from 'react';
 import './auth.css';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
-import { Redirect} from 'react-router-dom';
 import Spinner from '../../UI/Spinner/Spinner';
 //importing firebase in order to add a user with email and password
 import firebase from '../../firebase/firebase';
@@ -16,6 +15,7 @@ const Auth = (props) =>  {
   });
 
   const [error, setError] = useState("");
+  const [loading,setLoading] = useState(false);
 
     //validating the email and the password to be grather than 6.
   const  validateForm  = () => {
@@ -32,6 +32,8 @@ const handleSubmit = async (event) => {
 
   event.preventDefault();
   const {email , password,name} = credentials;
+  //setting the loading state
+  setLoading(prev => !prev);
 
   //firebase method to sign up
   await firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -54,10 +56,13 @@ const handleSubmit = async (event) => {
             //delete line below after all is working
             alert('the user with the email' + email + 'was created!')
         } else {
-        const errorCode = error.code;
+
         const errorMessage = error.message;
-        alert(errorCode, errorMessage);
+        setError(errorMessage);
+
         }
+
+        setLoading( prev => prev)
     }).catch(e => {
       setError(e.message);
     })
@@ -81,10 +86,10 @@ const handleSubmit = async (event) => {
 
   const history =  props.history;
 
-//aqui tendremos que cambiar esto por los nuevos datos del nuevo context
-  //if(newData.loading) {
-   // return <Spinner/>
-  //}
+//display spinner onLoading user
+  if(loading) {
+    return <Spinner/>
+  }
 
 
   return (
