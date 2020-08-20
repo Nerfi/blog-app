@@ -1,29 +1,28 @@
 import React, {useState} from 'react';
+import firebase from '../firebase/firebase';
+
 
 const SearchBar = (props) => {
 
   const [query, setQuery] = useState('');
 
-  const handleChange = event => {
-      setQuery(event.target.value)
-  };
+
+  const handleChange = e => setQuery(e.target.value);
 
 
-  const callSearchFucntion = e => {
-    e.preventDefault();
-    props.search(query);
-  };
 
+
+  console.log(query, 'query from SearchBar component here')
 
   return(
     <div>
        <form>
           <input
-            placeholder="Search for posts"
+            placeholder="Search for Posts"
             value={query}
             onChange={handleChange}
           />
-        <input onClick={callSearchFucntion} type="submit" value="SEARCH" />
+      <button style={{height: '80px', backgroundColor: 'red'}} onClick={props.searchProp} type="submit" value="SEARCHWEY" />
 
         </form>
 

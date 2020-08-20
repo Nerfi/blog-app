@@ -1,10 +1,9 @@
-import React,{useState,useEffect, useContext} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Card,Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './landingPage.css';
 import SearchBar from '../../UI/SearchBar';
 import Spinner from '../../UI/Spinner/Spinner'
-
 //importing firebase firestore
 import firebase from '../../firebase/firebase';
 
@@ -24,7 +23,7 @@ const LandinPage = (props) => {
 
   const fetchData = async () => {
 
-    setLoading(prevLoading => {return !prevLoading});
+    setLoading(prevLoading => !prevLoading);
 
     const unsubscribe = firebase
     .firestore()
@@ -50,14 +49,47 @@ const LandinPage = (props) => {
 
   },[]);
 
-// need to check firebase docs for search fucnitonalitty
 
-  const search = async (query) => {
-    const searchTerms = await fetch(`https://blog-fa351.firebaseio.com/posts?q${query}.json`);
-    const response = await searchTerms.json();
-    setQuery(response);
+
+  //NEW METHOD IMPORTED FROM SEARCHBAR FUNCTION IN ORDER TO STORE THE RETRIEVED DATA INTO THIS NEW STATE
+
+    const callSearchFucntion = e => {
+
+      //e.preventDefault();
+
+
+      //logic should be here
+      const db =  firebase.firestore().collection('posts');
+      let queryy =  db.where("title", "==", "juan")
+      .get()
+      .then(querySnapshot => {
+
+        querySnapshot.forEach(doc => {
+          let arr  = [];
+          arr.push(doc.data())
+
+          setQuery(arr);
+
+        })
+
+        setQuery(''); //cleanign the state
+      })
+      .catch(e => {
+        console.log(e, ' the error is there')
+      })
 
   };
+
+  //here jus tfor testing , dont forget to delete it
+
+  useEffect(() => {
+      callSearchFucntion()
+  },[]);
+  //the console log underneth is not what I was looking for to get
+
+  console.log(searchQuery.length, 'array of post to iterate over is here')
+
+  console.log(searchQuery, 'array of post to iterate over is here')
 
   //firebase test
   let newPostss =  newPosts.map(blogQuery => (
@@ -126,7 +158,7 @@ if(loading) return newResults = <Spinner/>;
 
     <div>
       <div className="app">
-        <SearchBar search={search} />
+        <SearchBar  searchProp={callSearchFucntion}/>
       </div>
 
 
@@ -135,6 +167,7 @@ if(loading) return newResults = <Spinner/>;
       <div className="containerBlogs">
 
         {newResults }
+
 
         {newPostss}
 
