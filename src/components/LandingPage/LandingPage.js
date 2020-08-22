@@ -55,48 +55,26 @@ const LandinPage = (props) => {
 
     const callSearchFucntion = e => {
 
-      //e.preventDefault();
 
+    const db = firebase.firestore()
 
-      //logic should be here
-      const db = firebase.firestore();
-      db.collection("posts").where("title", "==",  "juan" )
+    db.collection("posts").where("title", "==", "juan")
     .get()
     .then(function(querySnapshot) {
-    console.log(querySnapshot, 'query')
 
-     querySnapshot.forEach(function(doc) {
+        querySnapshot.forEach(function(doc) {
+
             // doc.data() is never undefined for query doc snapshots
-            //return console.log arrayOfObjects.push( (doc.id, doc.title," => ", doc.data() ) );
-           console.log(doc.data())
-           setQueryResults(doc.data())
-
-
-            let keys = [];
-            const data = doc.data();
-
-             for (let key in data ) {
-                 if (data.hasOwnProperty(key)) keys.push(key);
-
-             }
-             for(let i =0; i < keys.length; i++) {
-                console.log(keys[i], data[keys[i]], 'key value pais here');
-             }
-
-             console.log(keys.map(e => e.title), 'keys yiylr hrtr')
-
-
+            console.log(doc.id, " => ", doc.data(), "=>", doc.data().likes);
         });
-
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
 
 
-  console.log(searchQueryResults, 'searched query here')
 
-
+  console.log(searchQueryResults, 'searchProp')
   };
 
   //here jus tfor testing , dont forget to delete it
@@ -148,25 +126,7 @@ const LandinPage = (props) => {
             </Card>
         ))
   );
-//not working since I have not check the firebase docs for thsi
-  //if(searchQuery) {
 
-    //  newResults =  searchQuery.map(blogQuery => (
-
-      //<Card className="card" key={blogQuery.id} >
-        //<Card.Body >
-        //<Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
-       // <p>{blogQuery.likes} times this post was liked</p>
-        //<Card.Text>
-        //Created by: {blogQuery.author}
-        //{blogQuery.category}
-        //</Card.Text>
-
-        //</Card.Body>
-
-      //</Card>
-  //));
-//};
 
 if(loading) return newResults = <Spinner/>;
 
@@ -185,8 +145,6 @@ if(loading) return newResults = <Spinner/>;
       <div className="containerBlogs">
 
         {newResults }
-
-
 
 
         {newPostss}
