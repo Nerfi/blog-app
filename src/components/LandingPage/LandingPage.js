@@ -10,7 +10,7 @@ import firebase from '../../firebase/firebase';
 const LandinPage = (props) => {
 //need to be delete blogs state
   const [blogs, setBlogs] =  useState([]);
-  const [searchQuery, setQuery] = useState([]);
+  const [searchQueryResults, setQueryResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -59,54 +59,43 @@ const LandinPage = (props) => {
 
 
       //logic should be here
-      const db =  firebase.firestore().collection('posts');
-      let queryy =  db.where("title", "==", "juan")
-      .get()
-      .then(querySnapshot => {
+      const db = firebase.firestore();
+      db.collection("posts").where("title", "==",  "juan" )
+    .get()
+    .then(function(querySnapshot) {
+    console.log(querySnapshot, 'query')
 
-        querySnapshot.forEach(doc => {
-          //this data is individual object with key--values, the get logged in separeted lines, one by one
-          console.log(doc.data(), 'document given bakc from firebase firestore line 68')
-
-          const dataGotten = doc.data();
-
-          const arr = [];
-          arr.push(dataGotten)
-          console.log(arr, 'arr is here')
-
-          setQuery(arr)
-          console.log(searchQuery, 'searchQuery')
-
-          /* new test from stackoverflow
-             const matchedPosts = Object.values(doc.data() )
-              .map(objc => {
-                return setQuery(objc);
-              });
-              console.log(matchedPosts, 'matchedPosts here')
-
-           qui acaba el codig online
-           */
-
-            //creating the array on wich we will store the data coming bakc from firebase
+     querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            //return console.log arrayOfObjects.push( (doc.id, doc.title," => ", doc.data() ) );
+           console.log(doc.data())
+           setQueryResults(doc.data())
 
 
-          //const matchedObj = Object.values(doc.data())
-            //.map(obj => {
-             //     return arr.push(obj)
-            //})
-          //arr.push(doc.data())
+            let keys = [];
+            const data = doc.data();
+
+             for (let key in data ) {
+                 if (data.hasOwnProperty(key)) keys.push(key);
+
+             }
+             for(let i =0; i < keys.length; i++) {
+                console.log(keys[i], data[keys[i]], 'key value pais here');
+             }
+
+             console.log(keys.map(e => e.title), 'keys yiylr hrtr')
 
 
-          //setQuery(arr);
-          //console.log(arr, 'arr array is here, this is line 99')
+        });
 
-        })
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
 
-        setQuery(''); //cleanign the state
-      })
-      .catch(e => {
-        console.log(e, ' the error is there')
-      })
+
+  console.log(searchQueryResults, 'searched query here')
+
 
   };
 
@@ -117,15 +106,13 @@ const LandinPage = (props) => {
   },[]);
   //the console log underneth is not what I was looking for to get
 
- // console.log(searchQuery, 'array of post to iterate over is here 110')
 
-  console.log(typeof(searchQuery), 'array of post to iterate over is here, also TYPEof 112')
-
-  //firebase test
+  //firebase test, currently rendering this
   let newPostss =  newPosts.map(blogQuery => (
 
       <Card className="card" key={blogQuery.id} >
         <Card.Body >
+        <h1>akfksajbdkfja</h1>
         <Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
         <p>{blogQuery.likes} times this post was liked</p>
         <Card.Text>
@@ -147,6 +134,7 @@ const LandinPage = (props) => {
 
            <Card key={likesOnBlog.id} >
               <Card.Body >
+              <h1>sdfasdf</h1>
                 <Card.Title> <Link to={`/post/${likesOnBlog.id}`}> {likesOnBlog.title} </Link></Card.Title>
                 <p>{likesOnBlog.likes} times this post was liked</p>
                 <Card.Text>
@@ -202,6 +190,8 @@ if(loading) return newResults = <Spinner/>;
 
 
         {newPostss}
+
+
 
 
 
