@@ -65,10 +65,40 @@ const LandinPage = (props) => {
       .then(querySnapshot => {
 
         querySnapshot.forEach(doc => {
-          let arr  = [];
-          arr.push(doc.data())
+          //this data is individual object with key--values, the get logged in separeted lines, one by one
+          console.log(doc.data(), 'document given bakc from firebase firestore line 68')
 
-          setQuery(arr);
+          const dataGotten = doc.data();
+
+          const arr = [];
+          arr.push(dataGotten)
+          console.log(arr, 'arr is here')
+
+          setQuery(arr)
+          console.log(searchQuery, 'searchQuery')
+
+          /* new test from stackoverflow
+             const matchedPosts = Object.values(doc.data() )
+              .map(objc => {
+                return setQuery(objc);
+              });
+              console.log(matchedPosts, 'matchedPosts here')
+
+           qui acaba el codig online
+           */
+
+            //creating the array on wich we will store the data coming bakc from firebase
+
+
+          //const matchedObj = Object.values(doc.data())
+            //.map(obj => {
+             //     return arr.push(obj)
+            //})
+          //arr.push(doc.data())
+
+
+          //setQuery(arr);
+          //console.log(arr, 'arr array is here, this is line 99')
 
         })
 
@@ -87,9 +117,9 @@ const LandinPage = (props) => {
   },[]);
   //the console log underneth is not what I was looking for to get
 
-  console.log(searchQuery.length, 'array of post to iterate over is here')
+ // console.log(searchQuery, 'array of post to iterate over is here 110')
 
-  console.log(searchQuery, 'array of post to iterate over is here')
+  console.log(typeof(searchQuery), 'array of post to iterate over is here, also TYPEof 112')
 
   //firebase test
   let newPostss =  newPosts.map(blogQuery => (
@@ -131,24 +161,24 @@ const LandinPage = (props) => {
         ))
   );
 //not working since I have not check the firebase docs for thsi
-  if(searchQuery.length >= 1) {
+  //if(searchQuery) {
 
-      newResults =  searchQuery.map(blogQuery => (
+    //  newResults =  searchQuery.map(blogQuery => (
 
-      <Card className="card" key={blogQuery.id} >
-        <Card.Body >
-        <Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
-        <p>{blogQuery.likes} times this post was liked</p>
-        <Card.Text>
-        Created by: {blogQuery.author}
-        {blogQuery.category}
-        </Card.Text>
+      //<Card className="card" key={blogQuery.id} >
+        //<Card.Body >
+        //<Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
+       // <p>{blogQuery.likes} times this post was liked</p>
+        //<Card.Text>
+        //Created by: {blogQuery.author}
+        //{blogQuery.category}
+        //</Card.Text>
 
-        </Card.Body>
+        //</Card.Body>
 
-      </Card>
-  ));
-};
+      //</Card>
+  //));
+//};
 
 if(loading) return newResults = <Spinner/>;
 
@@ -167,6 +197,8 @@ if(loading) return newResults = <Spinner/>;
       <div className="containerBlogs">
 
         {newResults }
+
+
 
 
         {newPostss}

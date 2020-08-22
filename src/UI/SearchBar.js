@@ -10,10 +10,6 @@ const SearchBar = (props) => {
   const handleChange = e => setQuery(e.target.value);
 
 
-
-
-  console.log(query, 'query from SearchBar component here')
-
   return(
     <div>
        <form>
