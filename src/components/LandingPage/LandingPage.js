@@ -11,8 +11,7 @@ const LandinPage = (props) => {
   const [searchQueryResults, setQueryResults] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  //newsetter for testing firebase firestroe
-  const [newPosts , setNewPosts] = useState([]);
+
 
   //user query
   const [query, setQuery] = useState('');
@@ -93,24 +92,6 @@ const LandinPage = (props) => {
 
       console.log(searchQueryResults,'searchQueryResults')
 
-  //firebase test, CURRENTLY RENDERING THIS
-  let newPostss =  newPosts.map(blogQuery => (
-
-      <Card className="card" key={blogQuery.id} >
-        <Card.Body >
-        <Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
-        <p>{blogQuery.likes} times this post was liked</p>
-        <Card.Text>
-        Created by: {blogQuery.author}
-        {blogQuery.category}
-        </Card.Text>
-
-        </Card.Body>
-
-      </Card>
-  ));
-
-
   //when the component mounts again the whole array is loaded, that's not what I wanted
 
     let newResults  = (
@@ -158,9 +139,6 @@ if(loading) return newResults = <Spinner/>;
       <div className="containerBlogs">
 
         {newResults }
-
-
-        {newPostss}
 
       </div>
 
