@@ -9,6 +9,12 @@ const SearchBar = (props) => {
 
   const handleChange = e => setQuery(e.target.value);
 
+  const executeProp = e => {
+    e.preventDefault()
+      return props.searchProp();
+
+  }
+
 
   return(
     <div>
@@ -18,7 +24,7 @@ const SearchBar = (props) => {
             value={query}
             onChange={handleChange}
           />
-      <button style={{height: '80px', backgroundColor: 'red'}} onClick={props.searchProp} type="submit" value="SEARCHWEY" />
+      <button style={{height: '80px', backgroundColor: 'red'}} onClick={executeProp} type="submit" value="SEARCHWEY" />
 
         </form>
 

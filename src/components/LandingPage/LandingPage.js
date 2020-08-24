@@ -55,33 +55,35 @@ const LandinPage = (props) => {
 
     const callSearchFucntion = e => {
 
+      //e.preventDefault()
+
 
     const db = firebase.firestore()
 
-    db.collection("posts").where("title", "==", "juan")
+
+    db.collection("posts").where("title", "==", "27 kilates")
     .get()
     .then(function(querySnapshot) {
 
+      const fetchedPosts = [];
+
         querySnapshot.forEach(function(doc) {
+          fetchedPosts.push(doc.data())
+          console.log(fetchedPosts, 'fetchedPosts here')
 
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data(), "=>", doc.data().likes);
+            //console.log(doc.id, " => ", doc.data(), "=>", doc.data().likes);
         });
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
 
-
-
-  console.log(searchQueryResults, 'searchProp')
   };
-
-  //here jus tfor testing , dont forget to delete it
 
   useEffect(() => {
       callSearchFucntion()
-  },[]);
+  },[searchQueryResults]);
   //the console log underneth is not what I was looking for to get
 
 
