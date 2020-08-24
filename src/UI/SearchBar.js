@@ -24,7 +24,7 @@ const SearchBar = (props) => {
             value={query}
             onChange={handleChange}
           />
-      <button style={{height: '80px', backgroundColor: 'red'}} onClick={executeProp} type="submit" value="SEARCHWEY" />
+      <button style={{height: '70px', backgroundColor: 'red'}} onClick={executeProp} type="submit" value="SEARCHWEY" />
 
         </form>
 

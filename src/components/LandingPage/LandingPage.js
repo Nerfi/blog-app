@@ -4,17 +4,14 @@ import {Link} from 'react-router-dom';
 import './landingPage.css';
 import SearchBar from '../../UI/SearchBar';
 import Spinner from '../../UI/Spinner/Spinner'
-//importing firebase firestore
 import firebase from '../../firebase/firebase';
 
 const LandinPage = (props) => {
-//need to be delete blogs state
-  const [blogs, setBlogs] =  useState([]);
+
+  const [blogs, setBlogs] = useState()
   const [searchQueryResults, setQueryResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
-
   //newsetter for testing firebase firestroe
   const [newPosts , setNewPosts] = useState([]);
 
@@ -50,13 +47,7 @@ const LandinPage = (props) => {
   },[]);
 
 
-
-  //NEW METHOD IMPORTED FROM SEARCHBAR FUNCTION IN ORDER TO STORE THE RETRIEVED DATA INTO THIS NEW STATE
-
-    const callSearchFucntion = e => {
-
-      //e.preventDefault()
-
+    const callSearchFucntion = () => {
 
     const db = firebase.firestore()
 
@@ -68,11 +59,10 @@ const LandinPage = (props) => {
       const fetchedPosts = [];
 
         querySnapshot.forEach(function(doc) {
-          fetchedPosts.push(doc.data())
-          console.log(fetchedPosts, 'fetchedPosts here')
 
-            // doc.data() is never undefined for query doc snapshots
-            //console.log(doc.id, " => ", doc.data(), "=>", doc.data().likes);
+          fetchedPosts.push(doc.data())
+          setQueryResults(fetchedPosts);
+
         });
     })
     .catch(function(error) {
@@ -82,17 +72,14 @@ const LandinPage = (props) => {
   };
 
   useEffect(() => {
-      callSearchFucntion()
+      callSearchFucntion();
   },[searchQueryResults]);
-  //the console log underneth is not what I was looking for to get
 
-
-  //firebase test, currently rendering this
+  //firebase test, CURRENTLY RENDERING THIS
   let newPostss =  newPosts.map(blogQuery => (
 
       <Card className="card" key={blogQuery.id} >
         <Card.Body >
-        <h1>akfksajbdkfja</h1>
         <Card.Title> <Link to={`/post/${blogQuery.id}`}> {blogQuery.title} </Link></Card.Title>
         <p>{blogQuery.likes} times this post was liked</p>
         <Card.Text>
@@ -110,7 +97,7 @@ const LandinPage = (props) => {
 
     let newResults  = (
 
-       blogs.filter(blog => blog.likes > 10).map(likesOnBlog => (
+       blogs && blogs.filter(blog => blog.likes > 10).map(likesOnBlog => (
 
            <Card key={likesOnBlog.id} >
               <Card.Body >
@@ -150,10 +137,6 @@ if(loading) return newResults = <Spinner/>;
 
 
         {newPostss}
-
-
-
-
 
       </div>
 
