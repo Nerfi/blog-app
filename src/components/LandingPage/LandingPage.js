@@ -2,18 +2,23 @@ import React,{useState,useEffect} from 'react';
 import { Card,Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './landingPage.css';
-import SearchBar from '../../UI/SearchBar';
 import Spinner from '../../UI/Spinner/Spinner'
 import firebase from '../../firebase/firebase';
 
 const LandinPage = (props) => {
 
   const [blogs, setBlogs] = useState()
-  const [searchQueryResults, setQueryResults] = useState([]);
+  const [searchQueryResults, setQueryResults] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   //newsetter for testing firebase firestroe
   const [newPosts , setNewPosts] = useState([]);
+
+  //user query
+  const [query, setQuery] = useState('');
+
+
+   const handleChange = e => setQuery(e.target.value);
 
 
   useEffect(() => {
@@ -47,7 +52,9 @@ const LandinPage = (props) => {
   },[]);
 
 
-    const callSearchFucntion = () => {
+    const callSearchFucntion = (e) => {
+
+      //e.preventDefault()
 
     const db = firebase.firestore()
 
@@ -63,6 +70,8 @@ const LandinPage = (props) => {
           fetchedPosts.push(doc.data())
           setQueryResults(fetchedPosts);
 
+          console.log(searchQueryResults,'searchQueryResults')
+
         });
     })
     .catch(function(error) {
@@ -71,9 +80,12 @@ const LandinPage = (props) => {
 
   };
 
+
   useEffect(() => {
       callSearchFucntion();
-  },[searchQueryResults]);
+  },[]);
+
+      console.log(searchQueryResults,'searchQueryResults')
 
   //firebase test, CURRENTLY RENDERING THIS
   let newPostss =  newPosts.map(blogQuery => (
@@ -125,7 +137,16 @@ if(loading) return newResults = <Spinner/>;
 
     <div>
       <div className="app">
-        <SearchBar  searchProp={callSearchFucntion}/>
+            <form>
+              <input
+                placeholder="Search for Posts"
+                value={query}
+                onChange={handleChange}
+              />
+          <button style={{height: '70px', backgroundColor: 'red'}} onClick={callSearchFucntion} type="submit" value="SEARCHWEY" />
+
+        </form>
+
       </div>
 
 
