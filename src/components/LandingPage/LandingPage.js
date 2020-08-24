@@ -27,39 +27,45 @@ const LandinPage = (props) => {
 
     setLoading(prevLoading => !prevLoading);
 
-    const unsubscribe = firebase
-    .firestore()
-    .collection('posts')
-    .onSnapshot((snap) => {
-      const newData = snap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data()
-      }))
+    //chagne this later on for my own data
+      const db = firebase.firestore();
 
-      setNewPosts(newData);
+      db.collection("posts").where("likes", ">=", 10)
+      .get()
+      .then(function(querySnapshot) {
+
+        const mostLike = [];
+
+          querySnapshot.forEach(function(doc) {
+
+             mostLike.push(doc.data());
+
+             setBlogs(mostLike);
+             console.log(blogs, 'blogs from the API call here')
+          });
+      })
+      .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+
+
       setLoading(prev => !prev);
 
-    })
-      //when we cahnge out tab we want to drop the susbcrition we have with
-      //firebase firestore., that's why we do this,see the video bakc again for more details
-    return () => unsubscribe();
+    };
 
+    fetchData();
 
-  };
+  },[blogs]);
 
-  fetchData();
-
-  },[]);
-
+ console.log(blogs, 'blogs fwit more than 10 likes')
 
     const callSearchFucntion = (e) => {
 
       //e.preventDefault()
 
-    const db = firebase.firestore()
+    const db = firebase.firestore();
 
-
-    db.collection("posts").where("title", "==", "27 kilates")
+    db.collection("posts").where("title", "==", query ) // not working
     .get()
     .then(function(querySnapshot) {
 
@@ -109,7 +115,7 @@ const LandinPage = (props) => {
 
     let newResults  = (
 
-       blogs && blogs.filter(blog => blog.likes > 10).map(likesOnBlog => (
+       blogs.map(likesOnBlog => (
 
            <Card key={likesOnBlog.id} >
               <Card.Body >
@@ -148,9 +154,6 @@ if(loading) return newResults = <Spinner/>;
         </form>
 
       </div>
-
-
-      <p style={{color:'red' }}>Our Most Popular Posts </p>
 
       <div className="containerBlogs">
 
