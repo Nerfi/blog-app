@@ -7,7 +7,7 @@ import firebase from '../../firebase/firebase';
 
 const LandinPage = (props) => {
 
-  const [blogs, setBlogs] = useState()
+  const [blogs, setBlogs] = useState([])
   const [searchQueryResults, setQueryResults] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -55,7 +55,7 @@ const LandinPage = (props) => {
 
     fetchData();
 
-  },[blogs]);
+  },[]);
 
  console.log(blogs, 'blogs fwit more than 10 likes')
 
