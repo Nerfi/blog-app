@@ -34,7 +34,12 @@ const LandinPage = (props) => {
 
           querySnapshot.forEach(function(doc) {
 
-             mostLike.push(doc.data());
+            const deconstrucId = {
+              id: doc.id,
+              ...doc.data()
+            };
+
+             mostLike.push(deconstrucId);
 
              setBlogs(mostLike);
 
@@ -51,6 +56,9 @@ const LandinPage = (props) => {
     fetchData();
 
   },[]);
+
+  //checking if the ID is save in the blogs state array
+  console.log(blogs, 'blogs here')
 
 
     const callSearchFucntion = (e) => {
@@ -71,7 +79,10 @@ const LandinPage = (props) => {
 
           setQueryResults(fetchedPosts);
 
-          console.log(searchQueryResults,'searchQueryResults')
+          /* delete for testing porpuses, undo the action once
+          I have to work on that feature */
+
+          //console.log(searchQueryResults,'searchQueryResults')
 
         });
     })
@@ -89,13 +100,20 @@ const LandinPage = (props) => {
   console.log(searchQueryResults,'searchQueryResults')
 
 
-    let newResults  = (
+    let newResults  =
 
           blogs.map(likesOnBlog => (
 
+
            <Card key={likesOnBlog.id} >
+
+           {console.log(likesOnBlog.id, 'likesOnBlog ID')}
+
               <Card.Body >
-                <Card.Title> <Link to={`/post/${likesOnBlog.id}`}> {likesOnBlog.title} </Link></Card.Title>
+                <Card.Title>
+                <Link to={`/post/${likesOnBlog.title}`}>
+                  {likesOnBlog.title} </Link>
+                </Card.Title>
                 <p>{likesOnBlog.likes} times this post was liked</p>
                 <Card.Text>
                   Created by: {likesOnBlog.author}
@@ -107,7 +125,6 @@ const LandinPage = (props) => {
 
             </Card>
         ))
-  );
 
 
 if(loading) return newResults = <Spinner/>;

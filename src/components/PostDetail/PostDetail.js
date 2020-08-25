@@ -1,6 +1,6 @@
 import React,{useState,useEffect, useContext} from 'react';
 import { Card,Button } from 'react-bootstrap';
-import {Link, Route, Routes, Redirect} from 'react-router-dom'
+import {Link, Route, Redirect} from 'react-router-dom'
 import './PostDetail.css';
 import {AuthContext} from '../Context/AuthContext';
 //importing firebase in order to make the PATCH request
@@ -88,14 +88,12 @@ function PostDetails(props){
 
     };
 
-    console.log(selectedPost, 'selectedPost aqui')
+    console.log(selectedPost, 'selectedPost aquim Post detail component')
 
 
   //redirecting to a 404 in case an error occur
 
-    if (error) {
-      return <Redirect to="/404" />
-    }
+    if (error)  return <Redirect to="/404" />
 
   return(
      <Card key={selectedPost.id} className="singlePost">

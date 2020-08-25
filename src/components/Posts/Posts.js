@@ -7,11 +7,8 @@ function Posts(props) {
 
   const [posts, setPosts] = useState([]);
 
-
-
     useEffect(() => {
 
-      //new async function in order to call firebase and render posts from firebase
       const fetchPosts = async () => {
 
         const fetch = await firebase.firestore()
