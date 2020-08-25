@@ -11,7 +11,6 @@ const LandinPage = (props) => {
   const [searchQueryResults, setQueryResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  //user query
   const [query, setQuery] = useState('');
 
 
