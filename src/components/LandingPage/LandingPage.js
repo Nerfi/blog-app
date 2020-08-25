@@ -8,7 +8,7 @@ import firebase from '../../firebase/firebase';
 const LandinPage = (props) => {
 
   const [blogs, setBlogs] = useState([])
-  const [searchQueryResults, setQueryResults] = useState();
+  const [searchQueryResults, setQueryResults] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -24,10 +24,9 @@ const LandinPage = (props) => {
 
   const fetchData = async () => {
 
-    setLoading(prevLoading => !prevLoading);
+    setLoading(true);
 
-    //chagne this later on for my own data
-      const db = firebase.firestore();
+      const db = firebase.firestore()
 
       db.collection("posts").where("likes", ">=", 10)
       .get()
@@ -40,15 +39,17 @@ const LandinPage = (props) => {
              mostLike.push(doc.data());
 
              setBlogs(mostLike);
-             console.log(blogs, 'blogs from the API call here')
+
           });
+             setLoading(false);
       })
       .catch(function(error) {
-          console.log("Error getting documents: ", error);
+        setError(error)
+
       });
 
 
-      setLoading(prev => !prev);
+
 
     };
 
@@ -60,9 +61,9 @@ const LandinPage = (props) => {
 
     const callSearchFucntion = (e) => {
 
-      //e.preventDefault()
+      //e.preventDefault() not working
 
-    const db = firebase.firestore();
+    const db = firebase.firestore()
 
     db.collection("posts").where("title", "==", query ) // not working
     .get()
@@ -72,7 +73,8 @@ const LandinPage = (props) => {
 
         querySnapshot.forEach(function(doc) {
 
-          fetchedPosts.push(doc.data())
+          fetchedPosts.push(doc.data());
+
           setQueryResults(fetchedPosts);
 
           console.log(searchQueryResults,'searchQueryResults')
@@ -88,7 +90,7 @@ const LandinPage = (props) => {
 
   useEffect(() => {
       callSearchFucntion();
-  },[]);
+  },[query]);
 
       console.log(searchQueryResults,'searchQueryResults')
 
@@ -96,11 +98,10 @@ const LandinPage = (props) => {
 
     let newResults  = (
 
-       blogs.map(likesOnBlog => (
+          blogs.map(likesOnBlog => (
 
            <Card key={likesOnBlog.id} >
               <Card.Body >
-              <h1>sdfasdf</h1>
                 <Card.Title> <Link to={`/post/${likesOnBlog.id}`}> {likesOnBlog.title} </Link></Card.Title>
                 <p>{likesOnBlog.likes} times this post was liked</p>
                 <Card.Text>
@@ -124,15 +125,12 @@ if(loading) return newResults = <Spinner/>;
 
     <div>
       <div className="app">
-            <form>
               <input
                 placeholder="Search for Posts"
                 value={query}
                 onChange={handleChange}
               />
           <button style={{height: '70px', backgroundColor: 'red'}} onClick={callSearchFucntion} type="submit" value="SEARCHWEY" />
-
-        </form>
 
       </div>
 
