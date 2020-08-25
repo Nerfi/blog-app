@@ -8,7 +8,7 @@ import firebase from '../../firebase/firebase';
 const LandinPage = (props) => {
 
   const [blogs, setBlogs] = useState([])
-  const [searchQueryResults, setQueryResults] = useState("");
+  const [searchQueryResults, setQueryResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   //user query
@@ -57,9 +57,6 @@ const LandinPage = (props) => {
 
   },[]);
 
-  //checking if the ID is save in the blogs state array
-  console.log(blogs, 'blogs here WITH ID ')
-
 
     const callSearchFucntion = (e) => {
 
@@ -75,14 +72,15 @@ const LandinPage = (props) => {
 
         querySnapshot.forEach(function(doc) {
 
-          fetchedPosts.push(doc.data());
+             const deconstrucId = {
+              id: doc.id,
+              ...doc.data()
+            };
+
+
+          fetchedPosts.push(deconstrucId);
 
           setQueryResults(fetchedPosts);
-
-          /* delete for testing porpuses, undo the action once
-          I have to work on that feature */
-
-          //console.log(searchQueryResults,'searchQueryResults')
 
         });
     })
@@ -95,20 +93,17 @@ const LandinPage = (props) => {
 
   useEffect(() => {
       callSearchFucntion();
-  },[query]);
+  },[]);
 
-  console.log(searchQueryResults,'searchQueryResults')
+  console.log(searchQueryResults,'searchQueryResults array is here line 94')
 
 
-    let newResults  =
+    let newResults  = (
 
           blogs.map(likesOnBlog => (
 
 
            <Card key={likesOnBlog.id} >
-
-           {console.log(likesOnBlog.id, 'likesOnBlog ID')}
-
               <Card.Body >
                 <Card.Title>
                 <Link to={`/post/${likesOnBlog.id}`}>
@@ -125,6 +120,39 @@ const LandinPage = (props) => {
 
             </Card>
         ))
+      );
+
+    //adding condition in case the user types in adn show the results
+
+    if(searchQueryResults.length >= 1) {
+
+      searchQueryResults.map(results => (
+
+         newResults = (
+
+         <Card key={results.id} >
+              <Card.Body >
+                <Card.Title>
+                <Link to={`/post/${results.id}`}>
+                  {results.title} </Link>
+                </Card.Title>
+                <p>{results.likes} times this post was liked</p>
+                <Card.Text>
+                  Created by: {results.author}
+                  {results.category}
+                </Card.Text>
+
+
+              </Card.Body>
+
+            </Card>
+
+      )
+
+      ))
+
+
+    }
 
 
 if(loading) return newResults = <Spinner/>;
