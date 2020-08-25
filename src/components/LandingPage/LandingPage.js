@@ -11,8 +11,6 @@ const LandinPage = (props) => {
   const [searchQueryResults, setQueryResults] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
-
   //user query
   const [query, setQuery] = useState('');
 
@@ -48,16 +46,12 @@ const LandinPage = (props) => {
 
       });
 
-
-
-
     };
 
     fetchData();
 
   },[]);
 
- console.log(blogs, 'blogs fwit more than 10 likes')
 
     const callSearchFucntion = (e) => {
 
@@ -65,7 +59,7 @@ const LandinPage = (props) => {
 
     const db = firebase.firestore()
 
-    db.collection("posts").where("title", "==", query ) // not working
+    db.collection("posts").where("title", "==", query )
     .get()
     .then(function(querySnapshot) {
 
@@ -82,7 +76,7 @@ const LandinPage = (props) => {
         });
     })
     .catch(function(error) {
-        console.log("Error getting documents: ", error);
+       setError(error);
     });
 
   };
@@ -92,9 +86,8 @@ const LandinPage = (props) => {
       callSearchFucntion();
   },[query]);
 
-      console.log(searchQueryResults,'searchQueryResults')
+  console.log(searchQueryResults,'searchQueryResults')
 
-  //when the component mounts again the whole array is loaded, that's not what I wanted
 
     let newResults  = (
 
@@ -118,8 +111,6 @@ const LandinPage = (props) => {
 
 
 if(loading) return newResults = <Spinner/>;
-
-
 
   return(
 
