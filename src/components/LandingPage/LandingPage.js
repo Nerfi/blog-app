@@ -58,7 +58,7 @@ const LandinPage = (props) => {
   },[]);
 
   //checking if the ID is save in the blogs state array
-  console.log(blogs, 'blogs here')
+  console.log(blogs, 'blogs here WITH ID ')
 
 
     const callSearchFucntion = (e) => {
@@ -111,7 +111,7 @@ const LandinPage = (props) => {
 
               <Card.Body >
                 <Card.Title>
-                <Link to={`/post/${likesOnBlog.title}`}>
+                <Link to={`/post/${likesOnBlog.id}`}>
                   {likesOnBlog.title} </Link>
                 </Card.Title>
                 <p>{likesOnBlog.likes} times this post was liked</p>
