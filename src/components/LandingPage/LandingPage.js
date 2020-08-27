@@ -41,9 +41,7 @@ const LandinPage = (props) => {
 
 
           });
-          //I remove this from the inside loop  just like in the below function , I can not see the outcome because of the Card issue, once its solve check this outcome
              setBlogs(mostLike);
-             console.log('the new state after defininig it after the LOOP is here ')
              setLoading(false);
       })
       .catch(function(error) {
@@ -126,8 +124,7 @@ if(loading) return newResults = <Spinner/>;
                 value={query}
                 onChange={handleChange}
               />
-            {/* BUTTON NEEDS TO BE FIXED*/}
-          <button style={{height: '70px', backgroundColor: 'red'}} onClick={callSearchFucntion} type="submit" value="SEARCHWEY" />
+          <button type="button" onClick={callSearchFucntion}>Click Me!</button>
 
       </div>
 

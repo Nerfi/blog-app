@@ -17,4 +17,19 @@
   margin: 40px;
   margin-right:  40px;
   align-content: center;
+  padding-right: 32px;
+}
+
+
+/* styling button */
+
+.app > button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  height: 30px;
 }
