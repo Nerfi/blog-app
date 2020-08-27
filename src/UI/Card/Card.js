@@ -1,10 +1,36 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import './Card.css';
 
-function Card () {
+function PostsCard ({data}) {
+
+  //deconstructing data object
+  const {id, author, title, value} = data;
+
   return (
-    <h1>Im the fucking card component</h1>
+
+   <div className="containerBlogs">
+
+     <Card key={id} >
+              <Card.Body >
+                <Card.Title>
+                <Link to={`/post/${id}`}>
+                  {title} </Link>
+                </Card.Title>
+                <p></p>
+                <Card.Text>
+                  Created by: {author}
+                  {value}
+                </Card.Text>
+
+
+              </Card.Body>
+
+            </Card>
+   </div>
   );
 
 };
 
-export default Card;
+export default PostsCard;

@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from 'react';
-import { Card,Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 import './landingPage.css';
 import Spinner from '../../UI/Spinner/Spinner'
 import firebase from '../../firebase/firebase';
+import PostsCard from '../../UI/Card/Card';
 
 const LandinPage = (props) => {
 
@@ -40,9 +39,11 @@ const LandinPage = (props) => {
 
              mostLike.push(deconstrucId);
 
-             setBlogs(mostLike);
 
           });
+          //I remove this from the inside loop  just like in the below function , I can not see the outcome because of the Card issue, once its solve check this outcome
+             setBlogs(mostLike);
+             console.log('the new state after defininig it after the LOOP is here ')
              setLoading(false);
       })
       .catch(function(error) {
@@ -57,8 +58,6 @@ const LandinPage = (props) => {
   },[]);
 
 
-
-  // USER QUERYING DATA FUNCTION HERE
     const callSearchFucntion = (e) => {
 
     const db = firebase.firestore()
@@ -102,24 +101,8 @@ const LandinPage = (props) => {
     let newResults  = (
 
           blogs.map(likesOnBlog => (
+            <PostsCard data={likesOnBlog} key={likesOnBlog.id} />
 
-
-           <Card key={likesOnBlog.id} >
-              <Card.Body >
-                <Card.Title>
-                <Link to={`/post/${likesOnBlog.id}`}>
-                  {likesOnBlog.title} </Link>
-                </Card.Title>
-                <p>{likesOnBlog.likes} times this post was liked</p>
-                <Card.Text>
-                  Created by: {likesOnBlog.author}
-                  {likesOnBlog.category}
-                </Card.Text>
-
-
-              </Card.Body>
-
-            </Card>
         ))
       );
 
@@ -127,23 +110,7 @@ const LandinPage = (props) => {
     if(searchQueryResults.length > 0) {
 
      newResults = searchQueryResults.map(results =>
-
-        <Card key={results.id} >
-              <Card.Body >
-                <Card.Title>
-                <Link to={`/post/${results.id}`}>
-                  {results.title} </Link>
-                </Card.Title>
-                <p>{results.likes} times this post was liked</p>
-                <Card.Text>
-                  Created by: {results.author}
-                  {results.category}
-                </Card.Text>
-
-
-              </Card.Body>
-
-            </Card>
+      <PostsCard  data={results}/>
       )
     }
 
@@ -159,15 +126,19 @@ if(loading) return newResults = <Spinner/>;
                 value={query}
                 onChange={handleChange}
               />
+            {/* BUTTON NEEDS TO BE FIXED*/}
           <button style={{height: '70px', backgroundColor: 'red'}} onClick={callSearchFucntion} type="submit" value="SEARCHWEY" />
 
       </div>
 
-      <div className="containerBlogs">
+        <div className="containerBlogs">
 
-        {newResults }
+            {newResults }
 
-      </div>
+        </div>
+
+
+
 
     </div>
 
