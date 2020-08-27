@@ -123,13 +123,41 @@ const LandinPage = (props) => {
 
     //adding condition in case the user types in adn show the results
 
+    //if(searchQueryResults.length > 0) {
+
+     /// searchQueryResults.map(results => (
+
+         ///newResults = (
+
+         ///<Card key={results.id} >
+             /// <Card.Body >
+               /// <Card.Title>
+               /// <Link to={`/post/${results.id}`}>
+                 /// {results.title} </Link>
+                ///</Card.Title>
+                ///<p>{results.likes} times this post was liked</p>
+                ///<Card.Text>
+                  ///Created by: {results.author}
+                  ///{results.category}
+               /// </Card.Text>
+
+
+              ///</Card.Body>
+
+            ///</Card>
+
+      ///)
+
+      ///))
+
+
+    ///}
+
+
     if(searchQueryResults.length > 0) {
 
-      searchQueryResults.map(results => (
-
-         newResults = (
-
-         <Card key={results.id} >
+    return   newResults = searchQueryResults.map(results =>
+        <Card key={results.id} >
               <Card.Body >
                 <Card.Title>
                 <Link to={`/post/${results.id}`}>
@@ -145,12 +173,7 @@ const LandinPage = (props) => {
               </Card.Body>
 
             </Card>
-
       )
-
-      ))
-
-
     }
 
 
