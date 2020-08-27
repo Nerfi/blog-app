@@ -81,6 +81,7 @@ const LandinPage = (props) => {
 
 
         });
+        //tip: never update the state inside a loop!!
           setQueryResults(fetchedPosts);
     })
     .catch(function(error) {
@@ -94,6 +95,7 @@ const LandinPage = (props) => {
       callSearchFucntion();
   },[]);
 
+  //make sure to delte this after solving the issue
   console.log(searchQueryResults,'searchQueryResults array is here line 99')
 
 
@@ -121,42 +123,11 @@ const LandinPage = (props) => {
         ))
       );
 
-    //adding condition in case the user types in adn show the results
-
-    //if(searchQueryResults.length > 0) {
-
-     /// searchQueryResults.map(results => (
-
-         ///newResults = (
-
-         ///<Card key={results.id} >
-             /// <Card.Body >
-               /// <Card.Title>
-               /// <Link to={`/post/${results.id}`}>
-                 /// {results.title} </Link>
-                ///</Card.Title>
-                ///<p>{results.likes} times this post was liked</p>
-                ///<Card.Text>
-                  ///Created by: {results.author}
-                  ///{results.category}
-               /// </Card.Text>
-
-
-              ///</Card.Body>
-
-            ///</Card>
-
-      ///)
-
-      ///))
-
-
-    ///}
-
 
     if(searchQueryResults.length > 0) {
 
-    return   newResults = searchQueryResults.map(results =>
+     newResults = searchQueryResults.map(results =>
+
         <Card key={results.id} >
               <Card.Body >
                 <Card.Title>
