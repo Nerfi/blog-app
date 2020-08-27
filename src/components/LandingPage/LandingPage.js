@@ -57,9 +57,9 @@ const LandinPage = (props) => {
   },[]);
 
 
-    const callSearchFucntion = (e) => {
 
-      //e.preventDefault() not working
+  // USER QUERYING DATA FUNCTION HERE
+    const callSearchFucntion = (e) => {
 
     const db = firebase.firestore()
 
@@ -79,9 +79,9 @@ const LandinPage = (props) => {
 
           fetchedPosts.push(deconstrucId);
 
-          setQueryResults(fetchedPosts);
 
         });
+          setQueryResults(fetchedPosts);
     })
     .catch(function(error) {
        setError(error);
@@ -94,7 +94,7 @@ const LandinPage = (props) => {
       callSearchFucntion();
   },[]);
 
-  console.log(searchQueryResults,'searchQueryResults array is here line 94')
+  console.log(searchQueryResults,'searchQueryResults array is here line 99')
 
 
     let newResults  = (
@@ -123,7 +123,7 @@ const LandinPage = (props) => {
 
     //adding condition in case the user types in adn show the results
 
-    if(searchQueryResults.length >= 1) {
+    if(searchQueryResults.length > 0) {
 
       searchQueryResults.map(results => (
 
