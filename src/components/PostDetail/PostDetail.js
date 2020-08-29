@@ -111,7 +111,7 @@ function PostDetails(props){
               Category: {selectedPost.value}
              <Card.Text>
              </Card.Text>
-            <Button onClick={deleteSelectedPost} variant="danger">{currentUser.uid === selectedPost.currentUser ? "Delete" : "your not auth"}</Button>
+            <Button onClick={deleteSelectedPost} variant="danger">{ currentUser && currentUser.uid === selectedPost.currentUser ? "Delete" : "your not auth"}</Button>
              <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
               <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
           </Card.Body>
