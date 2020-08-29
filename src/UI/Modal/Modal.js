@@ -1,12 +1,21 @@
-import React from  'react';
-import Alert from 'react-bootstrap/Alert';
+import React,{useState} from  'react';
+import Modal from 'react-bootstrap/Modal';
+//need to take the user emial in order to display a btter UI experience on sign up
+  function ModalAlert () {
 
-  function Modal () {
+    const [show, setShow] = useState(true);
 
     return (
-      <Alert  variant={ 'success'}>
-        This is a success alert—check it out!
-      </Alert>
+
+      <Modal show={show}  animation={true}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body> You sign in successfully!!</Modal.Body>
+        <Modal.Footer>
+
+        </Modal.Footer>
+      </Modal>
 
     )
 
@@ -14,4 +23,4 @@ import Alert from 'react-bootstrap/Alert';
   };
 
 
-  export default Modal;
+  export default ModalAlert;

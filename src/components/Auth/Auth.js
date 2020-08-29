@@ -2,9 +2,9 @@ import React , {useState} from 'react';
 import './auth.css';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import Spinner from '../../UI/Spinner/Spinner';
-//importing firebase in order to add a user with email and password
+//importing firebase in order to add a user firebase method with email and password
 import firebase from '../../firebase/firebase';
-import Modal from '../../UI/Modal/Modal';
+import ModalAlert from '../../UI/Modal/Modal';
 
 
 const Auth = (props) =>  {
@@ -39,6 +39,9 @@ const handleSubmit = async (event) => {
   //setting the loading state
   setLoading(prev => !prev);
 
+  //setting the display state in order to display the modal on user creation
+  setDisplay(true);
+
   //firebase method to sign up
   await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
@@ -55,10 +58,7 @@ const handleSubmit = async (event) => {
            console.log('Something went wrong with added user to firestore: ', error);
 
           })
-            // code to display once the user was created correctly
-            //AQUI ABAJO VA MI CODIGO PARA CUADNO LA REQU FUCNIONOOOO
 
-              setDisplay(true)
               history.push("/");
         } else {
 
@@ -92,14 +92,13 @@ const handleSubmit = async (event) => {
   }
 
   const history =  props.history;
-
-//display spinner onLoading user
-  if(loading)  return <Spinner/>
-
+  if(display) return  <ModalAlert/>
+  if(loading) return <Spinner/>
 
   return (
      <div className="Login">
         <form onSubmit={handleSubmit}>
+
         <h1> {error ?  error : "SignUp"}</h1>
 
           <FormGroup controlId="name" bssize="large">
@@ -134,8 +133,6 @@ const handleSubmit = async (event) => {
               type="password"
             />
           </FormGroup>
-          <Modal/>
-
           <Button block bssize="large" disabled={!validateForm()} type="submit">
             Sign Up
           </Button>

@@ -13,7 +13,6 @@ const SingUp = (props) => {
 
   const history = props.history;
 
-  //new handle submit with firebase methods
   const handleSubmit = async (event) => {
 
     event.preventDefault();

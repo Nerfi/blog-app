@@ -3,6 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import  {NavLink,useHistory} from 'react-router-dom';
 import {AuthContext } from '../../../src/components/Context/AuthContext';
 import firebase from '../../firebase/firebase';
+import ModalAlert from '../../UI/Modal/Modal';
 
 const Main = () => {
 
@@ -13,7 +14,7 @@ const Main = () => {
 
         firebase.auth().signOut().then(function() {
       // Sign-out successful.
-          alert('Sign out done !')
+          //alert('Sign out done !')
           history.push("/")
 
         }).catch(function(error) {
@@ -34,6 +35,7 @@ const Main = () => {
               <Nav className="mr-auto">
                 <NavLink  style={{marginLeft: '20px', color: 'white'}} to="/posts">Posts</NavLink>
                 <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/CreatePost">CreatePost</NavLink>
+
                 {
                   currentUser ? <NavLink onClick={logOut} style={{marginLeft: '20px' , color: 'white'}} to="/logout">LogOut</NavLink>
                 :  <NavLink style={{marginLeft: '20px' , color: 'white'}} to="/SignUp">SignUp</NavLink>
