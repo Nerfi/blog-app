@@ -1,6 +1,6 @@
 import React,{useState,useEffect, useContext} from 'react';
 import { Card,Button } from 'react-bootstrap';
-import {Link, Route, Redirect} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import './PostDetail.css';
 import {AuthContext} from '../Context/AuthContext';
 //importing firebase in order to make the PATCH request
@@ -34,6 +34,7 @@ function PostDetails(props){
           }
       }).catch(function(error) {
           console.log("Error getting document:", error);
+          setError(error)
       });
 
 
@@ -76,7 +77,7 @@ function PostDetails(props){
           const likePost = firebase
             .firestore()
             .collection('posts')
-            .doc(`${props.match.params.id}`)
+            .doc(props.match.params.id)
             .update({ likes: likes + 1})
             .then(function() {
               setSelected({...selectedPost,likes: likes + 1})
@@ -87,8 +88,6 @@ function PostDetails(props){
             })
 
     };
-
-    console.log(selectedPost, 'selectedPost aquim Post detail component')
 
 
   //redirecting to a 404 in case an error occur
