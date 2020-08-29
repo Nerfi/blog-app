@@ -4,6 +4,7 @@ import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import Spinner from '../../UI/Spinner/Spinner';
 //importing firebase in order to add a user with email and password
 import firebase from '../../firebase/firebase';
+import Modal from '../../UI/Modal/Modal';
 
 
 const Auth = (props) =>  {
@@ -16,6 +17,8 @@ const Auth = (props) =>  {
 
   const [error, setError] = useState("");
   const [loading,setLoading] = useState(false);
+  //adding state in order to display the Modal, not working
+  const [display, setDisplay] = useState(false);
 
     //validating the email and the password to be grather than 6.
   const  validateForm  = () => {
@@ -31,7 +34,8 @@ const Auth = (props) =>  {
 const handleSubmit = async (event) => {
 
   event.preventDefault();
-  const {email , password,name} = credentials;
+
+  const {email , password, name} = credentials;
   //setting the loading state
   setLoading(prev => !prev);
 
@@ -51,23 +55,26 @@ const handleSubmit = async (event) => {
            console.log('Something went wrong with added user to firestore: ', error);
 
           })
+            // code to display once the user was created correctly
+            //AQUI ABAJO VA MI CODIGO PARA CUADNO LA REQU FUCNIONOOOO
 
-            history.push("/");
-            //delete line below after all is working
-            alert('the user with the email' + email + 'was created!')
+              setDisplay(true)
+              history.push("/");
         } else {
 
         const errorMessage = error.message;
         setError(errorMessage);
 
         }
+        setLoading( prev => prev);
+        setDisplay(false);
 
-        setLoading( prev => prev)
     }).catch(e => {
       setError(e.message);
     })
 
 };
+
 
   const handleChange = (event) => {
 
@@ -87,9 +94,7 @@ const handleSubmit = async (event) => {
   const history =  props.history;
 
 //display spinner onLoading user
-  if(loading) {
-    return <Spinner/>
-  }
+  if(loading)  return <Spinner/>
 
 
   return (
@@ -129,6 +134,8 @@ const handleSubmit = async (event) => {
               type="password"
             />
           </FormGroup>
+          <Modal/>
+
           <Button block bssize="large" disabled={!validateForm()} type="submit">
             Sign Up
           </Button>

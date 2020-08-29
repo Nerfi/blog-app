@@ -15,7 +15,7 @@ const SingUp = (props) => {
 
   //new handle submit with firebase methods
   const handleSubmit = async (event) => {
-    //preventing default behavior
+
     event.preventDefault();
 
     const {email , password} = singUp;

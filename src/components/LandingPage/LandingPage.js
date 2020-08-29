@@ -4,6 +4,7 @@ import Spinner from '../../UI/Spinner/Spinner'
 import firebase from '../../firebase/firebase';
 import PostsCard from '../../UI/Card/Card';
 
+
 const LandinPage = (props) => {
 
   const [blogs, setBlogs] = useState([])
@@ -133,6 +134,7 @@ if(loading) return newResults = <Spinner/>;
             {newResults }
 
         </div>
+
 
 
 
