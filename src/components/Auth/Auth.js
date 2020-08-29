@@ -7,6 +7,8 @@ import firebase from '../../firebase/firebase';
 import ModalAlert from '../../UI/Modal/Modal';
 
 
+
+
 const Auth = (props) =>  {
 
   const [credentials, setCredentials] = useState({
@@ -19,6 +21,7 @@ const Auth = (props) =>  {
   const [loading,setLoading] = useState(false);
   //adding state in order to display the Modal, not working
   const [display, setDisplay] = useState(false);
+
 
     //validating the email and the password to be grather than 6.
   const  validateForm  = () => {

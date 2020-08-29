@@ -3,7 +3,8 @@ import { Navbar, Nav } from 'react-bootstrap';
 import  {NavLink,useHistory} from 'react-router-dom';
 import {AuthContext } from '../../../src/components/Context/AuthContext';
 import firebase from '../../firebase/firebase';
-import ModalAlert from '../../UI/Modal/Modal';
+
+
 
 const Main = () => {
 
@@ -25,12 +26,14 @@ const Main = () => {
     };
 
   const { currentUser } = useContext(AuthContext);
+  console.log(currentUser, 'urrent user navbar here')
+
 
 
   return(
-       <div>
+       <div className="navBar_theme">
 
-          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Navbar className="navBar_component"  collapseOnSelect expand="lg" bg="dark" variant="dark">
             <NavLink style={{color: 'white'}} to="/">Blog</NavLink>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
