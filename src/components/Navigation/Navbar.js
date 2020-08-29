@@ -17,6 +17,7 @@ const Main = () => {
           //alert('Sign out done !')
           history.push("/")
 
+
         }).catch(function(error) {
           alert(error.message)
         })
@@ -24,6 +25,7 @@ const Main = () => {
     };
 
   const { currentUser } = useContext(AuthContext);
+
 
   return(
        <div>

@@ -15,7 +15,7 @@ const Auth = (props) =>  {
     name: ''
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [loading,setLoading] = useState(false);
   //adding state in order to display the Modal, not working
   const [display, setDisplay] = useState(false);
@@ -55,7 +55,8 @@ const handleSubmit = async (event) => {
 
           }).catch(e => {
 
-           console.log('Something went wrong with added user to firestore: ', error);
+           //console.log('Something went wrong with added user to firestore: ', error);
+           setError(e)
 
           })
 
@@ -63,6 +64,8 @@ const handleSubmit = async (event) => {
         } else {
 
         const errorMessage = error.message;
+        //esta linea no se carga en la console
+        console.log('veamos si esta line se carga,line 67')
         setError(errorMessage);
 
         }
@@ -94,6 +97,7 @@ const handleSubmit = async (event) => {
   const history =  props.history;
   if(display) return  <ModalAlert/>
   if(loading) return <Spinner/>
+
 
   return (
      <div className="Login">
