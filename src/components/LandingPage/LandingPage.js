@@ -92,7 +92,7 @@ const LandinPage = (props) => {
       callSearchFucntion();
   },[]);
 
-  //make sure to delte this after solving the issue
+  //aqui estan los resultados dela busqueda del usuario
   console.log(searchQueryResults,'searchQueryResults array is here line 99')
 
 

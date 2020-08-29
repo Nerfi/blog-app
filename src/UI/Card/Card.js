@@ -5,7 +5,7 @@ import './Card.css';
 
 function PostsCard ({data}) {
 
-  //deconstructing data object
+  //deconstructing data prop object
   const {id, author, title, value} = data;
 
   return (
