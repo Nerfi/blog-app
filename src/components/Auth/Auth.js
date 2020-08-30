@@ -36,6 +36,7 @@ const handleSubmit = async (event) => {
   event.preventDefault();
 
   const {email , password, name} = credentials;
+
   //setting the loading state
   setLoading(prev => !prev);
 
@@ -43,37 +44,59 @@ const handleSubmit = async (event) => {
   setDisplay(true);
 
   //firebase method to sign up
-  await firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(result => {
+  //await firebase.auth().createUserWithEmailAndPassword(email, password)
+   // .then(result => {
 
-        if(result) {
+       // if(result) {
 
          //once the user is created we also create a new one in the DB
-          firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+         // firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+           // email,
+           // name
+
+          //}).catch(e => {
+
+           //setError(e.message)
+
+          //})
+
+             // history.push("/");
+        //}
+        //else {
+
+        //const errorMessage = error.message;
+        //esta linea no se carga en la console
+       // console.log('veamos si esta line se carga,line 67')
+        //setError(errorMessage);
+
+        //}
+       // setLoading( prev => prev);
+       // setDisplay(false);
+
+   // }).catch(e => {
+     // setError(e.message);
+    //})
+
+    /*code test in order to cgeck some shit  */
+   await firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(result => {
+
+         firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
             email,
             name
 
-          }).catch(e => {
-
-           setError(e.message)
-
           })
 
-              history.push("/");
-        } else {
-
-        const errorMessage = error.message;
-        //esta linea no se carga en la console
-        console.log('veamos si esta line se carga,line 67')
-        setError(errorMessage);
-
-        }
-        setLoading( prev => prev);
-        setDisplay(false);
-
-    }).catch(e => {
-      setError(e.message);
     })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      setError(errorMessage);
+      // ...
+    });
+
+  /*finish here  */
 
 };
 
@@ -98,6 +121,7 @@ const handleSubmit = async (event) => {
   const {email} = credentials;
   if(display) return  <ModalAlert email={email} />
   if(loading) return <Spinner/>
+
 
 
   return (

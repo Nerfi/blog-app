@@ -23,7 +23,6 @@ const SingUp = (props) => {
     setDisplay(true);
 
      await firebase.auth().signInWithEmailAndPassword(email, password)
-
       .then(response => {
 
         if(response) {
