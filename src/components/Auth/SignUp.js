@@ -5,13 +5,10 @@ import firebase from '../../firebase/firebase';
 import ModalAlert from '../../UI/Modal/Modal';
 
 //THIS IS THE SIGN  IN COMPONENT
-
-
 const SingUp = (props) => {
 
   const [singUp, setSignup] =  useState({email: '', password: ''});
   const [error, setError] = useState(null);
-
   //adding state in order to display the modal
   const [display, setDisplay] = useState(false);
 
@@ -58,6 +55,7 @@ const SingUp = (props) => {
 
     return email.length > 0 && password.length > 0;
   };
+
   //displaying modal
   if(display) return <ModalAlert/>
 
