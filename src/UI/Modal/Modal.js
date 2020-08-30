@@ -1,28 +1,26 @@
 import React,{useState, useContext} from  'react';
 import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import {AuthContext } from '../../../src/components/Context/AuthContext';
 
-//need to take the user emial in order to display a btter UI experience on sign up
-  function ModalAlert () {
+  function ModalAlert ({email, changeState}) {
 
     const [show, setShow] = useState(true);
-
-
-
-
-    const { currentUser } = useContext(AuthContext);
-    console.log(currentUser, 'currentUser Modal here')
-
-
 
     return (
 
       <Modal show={show}  animation={true}>
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title>Success!</Modal.Title>
         </Modal.Header>
-        <Modal.Body> You sign in successfully!!</Modal.Body>
+      {/* borrar la line de abajo en cuanto tenga todo correcto*/}
+        <Modal.Body> You sign in successfully as {email}!!</Modal.Body>
+           <Modal.Body>  {email ? "welcome to the app" : "You sign out successfully as " + {email}}</Modal.Body>
         <Modal.Footer>
+
+        <Button variant="secondary" onClick={changeState}>
+            Close
+          </Button>
 
         </Modal.Footer>
       </Modal>

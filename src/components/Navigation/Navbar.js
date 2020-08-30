@@ -1,33 +1,42 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import  {NavLink,useHistory} from 'react-router-dom';
 import {AuthContext } from '../../../src/components/Context/AuthContext';
 import firebase from '../../firebase/firebase';
-
+import ModalAlert from '../../UI/Modal/Modal';
 
 
 const Main = () => {
 
-      const history = useHistory();
+   const [display, setDisplay] = useState(false);
 
+   //adding a closing button in order to close the modal
+   const handleClose = () => setDisplay(false);
+
+      const history = useHistory();
 
       const logOut = () => {
 
+
         firebase.auth().signOut().then(function() {
       // Sign-out successful.
-          //alert('Sign out done !')
           history.push("/")
+
+          setDisplay(true);
 
 
         }).catch(function(error) {
           alert(error.message)
         })
 
+        setDisplay(false);
+
     };
 
-  const { currentUser } = useContext(AuthContext);
-  console.log(currentUser, 'urrent user navbar here')
 
+  const { currentUser } = useContext(AuthContext);
+
+  if(display) return  <ModalAlert changeState={handleClose} />
 
 
   return(

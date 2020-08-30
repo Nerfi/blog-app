@@ -2,11 +2,8 @@ import React , {useState} from 'react';
 import './auth.css';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import Spinner from '../../UI/Spinner/Spinner';
-//importing firebase in order to add a user firebase method with email and password
 import firebase from '../../firebase/firebase';
 import ModalAlert from '../../UI/Modal/Modal';
-
-
 
 
 const Auth = (props) =>  {
@@ -19,7 +16,7 @@ const Auth = (props) =>  {
 
   const [error, setError] = useState(null);
   const [loading,setLoading] = useState(false);
-  //adding state in order to display the Modal, not working
+  //adding state in order to let the modal know when to mount and unmount
   const [display, setDisplay] = useState(false);
 
 
@@ -58,7 +55,6 @@ const handleSubmit = async (event) => {
 
           }).catch(e => {
 
-           //console.log('Something went wrong with added user to firestore: ', error);
            setError(e)
 
           })
@@ -98,7 +94,9 @@ const handleSubmit = async (event) => {
   }
 
   const history =  props.history;
-  if(display) return  <ModalAlert/>
+
+  const {email} = credentials;
+  if(display) return  <ModalAlert email={email} />
   if(loading) return <Spinner/>
 
 
@@ -117,8 +115,6 @@ const handleSubmit = async (event) => {
               type="name"
             />
           </FormGroup>
-
-
 
           <FormGroup controlId="email" bssize="large">
            <Form.Label>Email</Form.Label>
