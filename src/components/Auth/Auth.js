@@ -43,8 +43,6 @@ const handleSubmit = async (event) => {
   //setting the display state in order to display the modal on user creation
   setDisplay(true);
 
-
-    /*code test in order to cgeck some shit  */
    await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
 
@@ -68,7 +66,6 @@ const handleSubmit = async (event) => {
       // ...
     });
 
-  /*finish here  */
 
 };
 

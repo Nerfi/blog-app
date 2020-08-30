@@ -11,6 +11,7 @@ function Post(props) {
   const allInputs = {imgUrl: ''};
   const [imageAsFile , setImageAsFile] = useState('');
   const [imageAsUrl, setImageAsUrl] = useState(allInputs);
+  const [error, setError] = useState();
 
 
   const [category, setCategory] = useState({value: ''});
@@ -59,10 +60,11 @@ function Post(props) {
     uploadTask.on('state_changed',
     (snapShot) => {
       //takes a snap shot of the process as it is happening
-      console.log(snapShot)
+      console.log(snapShot, ' aqui esta el snapShot line 63')
     }, (err) => {
       //catches the errors
       console.log(err)
+      setError(err)
     }, () => {
       // gets the functions from storage refences the image storage in firebase by the children
       // gets the download url then sets the image from firebase as the value for the imgUrl key:
@@ -97,7 +99,7 @@ function Post(props) {
             props.history.push("/")
         })
           .catch(error => {
-            console.log(error, 'this is the error')
+            setError(error, 'this is the error')
           })
     }
 
@@ -136,7 +138,7 @@ function Post(props) {
         <option value="Tech">Tech</option>
       </select>
 
-        <button type="button" style={{margin: '20px'}} onClick={addPost}>Add Post</button>
+        <button type="submit" style={{margin: '20px'}} onClick={addPost}>Add Post</button>
       </Form>
     </div>
   );
