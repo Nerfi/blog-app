@@ -2,6 +2,7 @@ import React , {useState, useContext} from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import {UserContext} from '../Context/AuthContext';
 import firebase from '../../firebase/firebase';
+import ModalAlert from '../../UI/Modal/Modal';
 
 //THIS IS THE SIGN  IN COMPONENT
 
@@ -11,6 +12,9 @@ const SingUp = (props) => {
   const [singUp, setSignup] =  useState({email: '', password: ''});
   const [error, setError] = useState(null);
 
+  //adding state in order to display the modal
+  const [display, setDisplay] = useState(false);
+
   const history = props.history;
 
   const handleSubmit = async (event) => {
@@ -19,12 +23,15 @@ const SingUp = (props) => {
 
     const {email , password} = singUp;
 
-     await firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(response => {
-        if(response) {
+    setDisplay(true);
 
+     await firebase.auth().signInWithEmailAndPassword(email, password)
+
+      .then(response => {
+
+        if(response) {
+          setDisplay(false)
           history.push("/")
-          alert('the user' + email + 'was successfully signned in!')
         }
       }).catch(e => {
         setError(e.message);
@@ -51,7 +58,8 @@ const SingUp = (props) => {
 
     return email.length > 0 && password.length > 0;
   };
-
+  //displaying modal
+  if(display) return <ModalAlert/>
 
   return (
       <div className="Login">

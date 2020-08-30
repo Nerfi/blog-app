@@ -10,7 +10,7 @@ const Main = () => {
 
    const [display, setDisplay] = useState(false);
 
-   //adding a closing button in order to close the modal
+   //adding a closing button in order to close the modal, working
    const handleClose = () => setDisplay(false);
 
       const history = useHistory();
@@ -29,12 +29,14 @@ const Main = () => {
           alert(error.message)
         })
 
-        setDisplay(false);
-
     };
 
 
   const { currentUser } = useContext(AuthContext);
+  /*
+    I've delete setDisplay(false) because we take care of that
+    logic in the handleClose function
+  */
 
   if(display) return  <ModalAlert changeState={handleClose} />
 

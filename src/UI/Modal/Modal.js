@@ -13,9 +13,7 @@ import {AuthContext } from '../../../src/components/Context/AuthContext';
         <Modal.Header >
           <Modal.Title>Success!</Modal.Title>
         </Modal.Header>
-      {/* borrar la line de abajo en cuanto tenga todo correcto*/}
-        <Modal.Body> You sign in successfully as {email}!!</Modal.Body>
-           <Modal.Body>  {email ? "welcome to the app" : "You sign out successfully as " + {email}}</Modal.Body>
+           <Modal.Body>  {email ? "Welcome  " + email : "You sign out successfully!!" }</Modal.Body>
         <Modal.Footer>
 
         <Button variant="secondary" onClick={changeState}>

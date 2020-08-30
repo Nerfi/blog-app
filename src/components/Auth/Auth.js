@@ -55,7 +55,7 @@ const handleSubmit = async (event) => {
 
           }).catch(e => {
 
-           setError(e)
+           setError(e.message)
 
           })
 
