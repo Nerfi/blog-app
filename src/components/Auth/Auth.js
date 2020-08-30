@@ -43,39 +43,6 @@ const handleSubmit = async (event) => {
   //setting the display state in order to display the modal on user creation
   setDisplay(true);
 
-  //firebase method to sign up
-  //await firebase.auth().createUserWithEmailAndPassword(email, password)
-   // .then(result => {
-
-       // if(result) {
-
-         //once the user is created we also create a new one in the DB
-         // firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
-           // email,
-           // name
-
-          //}).catch(e => {
-
-           //setError(e.message)
-
-          //})
-
-             // history.push("/");
-        //}
-        //else {
-
-        //const errorMessage = error.message;
-        //esta linea no se carga en la console
-       // console.log('veamos si esta line se carga,line 67')
-        //setError(errorMessage);
-
-        //}
-       // setLoading( prev => prev);
-       // setDisplay(false);
-
-   // }).catch(e => {
-     // setError(e.message);
-    //})
 
     /*code test in order to cgeck some shit  */
    await firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -86,6 +53,11 @@ const handleSubmit = async (event) => {
             name
 
           })
+
+          history.push("/");
+
+           setLoading( prev => prev);
+        setDisplay(false);
 
     })
     .catch(function(error) {
