@@ -21,7 +21,8 @@ const SingUp = (props) => {
     const {email , password} = singUp;
 
 
-          setDisplay(true);
+     setDisplay(true);
+
      await firebase.auth().signInWithEmailAndPassword(email, password)
       .then(response => {
 
@@ -62,8 +63,8 @@ const SingUp = (props) => {
   return (
       <div className="Login">
         <form onSubmit={handleSubmit}>
-        {error }
-          <h1>Sign In</h1>
+         <h2>{error}</h2>
+         <h1>Sign In</h1>
           <FormGroup controlId="email" bssize="large">
            <Form.Label>Email</Form.Label>
             <FormControl

@@ -14,7 +14,7 @@ const Auth = (props) =>  {
     name: ''
   });
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
   const [loading,setLoading] = useState(false);
   //adding state in order to let the modal know when to mount and unmount
   const [display, setDisplay] = useState(false);
@@ -40,12 +40,12 @@ const handleSubmit = async (event) => {
   //setting the loading state
   setLoading(prev => !prev);
 
-  //setting the display state in order to display the modal on user creation
+    //displaying modal on creation
+    setDisplay(true);
 
    await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
-
-          setDisplay(true);
+          //creating a new user in the db
          firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
             email,
             name
@@ -54,16 +54,12 @@ const handleSubmit = async (event) => {
 
           history.push("/");
 
-           setLoading( prev => prev);
+        setLoading( prev => prev);
         setDisplay(false);
 
     })
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      setError(errorMessage); //erro not displaying
-      // ...
+    .catch(error => {
+      setError(error.message); //error not displaying neither catch
     });
 
 
@@ -90,16 +86,15 @@ const handleSubmit = async (event) => {
   const {email} = credentials;
   if(display) return  <ModalAlert email={email} />
   if(loading) return <Spinner/>
-    // not working displayingerror, neither it gets trigger
-  if(error) return <h1>there is an error </h1>
-
-
 
   return (
      <div className="Login">
         <form onSubmit={handleSubmit}>
 
-        <h1> {error ?  error : "SignUp"}</h1>
+        <h1>
+          Sign Up
+        </h1>
+        <h2> {error} </h2>
 
           <FormGroup controlId="name" bssize="large">
           <Form.Label>Name</Form.Label>
@@ -145,3 +140,66 @@ const handleSubmit = async (event) => {
 };
 
 export default Auth;
+
+
+ /* code taken from discord in order to separate concerns
+
+   const Register = ({ history }) => {
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async ({ name, email, password }) => {
+    await firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(result => {
+        firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+          email,
+          name
+        });
+
+        setLoading(false);
+        setSuccess(true);
+        history.push('/');
+      })
+      .catch(err => {
+        setLoading(false);
+        setError(err.message);
+      });
+  }
+
+  return (
+    <>
+      {/* Stuff you render */}
+      <RegisterForm
+        onSubmit={handleSubmit}
+        error={error}
+      />
+      {success && <SuccessModal />}
+    </>
+  );
+}
+
+const RegisterForm = ({ onSubmit, error }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+
+    onSubmit({ name, email, password });
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* all the other stuff */}
+    </form>
+  );
+}
+
+const SuccessModal = () => {
+  // all the stuff you render in a modal
+}
+
+
+ */
