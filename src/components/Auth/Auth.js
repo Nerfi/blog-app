@@ -14,7 +14,7 @@ const Auth = (props) =>  {
     name: ''
   });
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [loading,setLoading] = useState(false);
   //adding state in order to let the modal know when to mount and unmount
   const [display, setDisplay] = useState(false);
@@ -41,11 +41,11 @@ const handleSubmit = async (event) => {
   setLoading(prev => !prev);
 
   //setting the display state in order to display the modal on user creation
-  setDisplay(true);
 
    await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
 
+          setDisplay(true);
          firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
             email,
             name
@@ -62,7 +62,7 @@ const handleSubmit = async (event) => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
-      setError(errorMessage);
+      setError(errorMessage); //erro not displaying
       // ...
     });
 
@@ -90,6 +90,8 @@ const handleSubmit = async (event) => {
   const {email} = credentials;
   if(display) return  <ModalAlert email={email} />
   if(loading) return <Spinner/>
+    // not working displayingerror, neither it gets trigger
+  if(error) return <h1>there is an error </h1>
 
 
 

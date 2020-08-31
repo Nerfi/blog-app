@@ -8,7 +8,7 @@ import ModalAlert from '../../UI/Modal/Modal';
 const SingUp = (props) => {
 
   const [singUp, setSignup] =  useState({email: '', password: ''});
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   //adding state in order to display the modal
   const [display, setDisplay] = useState(false);
 
@@ -20,18 +20,19 @@ const SingUp = (props) => {
 
     const {email , password} = singUp;
 
-    setDisplay(true);
 
+          setDisplay(true);
      await firebase.auth().signInWithEmailAndPassword(email, password)
       .then(response => {
 
-        if(response) {
-          setDisplay(false)
           history.push("/")
-        }
-      }).catch(e => {
+
+
+      })
+      .catch(e => {
         setError(e.message);
       })
+      setDisplay(false)
 
   };
 
@@ -61,7 +62,7 @@ const SingUp = (props) => {
   return (
       <div className="Login">
         <form onSubmit={handleSubmit}>
-        {error && error}
+        {error }
           <h1>Sign In</h1>
           <FormGroup controlId="email" bssize="large">
            <Form.Label>Email</Form.Label>
