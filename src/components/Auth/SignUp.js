@@ -33,6 +33,7 @@ const SingUp = (props) => {
       .catch(e => {
         setError(e.message);
       })
+
       setDisplay(false)
 
   };

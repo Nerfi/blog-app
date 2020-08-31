@@ -37,15 +37,14 @@ const handleSubmit = async (event) => {
 
   const {email , password, name} = credentials;
 
-  //setting the loading state
-  setLoading(prev => !prev);
 
-    //displaying modal on creation
-    setDisplay(true);
+   setDisplay(true)
 
    await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
-          //creating a new user in the db
+
+      setLoading(true);
+     //creating a new user in the db
          firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
             email,
             name
@@ -54,14 +53,14 @@ const handleSubmit = async (event) => {
 
           history.push("/");
 
-        setLoading( prev => prev);
-        setDisplay(false);
+        setLoading( prev => prev); //aqui laoding es false
 
     })
     .catch(error => {
-      setError(error.message); //error not displaying neither catch
+      setError(error.message);
     });
 
+    setDisplay(false);
 
 };
 
@@ -140,67 +139,3 @@ const handleSubmit = async (event) => {
 };
 
 export default Auth;
-
-
- /*
-  code taken from discord in order to separate concerns
-
-   const Register = ({ history }) => {
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleSubmit = async ({ name, email, password }) => {
-    await firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(result => {
-        firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
-          email,
-          name
-        });
-
-        setLoading(false);
-        setSuccess(true);
-        history.push('/');
-      })
-      .catch(err => {
-        setLoading(false);
-        setError(err.message);
-      });
-  }
-
-  return (
-    <>
-      {/* Stuff you render */}
-      <RegisterForm
-        onSubmit={handleSubmit}
-        error={error}
-      />
-      {success && <SuccessModal />}
-    </>
-  );
-}
-
-const RegisterForm = ({ onSubmit, error }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    onSubmit({ name, email, password });
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      {/* all the other stuff */}
-    </form>
-  );
-}
-
-const SuccessModal = () => {
-  // all the stuff you render in a modal
-}
-
-
- */
