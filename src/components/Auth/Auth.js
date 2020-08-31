@@ -142,7 +142,8 @@ const handleSubmit = async (event) => {
 export default Auth;
 
 
- /* code taken from discord in order to separate concerns
+ /*
+  code taken from discord in order to separate concerns
 
    const Register = ({ history }) => {
   const [success, setSuccess] = useState(false);
