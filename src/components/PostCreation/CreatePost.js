@@ -42,12 +42,9 @@ function Post(props) {
 
   };
 
+//creating a function to handle uploading of an img into firestoreage
 
-
-  const addPost = (event) => {
-
-    event.preventDefault();
-
+  const uploadImg = () => {
 
     //addig firebase upload img
     if(imageAsFile === '') {
@@ -60,7 +57,7 @@ function Post(props) {
     uploadTask.on('state_changed',
     (snapShot) => {
       //takes a snap shot of the process as it is happening
-      console.log(snapShot, ' aqui esta el snapShot line 63')
+      console.log(snapShot, ' aqui esta el snapShot line 60')
     }, (err) => {
       //catches the errors
       console.log(err)
@@ -74,14 +71,28 @@ function Post(props) {
        })
     })
 
-    //deconstructing the objecst state
+
+  }
+
+  const addPost = (event) => {
+
+    event.preventDefault();
+
+    // calling function in order to upload img
+    uploadImg();
+
+
+    //deconstructing the objecst state, aqui empieza la post reques to firebase
     const {title, author, likes}  = details;
     const { value } = category;
     const {imgUrl}  = imageAsUrl;
 
+    //taking the history prop
+    const {history} = props;
+
 
     // adding new post!
-    if(title && author  && value && imgUrl) {
+    //if(title && author  && value && imgUrl) {
 
        firebase
         .firestore()
@@ -96,12 +107,13 @@ function Post(props) {
 
         })
           .then(function() {
-            props.history.push("/")
+            history.push("/")
         })
           .catch(error => {
-            setError(error.message, 'this is the error')
+            console.log(error.message); //error not catch
+            setError(error.message, 'this is the error');
           })
-    }
+   // }
 
   }
 

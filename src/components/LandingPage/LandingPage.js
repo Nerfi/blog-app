@@ -19,6 +19,8 @@ const LandinPage = (props) => {
 
   useEffect(() => {
 
+    //fetching default values for landing page, the most popular posts
+
   const fetchData = async () => {
 
     setLoading(true);
@@ -46,7 +48,7 @@ const LandinPage = (props) => {
              setLoading(false);
       })
       .catch(function(error) {
-        setError(error)
+        setError(error.message)
 
       });
 
@@ -94,7 +96,7 @@ const LandinPage = (props) => {
   },[]);
 
   //aqui estan los resultados dela busqueda del usuario
-  console.log(searchQueryResults,'searchQueryResults array is here line 99')
+  console.log(searchQueryResults,'searchQueryResults array is here line 97')
 
 
     let newResults  = (
@@ -105,6 +107,8 @@ const LandinPage = (props) => {
         ))
       );
 
+    // porque coño caundo creo un nuevo post este stament es llamado ??!!!!?!??!?!?!?
+    //recordar que he borrado el if stament on Create post para ver como funciona, desde que lo borre tengo esta issue !
 
     if(searchQueryResults.length > 0) {
 
@@ -125,7 +129,7 @@ if(loading) return newResults = <Spinner/>;
                 value={query}
                 onChange={handleChange}
               />
-          <button type="button" onClick={callSearchFucntion}>Click Me!</button>
+          <button type="submit" onClick={callSearchFucntion}>Click Me!</button>
 
       </div>
 
