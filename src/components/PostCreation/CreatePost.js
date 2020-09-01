@@ -99,10 +99,9 @@ function Post(props) {
             props.history.push("/")
         })
           .catch(error => {
-            setError(error, 'this is the error')
+            setError(error.message, 'this is the error')
           })
     }
-
 
   }
 
