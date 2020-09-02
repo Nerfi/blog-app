@@ -1,6 +1,6 @@
 import React,{useState, useContext} from 'react';
 import {Form} from 'react-bootstrap';
-//adding firebase methods
+//adding firebase methods, we import storage in order to upload files into firebase, in this case a photo
 import  firebase, {storage} from '../../firebase/firebase';
 import {AuthContext } from '../../../src/components/Context/AuthContext';
 
@@ -126,6 +126,8 @@ function Post(props) {
 
 
   return (
+
+  /*Borrar este inline style del div create_div in order to have a cleaner code*/
 
     <div className="create_div" style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
 
