@@ -131,6 +131,31 @@ function Post(props) {
 
     <div className="create_div" style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
 
+      {/*ADDING THE NEW FORM, THE SIMPLE ONE  */ }
+      <form onSubmit={addPost}>
+
+       <div className="form_control">
+
+        <label>Title:</label>
+          <input type="email" className="form-control" id="title" placeholder="Enter title" name="title" required  />
+       </div>
+
+        <div className="form-group">
+          <label >Content:</label>
+          <input type="text" className="form-control" id="content" placeholder="Write your history" name="content" required />
+        </div>
+
+
+        <input type='file' onChange={handleImageAsFile}  required />
+
+        <button type="submit" style={{margin: '20px'}} onClick={addPost}>Add Post con nueva forma</button>
+
+      </form>
+
+    {/*AQUI ACABARA LA FORMA QUE ESTOY AÑADIENDO*/}
+
+  {/*cooemtnig out the old fomr in orde r to check that everything is in order
+
       <Form>
         <Form.Group controlId="formGroupEmail">
         <Form.Label>Title</Form.Label>
@@ -153,9 +178,40 @@ function Post(props) {
 
         <button type="submit" style={{margin: '20px'}} onClick={addPost}>Add Post</button>
       </Form>
+    */}
     </div>
   );
 }
 
 
 export default Post;
+
+
+
+/*  CODE TO implement into my FORM
+<div class="container">
+  <h2>Form</h2>
+  <form action="/action_page.php">
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required  >
+    </div>
+
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+    </div>
+
+    <div class="form-group form-check">
+      <label class="form-check-label">
+       <input type='file' onChange={handleImageAsFile} required />
+
+        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+*/
