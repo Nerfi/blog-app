@@ -1,5 +1,4 @@
 import React,{useState, useContext} from 'react';
-import {Form} from 'react-bootstrap';
 //adding firebase methods, we import storage in order to upload files into firebase, in this case a photo
 import  firebase, {storage} from '../../firebase/firebase';
 import {AuthContext } from '../../../src/components/Context/AuthContext';
@@ -72,7 +71,7 @@ function Post(props) {
     })
 
 
-  }
+  };
 
   const addPost = (event) => {
 
@@ -91,8 +90,8 @@ function Post(props) {
     const {history} = props;
 
 
-    // adding new post!
-    //if(title && author  && value && imgUrl) {
+    // adding new post!, not working validation of all the input fields
+    if(title && author  && value && imgUrl) {
 
        firebase
         .firestore()
@@ -113,15 +112,15 @@ function Post(props) {
             console.log(error.message); //error not catch
             setError(error.message, 'this is the error');
           })
-   // }
+    }
 
-  }
+  };
 
 
    const handleImageAsFile = (e) => {
       const image = e.target.files[0]
       setImageAsFile(imageFile => (image))
-  }
+  };
 
 
 
@@ -129,89 +128,54 @@ function Post(props) {
 
   /*Borrar este inline style del div create_div in order to have a cleaner code*/
 
-    <div className="create_div" style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
+      <div className="create_div" style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
 
-      {/*ADDING THE NEW FORM, THE SIMPLE ONE  */ }
       <form onSubmit={addPost}>
 
        <div className="form_control">
 
         <label>Title:</label>
-          <input type="email" className="form-control" id="title" placeholder="Enter title" name="title" required  />
+          <input type="text"
+           className="form-control"
+           placeholder="Enter title"
+           name="title"
+           required
+           />
        </div>
 
         <div className="form-group">
           <label >Content:</label>
-          <input type="text" className="form-control" id="content" placeholder="Write your history" name="content" required />
+          <input type="text" className="form-control"  required  placeholder="Write your history" name="content"  />
         </div>
 
 
         <input type='file' onChange={handleImageAsFile}  required />
 
-        <button type="submit" style={{margin: '20px'}} onClick={addPost}>Add Post con nueva forma</button>
+         {/* <select onChange={handleCategorChange} required >
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option  value="News">News</option>
+            <option value="Tech">Tech</option>
+          </select>
+        */}
+
+           <select  required onChange={handleCategorChange}>
+          <option value="">None</option>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+
+        <button type="submit" style={{margin: '20px'}}  >Add Post con nueva forma</button>
+
 
       </form>
 
-    {/*AQUI ACABARA LA FORMA QUE ESTOY AÑADIENDO*/}
 
-  {/*cooemtnig out the old fomr in orde r to check that everything is in order
-
-      <Form>
-        <Form.Group controlId="formGroupEmail">
-        <Form.Label>Title</Form.Label>
-        <Form.Control onChange={handleChange} name="title" type="text" placeholder="Enter title"  required/>
-        </Form.Group>
-
-          <div className="form-group">
-          <label >Write your history</label>
-          <textarea className="form-control"  onChange={handleChange} name="author" required  rows="3" placeholder="Write your history"></textarea>
-        </div>
-
-        <input type='file' onChange={handleImageAsFile} />
-
-      <select onChange={handleCategorChange}>
-        <option value="Food">Food</option>
-        <option value="Travel">Travel</option>
-        <option  value="News">News</option>
-        <option value="Tech">Tech</option>
-      </select>
-
-        <button type="submit" style={{margin: '20px'}} onClick={addPost}>Add Post</button>
-      </Form>
-    */}
     </div>
   );
 }
 
 
 export default Post;
-
-
-
-/*  CODE TO implement into my FORM
-<div class="container">
-  <h2>Form</h2>
-  <form action="/action_page.php">
-
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required  >
-    </div>
-
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-    </div>
-
-    <div class="form-group form-check">
-      <label class="form-check-label">
-       <input type='file' onChange={handleImageAsFile} required />
-
-        <input class="form-check-input" type="checkbox" name="remember"> Remember me
-      </label>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
-*/
