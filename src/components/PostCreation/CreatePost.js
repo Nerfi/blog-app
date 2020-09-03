@@ -151,15 +151,9 @@ function Post(props) {
 
         <input type='file' onChange={handleImageAsFile}  required />
 
-         {/* <select onChange={handleCategorChange} required >
-            <option value="Food">Food</option>
-            <option value="Travel">Travel</option>
-            <option  value="News">News</option>
-            <option value="Tech">Tech</option>
-          </select>
-        */}
 
-           <select  required onChange={handleCategorChange}>
+
+         <select  required onChange={handleCategorChange}>
           <option value="">None</option>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
