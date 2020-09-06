@@ -92,7 +92,7 @@ function Post(props) {
 
 
     // adding new post!, not working validation of all the input fields
-    //if(currentUser) {
+   // if(currentUser) {
 
        firebase
         .firestore()
@@ -112,7 +112,7 @@ function Post(props) {
           .catch(error => {
             setError(error.message, 'this is the error');
           })
-   // }
+    //}
 
   };
 
