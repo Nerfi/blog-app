@@ -9,16 +9,17 @@ import ModalAlert from '../../UI/Modal/Modal';
 const Main = () => {
 
    const [display, setDisplay] = useState(false);
+   const [error, setError] = useState(false);
 
    //adding a closing button in order to close the modal, working
    const handleClose = () => setDisplay(false);
 
       const history = useHistory();
 
-      const logOut = () => {
+      const logOut = ()  => {
 
 
-        firebase.auth().signOut().then(function() {
+         firebase.auth().signOut().then(function() {
       // Sign-out successful.
           history.push("/")
 
@@ -26,19 +27,18 @@ const Main = () => {
 
 
         }).catch(function(error) {
-          alert(error.message)
+
+          setError(error.message)
         })
 
     };
 
 
   const { currentUser } = useContext(AuthContext);
-  /*
-    I've delete setDisplay(false) because we take care of that
-    logic in the handleClose function
-  */
+
 
   if(display) return  <ModalAlert changeState={handleClose} />
+  if(error) return <h1>tenemos un puto error</h1>
 
 
   return(

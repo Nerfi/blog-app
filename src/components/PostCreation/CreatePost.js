@@ -17,7 +17,7 @@ function Post(props) {
   const [details, setDetails] = useState({
     title:"",
    author: "",
-   likes: null
+   likes: 0
  });
 
   //importing context in order to grab the user uid
@@ -91,7 +91,7 @@ function Post(props) {
 
 
     // adding new post!, not working validation of all the input fields
-    if(title && author  && value && imgUrl) {
+    //if(title && author  && value && imgUrl) {
 
        firebase
         .firestore()
@@ -112,7 +112,7 @@ function Post(props) {
             console.log(error.message); //error not catch
             setError(error.message, 'this is the error');
           })
-    }
+   // }
 
   };
 
@@ -145,7 +145,7 @@ function Post(props) {
 
         <div className="form-group">
           <label >Content:</label>
-          <input type="text" className="form-control"  required  placeholder="Write your history" name="content"  />
+          <input type="content" className="form-control"  required  placeholder="Write your history" name="content"  />
         </div>
 
 
@@ -154,11 +154,10 @@ function Post(props) {
 
 
          <select  required onChange={handleCategorChange}>
-          <option value="">None</option>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+          <option value="News">News</option>
+          <option value="Travel">Travel</option>
+          <option value="Health">Health</option>
+          <option value="Tech">Tech</option>
         </select>
 
         <button type="submit" style={{margin: '20px'}}  >Add Post con nueva forma</button>
