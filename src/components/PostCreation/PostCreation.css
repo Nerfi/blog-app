@@ -1,0 +1,10 @@
+.create_div {
+  display: flex;
+  justify-content: center;
+  margin-top: 15vh;
+}
+
+
+.btn_create {
+  margin: 20px;
+}

@@ -2,6 +2,7 @@ import React,{useState, useContext} from 'react';
 //adding firebase methods, we import storage in order to upload files into firebase, in this case a photo
 import  firebase, {storage} from '../../firebase/firebase';
 import {AuthContext } from '../../../src/components/Context/AuthContext';
+import './PostCreation.css';
 
 
 function Post(props) {
@@ -23,7 +24,7 @@ function Post(props) {
   //importing context in order to grab the user uid
   const { currentUser } = useContext(AuthContext);
 
-    //handling selection of category
+  //handling selection of category
   const handleCategorChange = event => setCategory({value: event.target.value});
 
 
@@ -91,7 +92,7 @@ function Post(props) {
 
 
     // adding new post!, not working validation of all the input fields
-    //if(title && author  && value && imgUrl) {
+    //if(currentUser) {
 
        firebase
         .firestore()
@@ -109,7 +110,6 @@ function Post(props) {
             history.push("/")
         })
           .catch(error => {
-            console.log(error.message); //error not catch
             setError(error.message, 'this is the error');
           })
    // }
@@ -123,29 +123,43 @@ function Post(props) {
   };
 
 
+  if(error) return <h1>{error}</h1>
+
 
   return (
 
   /*Borrar este inline style del div create_div in order to have a cleaner code*/
 
-      <div className="create_div" style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
+      <div className="create_div" >
 
       <form onSubmit={addPost}>
 
        <div className="form_control">
 
         <label>Title:</label>
+
           <input type="text"
            className="form-control"
            placeholder="Enter title"
            name="title"
+           onChange={handleChange}
            required
            />
+
        </div>
 
         <div className="form-group">
           <label >Content:</label>
-          <input type="content" className="form-control"  required  placeholder="Write your history" name="content"  />
+
+          <input
+          type="content"
+          className="form-control"
+          required
+          placeholder="Write your history"
+          name="content"
+          onChange={handleChange}
+          />
+
         </div>
 
 
@@ -160,7 +174,7 @@ function Post(props) {
           <option value="Tech">Tech</option>
         </select>
 
-        <button type="submit" style={{margin: '20px'}}  >Add Post con nueva forma</button>
+        <button type="submit" className="btn_create" >Add Post</button>
 
 
       </form>
