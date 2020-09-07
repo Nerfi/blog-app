@@ -95,7 +95,7 @@ const LandinPage = (props) => {
       callSearchFucntion();
   },[]);
 
-  //aqui estan los resultados dela busqueda del usuario
+  //aqui estan los resultados dela busqueda del usuario no olvidar borrar esto despies
   console.log(searchQueryResults,'searchQueryResults array is here line 97')
 
 
@@ -107,13 +107,10 @@ const LandinPage = (props) => {
         ))
       );
 
-    // porque coño caundo creo un nuevo post este stament es llamado ??!!!!?!??!?!?!?
-    //recordar que he borrado el if stament on Create post para ver como funciona, desde que lo borre tengo esta issue !
-
     if(searchQueryResults.length > 0) {
 
      newResults = searchQueryResults.map(results =>
-      <PostsCard  data={results}/>
+      <PostsCard  key={results.id} data={results}/>
       )
     }
 

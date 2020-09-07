@@ -14,7 +14,8 @@ function PostDetails(props){
   const [error, setError] = useState(false);
   //calling the context
    const {currentUser} = useContext(AuthContext);
-
+   //adding new state in order to handle auth errors
+   const [authError, setAuthError] = useState(false);
 
   useEffect(() => {
 
@@ -22,7 +23,7 @@ function PostDetails(props){
 
         const docRef = firebase.firestore()
         .collection("posts")
-        .doc(`${props.match.params.id}`)
+        .doc(props.match.params.id)
 
       docRef.get().then(function(doc) {
 
@@ -33,7 +34,6 @@ function PostDetails(props){
               setError(!error)
           }
       }).catch(function(error) {
-          console.log("Error getting document:", error);
           setError(error)
       });
 
@@ -53,22 +53,21 @@ function PostDetails(props){
 
     if(currentUser.uid ===  selectedPost.currentUser) {
 
-          firebase.firestore().collection("posts").doc(`${props.match.params.id}`).delete().then(function() {
+          firebase.firestore().collection("posts").doc(props.match.params.id).delete().then(function() {
             return console.log("Document successfully deleted!");
             /* here I should show a modal in order to let the user know that he/she deleted successfully the post he/she owns */
         }).catch(function(error) {
-            console.error("Error removing document: ", error);
+            setAuthError(error.message)
         });
 
         props.history.push('/posts');
 
-    } else {
-      alert('not working this shit ');
-    }
+    } //else { check this out in order to grab the error in the state
+      //alert('not working this shit ');
+    //}
 
 
   }
-
 
     const addLikes = () => {
 
@@ -84,15 +83,15 @@ function PostDetails(props){
 
             })
             .catch(function(error) {
-               console.error("Error updating document: ", error);
+               setAuthError(error.message)
             })
 
     };
 
 
-  //redirecting to a 404 in case an error occur
 
-    if (error)  return <Redirect to="/404" />
+  //redirecting to a 404 in case an error occur
+  if (error)  return <Redirect to="/404" />
 
   return(
      <Card key={selectedPost.id} className="singlePost">
@@ -100,19 +99,32 @@ function PostDetails(props){
           <Card.Body>
 
            <h1>{error}</h1>
+           <h2>{authError}</h2>
             <Card.Title> {selectedPost.title}</Card.Title>
              <img className="postDetail_img" src={selectedPost.imgUrl} alt="image tag" />
             <p>{selectedPost.likes === 0 ? 'Be the first to like this post!' : selectedPost.likes} {selectedPost.likes ? "Times this post was liked" : null}</p>
 
             <Card.Text>
-              the author of this post is: <strong>{selectedPost.author}</strong>
+              Author : <strong>{selectedPost.author}</strong>
             </Card.Text>
               Category: {selectedPost.value}
              <Card.Text>
              </Card.Text>
-            <Button onClick={deleteSelectedPost} variant="danger">{ currentUser && currentUser.uid === selectedPost.currentUser ? "Delete" : "your not auth"}</Button>
-             <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
-              <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
+
+             {
+              currentUser && currentUser.uid === selectedPost.currentUser ? (
+              <>
+
+                <Button onClick={deleteSelectedPost} variant="danger">Delete</Button>
+
+               <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
+
+             </>
+
+              ) :  null
+           }
+            <Button onClick={addLikes} variant="success" style={{margin: '10px'}}>Like Post</Button>
+
           </Card.Body>
 
         </Card>

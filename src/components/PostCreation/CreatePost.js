@@ -48,7 +48,9 @@ function Post(props) {
 
     //addig firebase upload img
     if(imageAsFile === '') {
+      //borrar el console log
       console.log(` not an image, the ima is ${typeof(imageAsFile)}`)
+      setError(true)
     }
     //with this const we are uploading the img to firebase
     const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
@@ -78,9 +80,6 @@ function Post(props) {
 
     event.preventDefault();
 
-    // calling function in order to upload img
-    uploadImg();
-
 
     //deconstructing the objecst state, aqui empieza la post reques to firebase
     const {title, author, likes}  = details;
@@ -92,7 +91,10 @@ function Post(props) {
 
 
     // adding new post!, not working validation of all the input fields
-   // if(currentUser) {
+    if(currentUser) {
+
+        // calling function in order to upload img, not working
+        uploadImg();
 
        firebase
         .firestore()
@@ -103,7 +105,7 @@ function Post(props) {
           likes,
           value,
           imgUrl: imgUrl,
-          currentUser: currentUser.uid
+          currentUser: currentUser.uid,
 
         })
           .then(function() {
@@ -112,7 +114,10 @@ function Post(props) {
           .catch(error => {
             setError(error.message, 'this is the error');
           })
-    //}
+    } else {
+      //check this , is not working
+     return   <h2>You need to sign up / Login!</h2>
+    }
 
   };
 
@@ -126,9 +131,8 @@ function Post(props) {
   if(error) return <h1>{error}</h1>
 
 
-  return (
 
-  /*Borrar este inline style del div create_div in order to have a cleaner code*/
+  return (
 
       <div className="create_div" >
 
@@ -149,6 +153,7 @@ function Post(props) {
        </div>
 
         <div className="form-group">
+
           <label >Content:</label>
 
           <input
@@ -156,18 +161,15 @@ function Post(props) {
           className="form-control"
           required
           placeholder="Write your history"
-          name="content"
+          name="author"
           onChange={handleChange}
           />
 
         </div>
 
-
         <input type='file' onChange={handleImageAsFile}  required />
 
-
-
-         <select  required onChange={handleCategorChange}>
+         <select  onChange={handleCategorChange} required>
           <option value="News">News</option>
           <option value="Travel">Travel</option>
           <option value="Health">Health</option>

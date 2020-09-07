@@ -42,14 +42,12 @@ const UpdatePost = (props) => {
             setUpdatePost( doc.data() );
         }
       }).catch(function(error) {
-        console.log(error, 'the error is here')
+        setError(error)
       })
 
     }
 
     fetchUpdatePost();
-
-
 
   },[]);
 
@@ -61,7 +59,7 @@ const UpdatePost = (props) => {
     let name = event.target.name;
 
     setUpdatePost(prev => {
-      //because we depend on the last value
+      //because we depend on the last value(state)
       return {
         ...prev,
         [name]: value
@@ -88,7 +86,7 @@ const UpdatePost = (props) => {
     .then(function() {
       props.history.push("/")
     }).catch(e => {
-      console.log(e.message)
+      setError(e.message);
     })
 
   }
@@ -96,14 +94,15 @@ const UpdatePost = (props) => {
 
 
   const handleCategoryChange = event => setCategory({value: event.target.value});
-
   const {title, author} = updatePost;
 
 
   return(
     <div style={{display: 'flex', justifyContent: 'center', marginTop: '15vh'}}>
      <Form >
+      <h2>{error && error}</h2>
         <Form.Group controlId="formGroupEmail">
+
         <Form.Label>Title</Form.Label>
         <Form.Control
         name="title"
