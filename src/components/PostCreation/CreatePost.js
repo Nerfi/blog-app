@@ -11,6 +11,8 @@ function Post(props) {
   const allInputs = {imgUrl: ''};
   const [imageAsFile , setImageAsFile] = useState('');
   const [imageAsUrl, setImageAsUrl] = useState(allInputs);
+
+
   const [error, setError] = useState();
 
 

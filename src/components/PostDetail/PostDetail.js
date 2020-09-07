@@ -17,6 +17,8 @@ function PostDetails(props){
    //adding new state in order to handle auth errors
    const [authError, setAuthError] = useState(false);
 
+
+
   useEffect(() => {
 
     const selectPost = async () => {
