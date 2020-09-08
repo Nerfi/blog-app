@@ -118,7 +118,6 @@ function PostDetails(props){
               <>
 
                 <Button onClick={deleteSelectedPost} variant="danger">Delete</Button>
-
                <Link to={`/update/post/${props.match.params.id}`} > Update Post </Link>
 
              </>

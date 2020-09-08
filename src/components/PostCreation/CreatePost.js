@@ -52,7 +52,7 @@ function Post(props) {
     if(imageAsFile === '') {
       //borrar el console log
       console.log(` not an image, the ima is ${typeof(imageAsFile)}`)
-      setError(true)
+      //setError(true)
     }
     //with this const we are uploading the img to firebase
     const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
@@ -92,11 +92,9 @@ function Post(props) {
     const {history} = props;
 
 
-    // adding new post!, not working validation of all the input fields
-    if(currentUser) {
+    // adding new post!
+    if(currentUser && imgUrl) {
 
-        // calling function in order to upload img, not working
-        uploadImg();
 
        firebase
         .firestore()
@@ -116,10 +114,13 @@ function Post(props) {
           .catch(error => {
             setError(error.message, 'this is the error');
           })
-    } else {
+    }// else {
       //check this , is not working
-     return   <h2>You need to sign up / Login!</h2>
-    }
+     //return   <h2>You need to sign up / Login!</h2>
+    //}
+
+      // calling function in order to upload img, not working
+        uploadImg();
 
   };
 
@@ -169,7 +170,11 @@ function Post(props) {
 
         </div>
 
-        <input type='file' onChange={handleImageAsFile}  required />
+        <input
+        type="file"
+        onChange={handleImageAsFile}
+        required
+         />
 
          <select  onChange={handleCategorChange} required>
           <option value="News">News</option>
