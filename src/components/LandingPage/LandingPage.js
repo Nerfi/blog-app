@@ -63,7 +63,7 @@ const LandinPage = (props) => {
 
     const db = firebase.firestore()
 
-    db.collection("posts").where("title", "==", query )
+     await db.collection("posts").where("title", "==", query )
     .get()
     .then(function(querySnapshot) {
 
