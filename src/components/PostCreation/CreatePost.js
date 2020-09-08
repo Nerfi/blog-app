@@ -114,10 +114,7 @@ function Post(props) {
           .catch(error => {
             setError(error.message, 'this is the error');
           })
-    }// else {
-      //check this , is not working
-     //return   <h2>You need to sign up / Login!</h2>
-    //}
+    }
 
       // calling function in order to upload img, not working
         uploadImg();

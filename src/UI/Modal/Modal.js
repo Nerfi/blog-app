@@ -13,7 +13,7 @@ import {AuthContext } from '../../../src/components/Context/AuthContext';
         <Modal.Header >
           <Modal.Title>Success!</Modal.Title>
         </Modal.Header>
-           <Modal.Body>  {email ? "Welcome  " + email : "You sign out successfully!!" }</Modal.Body>
+           <Modal.Body>  {email && email ? "Welcome  " + email : "You sign out successfully!!" }</Modal.Body>
         <Modal.Footer>
 
         <Button variant="secondary" onClick={changeState}>

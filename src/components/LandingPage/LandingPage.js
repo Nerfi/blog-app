@@ -59,7 +59,7 @@ const LandinPage = (props) => {
   },[]);
 
 
-    const callSearchFucntion = (e) => {
+    const callSearchFucntion = async (e) => {
 
     const db = firebase.firestore()
 
