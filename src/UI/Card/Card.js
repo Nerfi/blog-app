@@ -20,7 +20,7 @@ function PostsCard ({data}) {
                 </Card.Title>
                 <p></p>
                 <Card.Text>
-                  Created by: {author}
+                  Author: {author}
                   {value}
                 </Card.Text>
 

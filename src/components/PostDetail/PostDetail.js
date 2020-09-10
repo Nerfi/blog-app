@@ -100,7 +100,7 @@ function PostDetails(props){
 
            <h1>{error}</h1>
            <h2>{authError}</h2>
-            <Card.Title> {selectedPost.title}</Card.Title>
+            <Card.Title> <h1>{selectedPost.title}</h1></Card.Title>
              <img className="postDetail_img" src={selectedPost.imgUrl} alt="tag" />
             <p>{selectedPost.likes === 0 ? 'Be the first to like this post!' : selectedPost.likes} {selectedPost.likes ? "Times this post was liked" : null}</p>
 
