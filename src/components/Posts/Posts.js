@@ -14,6 +14,7 @@ function Posts(props) {
         const fetch = await firebase.firestore()
         .collection('posts')
         .onSnapshot((snap) => {
+
           const response  = snap.docs.map((doc) => ({
             id: doc.id,
             ...doc.data()
@@ -31,7 +32,6 @@ function Posts(props) {
 
     }, []);
 
-    console.log(posts, 'posts ')
 
   return (
     <div>

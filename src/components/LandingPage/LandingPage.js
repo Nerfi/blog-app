@@ -95,9 +95,6 @@ const LandinPage = (props) => {
       callSearchFucntion();
   },[]);
 
-  //aqui estan los resultados dela busqueda del usuario no olvidar borrar esto despies
-  console.log(searchQueryResults,'searchQueryResults array is here line 97')
-
 
     let newResults  = (
 

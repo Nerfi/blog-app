@@ -1,6 +1,5 @@
-import React , {useState, useContext} from 'react';
+import React , {useState} from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
-import {UserContext} from '../Context/AuthContext';
 import firebase from '../../firebase/firebase';
 import ModalAlert from '../../UI/Modal/Modal';
 

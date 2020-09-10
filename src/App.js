@@ -12,7 +12,7 @@ import Auth from '../src/components/Auth/Auth';
 import SignUp from '../src/components/Auth/SignUp';
 //importing the Context hook
 import {AuthProvider} from '../src/components/Context/AuthContext';
-import firebase from './firebase/firebase';
+
 
 
 

@@ -1,7 +1,6 @@
-import React,{useState, useContext} from  'react';
+import React,{useState} from  'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import {AuthContext } from '../../../src/components/Context/AuthContext';
 
   function ModalAlert ({email, changeState}) {
 

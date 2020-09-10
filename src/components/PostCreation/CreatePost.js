@@ -116,7 +116,7 @@ function Post(props) {
           })
     }
 
-      // calling function in order to upload img, not working
+      // calling function in order to upload img
         uploadImg();
 
   };
